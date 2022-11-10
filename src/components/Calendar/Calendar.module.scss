@@ -1,0 +1,83 @@
+@mixin cell($color){
+  display: flex;
+  flex-direction: column;
+
+  color: $color;
+
+  font-size: 1.5rem;
+
+  border-top: silver 0.01rem solid;
+  border-right: silver 0.01rem solid;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+
+  background-color: white;
+
+  padding-top: 0.25rem;
+  padding-left: 0.25rem;
+
+  transition: 1s;
+
+  &:nth-child(7n){
+    border-right: silver 0rem solid;
+  }
+}
+
+.Calendar {
+  width: 80rem;
+  height: 40rem;
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 0.4fr repeat(6, 1fr);
+
+  border: silver 0.1rem solid;
+  border-radius: 1rem;
+
+  background-color: white;
+
+  margin-right: 5rem;
+
+  box-shadow: 0 0 10px silver;
+
+  &__cell {
+    @include cell(silver);
+  }
+
+  &__activeMonth {
+    @include cell(black);
+
+    &:hover {
+      background-color: whitesmoke;
+    }
+  }
+
+  &__currentDay {
+    @include cell(red);
+
+    &:hover {
+      background-color: whitesmoke;
+    }
+  }
+
+  &__weekDay{
+    border: 0rem white solid;
+    border-radius: 1rem;
+
+    color: silver;
+    background-color: white;
+
+    font-size: 2rem;
+    text-align: center;
+
+    padding: 1rem;
+  }
+
+  &__tasks{
+    width: 8rem;
+    height: 1rem;
+
+    /*black*/
+  }
+}
+
