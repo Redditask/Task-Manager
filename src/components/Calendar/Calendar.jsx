@@ -9,9 +9,7 @@ const utils = require ("./utils/utils");
 const infoData = require("./utils/infoData");
 
 const Calendar = ({value}) => {
-    const text = "1234";
-
-    const tasks = useSelector(state=>state.tasks.tasks);
+    const tasks = useSelector(state => state.tasks.tasks);
     const dispatch = useDispatch();
 
     const [onCalendarYear, setOnCalendarYear] = useState(() => value.getFullYear());
@@ -57,20 +55,33 @@ const Calendar = ({value}) => {
                     if (isActiveMonth(data, onCalendarMonth)) className = styles.Calendar__activeMonth;
                     if (utils.isToday(data)) className = styles.Calendar__currentDay;
 
-                    const add = () => dispatch(addTask({text: "123", year: data.year, month: data.month, day: data.day}))
+                    //доработать
+                    const add = () => dispatch(addTask({
+                        taskText: "123",
+                        year: data.year,
+                        month: data.month,
+                        day: data.day
+                    }))
 
                     return (
                         <div
-                            onClick={add}
                             className={className}
                             key={data.day + "" + data.month + "" + data.year}
                         >
-                            {data.day}
-                                {tasks.map(task=>{
-                                    if(task.day===data.day) return (
-                                        <div>{task.text}</div>
-                                    )
-                                })}
+                            <div className={styles.Calendar__cellTitle}>
+                                {data.day
+                                //доработать
+                                }
+                                <div onClick={add}>+</div>
+                            </div>
+                            {tasks.map(task => {
+                                //доработать
+                                if (task.day === data.day
+                                    && task.month === data.month
+                                    && task.year === data.year) return (
+                                    <div>{task.taskText}</div>
+                                )
+                            })}
                         </div>
                     )
                 }

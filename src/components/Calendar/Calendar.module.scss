@@ -44,6 +44,15 @@
     @include cell(silver);
   }
 
+  &__cellTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-right: 0.7rem;
+  }
+
   &__activeMonth {
     @include cell(black);
 
