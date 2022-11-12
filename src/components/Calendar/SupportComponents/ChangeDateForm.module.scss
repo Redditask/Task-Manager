@@ -1,0 +1,23 @@
+.ChangeDateForm {
+  display: flex;
+  flex-direction: column;
+
+  margin: 1rem;
+  margin-bottom: 2rem;
+
+  &__item {
+    font-size: 2rem ;
+
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 1rem;
+  }
+
+  &__text {
+    color: rgba(0, 0, 0, 0.65);
+
+    margin-left: 1.3rem;
+    margin-right: 1.3rem;
+  }
+}

@@ -1,10 +1,12 @@
 @mixin cell($color){
+  max-height: 5.9rem;
+
   display: flex;
   flex-direction: column;
 
   color: $color;
 
-  font-size: 1.5rem;
+  font-size: 1rem;
 
   border-top: silver 0.01rem solid;
   border-right: silver 0.01rem solid;
@@ -45,12 +47,14 @@
   }
 
   &__cellTitle{
+    font-size: 1.5rem;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 
-    padding-right: 0.7rem;
+    padding-right: 0.1rem;
   }
 
   &__activeMonth {
@@ -83,10 +87,23 @@
   }
 
   &__tasks{
-    width: 8rem;
-    height: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-    /*black*/
+    overflow: auto;
+
+    gap: 1rem;
+  }
+
+  &__task {
+    color: rgba(0, 0, 0, 0.65);
+
+    padding: 0.2rem;
+
+    background-color: beige;
+
+    border-radius: 1rem;
   }
 }
 
