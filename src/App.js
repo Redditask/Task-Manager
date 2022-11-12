@@ -2,25 +2,30 @@ import styles from './App.module.scss';
 import AsideBar from "./components/AsideBar/AsideBar";
 import Calendar from "./components/Calendar/Calendar";
 import {useState} from "react";
+import Modal from "./components/UI/Modal/Modal";
+import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
  react && redux:
- сделать модальное окно для добавления задачи
- доработать идею с CurrentCell
- добавить onClick на ячейку, чтобы именно оно в slice меняло current cell
- вынести данные в render(), в Calendar, в отдельный компонент
+ сделать так, чтобы currentCell менялась по нажатию на всю клетку, а не именно на таску
+ оформить компонент AsideBar (фукнционал+стили)
+ вынести данные из render(), в Calendar, в отдельный компонент (что-то типо CalendarDataList)
 */
 
 function App() {
-    const [dateValue, setDateValue] = useState(()=>new Date());
+    const [date, setDate] = useState();
+    const [modalStatus, setModalStatus] = useState(false);
 
-  return (
-    <div className={styles.App}>
-      <AsideBar/>
-      <Calendar value={dateValue}/>
-    </div>
-  );
+    return (
+        <div className={styles.App}>
+            <AsideBar/>
+            <Calendar setModalStatus={setModalStatus} setDate={setDate}/>
+            <Modal visible={modalStatus} setVisible={setModalStatus}>
+                <AddTaskForm setModalStatus={setModalStatus} date={date}/>
+            </Modal>
+        </div>
+    );
 }
 
 export default App;

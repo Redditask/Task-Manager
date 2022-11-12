@@ -1,6 +1,8 @@
 @mixin cell($color){
   max-height: 5.9rem;
 
+  cursor: pointer;
+
   display: flex;
   flex-direction: column;
 

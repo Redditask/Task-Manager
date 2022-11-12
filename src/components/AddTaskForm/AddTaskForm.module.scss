@@ -1,0 +1,30 @@
+.AddTaskForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &__buttonArea{
+    font-size: 1.5rem;
+
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+
+    border: 0.2rem silver solid;
+    border-radius: 1rem;
+
+    &:hover{
+      background-color: silver;
+      transition: 1s;
+    }
+  }
+
+  &__title{
+    font-weight: normal;
+    text-decoration: underline silver;
+
+    color: black;
+
+    margin: 1rem 0;
+  }
+}

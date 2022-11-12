@@ -1,0 +1,21 @@
+.Input{
+  height: 2.5rem;
+  width: 15rem;
+
+  margin: 1rem 4rem;
+
+  border: silver solid;
+  border-radius: 1rem;
+
+  text-align: center;
+
+  transition: 0.5s;
+
+  &:focus {
+    transform: scale(1.2);
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}

@@ -24,9 +24,12 @@ const taskManagerSlice = createSlice({
         deleteTask(state, action){
 
         },
+        setCurrentCell(state, action){
+            state.currentCell=action.payload.task
+        }
     }
 });
 
-export const {addTask, deleteTask} = taskManagerSlice.actions;
+export const {addTask, deleteTask, setCurrentCell} = taskManagerSlice.actions;
 
 export default taskManagerSlice.reducer;

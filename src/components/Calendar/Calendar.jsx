@@ -3,19 +3,21 @@ import styles from "./Calendar.module.scss";
 import React, {useMemo, useState} from 'react';
 import {isActiveMonth} from "./utils/utils";
 import {useDispatch, useSelector} from "react-redux";
-import {addTask} from "../../store/taskManagerSlice";
 import Button from "../UI/Button/Button";
 import ChangeDateForm from "./SupportComponents/ChangeDateForm";
+import {setCurrentCell} from "../../store/taskManagerSlice";
 
 const utils = require ("./utils/utils");
 const infoData = require("./utils/infoData");
 
-const Calendar = ({value}) => {
+const Calendar = ({setModalStatus, setDate}) => {
+    const startValue = new Date();
+
     const tasks = useSelector(state => state.tasks.tasks);
     const dispatch = useDispatch();
 
-    const [onCalendarYear, setOnCalendarYear] = useState(() => value.getFullYear());
-    const [onCalendarMonth, setOnCalendarMonth] = useState(() => value.getMonth());
+    const [onCalendarYear, setOnCalendarYear] = useState(() => startValue.getFullYear());
+    const [onCalendarMonth, setOnCalendarMonth] = useState(() => startValue.getMonth());
 
     const calendarData = useMemo(() => {
         const prevMonth = utils.getPrevMonthDays(onCalendarYear, onCalendarMonth);
@@ -66,28 +68,22 @@ const Calendar = ({value}) => {
                         if (isActiveMonth(data, onCalendarMonth)) className = styles.Calendar__activeMonth;
                         if (utils.isToday(data)) className = styles.Calendar__currentDay;
 
-                        //доработать
-                        const add = () => dispatch(addTask({
-                            taskText: "123",
-                            year: data.year,
-                            month: data.month,
-                            day: data.day
-                        }))
-
                         return (
                             <div
                                 className={className}
                                 key={data.day + "" + data.month + "" + data.year}
                             >
                                 <div className={styles.Calendar__cellTitle}>
-                                    {data.day
-                                        //доработать
+                                    {data.day}
+                                    <Button text="+" onClick={() => {
+                                            setModalStatus(true)
+                                            setDate(`${data.day}-${data.month}-${data.year}`)}
                                     }
-                                    <Button text="+" onClick={add} title="Add task"/>
+                                            title="Add task"
+                                    />
                                 </div>
                                 <div className={styles.Calendar__tasks}>
                                     {tasks.map((task, index) => {
-                                        //доработать
                                         if (task.day === data.day
                                             && task.month === data.month
                                             && task.year === data.year)
@@ -95,6 +91,7 @@ const Calendar = ({value}) => {
                                                 <div
                                                     key={task.taskText + index}
                                                     className={styles.Calendar__task}
+                                                    onClick={()=>dispatch(setCurrentCell({task}))}
                                                 >
                                                     {task.taskText}
                                                 </div>
