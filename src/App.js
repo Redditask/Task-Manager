@@ -8,8 +8,9 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 /*
 ToDo
  react && redux:
- сделать так, чтобы currentCell менялась по нажатию на всю клетку, а не именно на таску
- оформить компонент AsideBar (фукнционал+стили)
+ анимацию выдвижения AsideBar слева направо
+ добавить возможность выбирать цвет таски (?)
+ сохранять таски в localStorage
  вынести данные из render(), в Calendar, в отдельный компонент (что-то типо CalendarDataList)
 */
 

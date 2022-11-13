@@ -50,7 +50,7 @@ const Calendar = ({setModalStatus, setDate}) => {
     }
 
     return (
-        <div style={{marginTop: "-5rem"}}>
+        <div>
             <ChangeDateForm
                 year={onCalendarYear}
                 month={infoData.monthsList[onCalendarMonth]}
@@ -72,6 +72,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                             <div
                                 className={className}
                                 key={data.day + "" + data.month + "" + data.year}
+                                onClick={()=>dispatch(setCurrentCell(data.day + "-" + data.month + "-" + data.year))}
                             >
                                 <div className={styles.Calendar__cellTitle}>
                                     {data.day}
@@ -91,7 +92,6 @@ const Calendar = ({setModalStatus, setDate}) => {
                                                 <div
                                                     key={task.taskText + index}
                                                     className={styles.Calendar__task}
-                                                    onClick={()=>dispatch(setCurrentCell({task}))}
                                                 >
                                                     {task.taskText}
                                                 </div>

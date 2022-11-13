@@ -4,12 +4,10 @@ const taskManagerSlice = createSlice({
     name: "tasks",
     initialState: {
         tasks: [],
-        currentCell: {}
+        currentCell: []
     },
     reducers: {
-        addTask(state, action){
-            console.log(action.payload)
-
+        addTask(state, action) {
             state.tasks.push({
                 id: new Date().toISOString(),
                 taskText: action.payload.taskText,
@@ -18,14 +16,29 @@ const taskManagerSlice = createSlice({
                 day: action.payload.day
             })
 
-            //доработать
-            state.currentCell = state.tasks[0];
+            state.currentCell = [];
+            for (let i = 0; i < state.tasks.length; i++) {
+                if (state.tasks[i].year === action.payload.year
+                    && state.tasks[i].month === action.payload.month
+                    && state.tasks[i].day === action.payload.day) {
+                        state.currentCell.push(state.tasks[i])
+                }
+            }
         },
-        deleteTask(state, action){
+        deleteTask(state, action) {
 
         },
-        setCurrentCell(state, action){
-            state.currentCell=action.payload.task
+        setCurrentCell(state, action) {
+            const [day, month, year] = action.payload.split("-");
+
+            state.currentCell = [];
+            for (let i = 0; i < state.tasks.length; i++) {
+                if (state.tasks[i].year === Number(year)
+                    && state.tasks[i].month === Number(month)
+                    && state.tasks[i].day === Number(day)) {
+                        state.currentCell.push(state.tasks[i])
+                }
+            }
         }
     }
 });
