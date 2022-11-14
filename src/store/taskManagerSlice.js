@@ -1,10 +1,11 @@
-import {createSlice, current} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 const taskManagerSlice = createSlice({
     name: "tasks",
     initialState: {
         tasks: [],
-        currentCell: []
+        currentCell: [],
+        currentCellDate: ""
     },
     reducers: {
         addTask(state, action) {
@@ -25,8 +26,9 @@ const taskManagerSlice = createSlice({
                 }
             }
         },
-        deleteTask(state, action) {
-
+        removeTask(state, action) {
+            state.tasks = state.tasks.filter(task=>task.id!==action.payload);
+            state.currentCell = state.currentCell.filter(task=>task.id!==action.payload);
         },
         setCurrentCell(state, action) {
             const [day, month, year] = action.payload.split("-");
@@ -39,10 +41,12 @@ const taskManagerSlice = createSlice({
                         state.currentCell.push(state.tasks[i])
                 }
             }
+
+            state.currentCellDate = action.payload;
         }
     }
 });
 
-export const {addTask, deleteTask, setCurrentCell} = taskManagerSlice.actions;
+export const {addTask, removeTask, setCurrentCell} = taskManagerSlice.actions;
 
 export default taskManagerSlice.reducer;

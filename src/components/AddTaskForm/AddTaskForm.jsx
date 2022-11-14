@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {addTask} from "../../store/taskManagerSlice";
 
 const AddTaskForm = ({setModalStatus, date}) => {
-    const [taskText, setTaskText] = useState("");
+    const [taskText, setTaskText] = useState("Enter your task");
 
     const today = new Date();
     let day=today.getDate();
@@ -31,12 +31,21 @@ const AddTaskForm = ({setModalStatus, date}) => {
             <Input
                 value={taskText}
                 onChange={event=>setTaskText(event.target.value)}
-                defaultValue="Your task"/>
+            />
             <div className={styles.AddTaskForm__buttonArea}>
-                <Button text="Enter" onClick={()=>{
-                    add(taskText)
-                    setModalStatus(false)
-                }}/>
+                {
+                    taskText
+                        ? <Button
+                            text="Add task"
+                            onClick={()=>{
+                                add(taskText)
+                                setModalStatus(false)
+                            }}
+                        />
+                        : <Button
+                            text="Input is empty"
+                        />
+                }
             </div>
         </div>
     );
