@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {addTask} from "../../store/taskManagerSlice";
 
 const AddTaskForm = ({setModalStatus, date}) => {
-    const [taskText, setTaskText] = useState("Enter your task");
+    const [taskText, setTaskText] = useState("Your task");
 
     const today = new Date();
     let day=today.getDate();

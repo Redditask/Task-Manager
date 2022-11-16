@@ -16,7 +16,7 @@ const AsideBar = () => {
         <div>
             <div className={styles.AsideBar__header}>
                 <h2 className={styles.AsideBar__title}>Tasks</h2>
-                <h3>{date ? date : "Select date"}</h3>
+                <h3 style={{textDecoration:"underline"}}>{date ? date : "Select date"}</h3>
             </div>
             <div className={styles.AsideBar}>
                 <ul>

@@ -1,0 +1,29 @@
+.Loader {
+  @media (max-width: 665px) {
+    width: 4rem;
+    height: 4rem;
+
+    margin-top: 5rem;
+    margin-left: 8rem;
+  }
+
+  @media (min-width: 666px) {
+    width: 9rem;
+    height: 9rem;
+
+    margin-top: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  border: 0.8rem solid white;
+  border-top: 0.8rem silver solid;
+  border-radius: 50%;
+
+  animation: spin 2s linear infinite;
+
+  @keyframes spin {
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+  }
+}
