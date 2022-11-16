@@ -95,13 +95,10 @@
 
     overflow: auto;
     &::-webkit-scrollbar{
-      border-top-left-radius: 1rem;
-      border-bottom-left-radius: 1rem;
-      border-bottom-right-radius: 1rem;
+      border: none;
 
       &-thumb{
-        background-color: silver;
-        border-radius: 50%;
+        border: none;
       }
     }
 

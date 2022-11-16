@@ -8,7 +8,6 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 /*
 ToDo
  анимации удаления и добавления тасок (TransitionGroup)
- добавление задачи в AsideBar, внизу AsideBar (?)
  //
  изменить (+расположение) переключатели года/месяца (например оставить только переключение месяца, а год будет просто отображаться) (?)
  //
@@ -27,7 +26,7 @@ function App() {
 
     return (
         <div className={styles.App}>
-            <AsideBar/>
+            <AsideBar setModalStatus={setModalStatus} setDate={setDate}/>
             <Calendar setModalStatus={setModalStatus} setDate={setDate}/>
             <Modal visible={modalStatus} setVisible={setModalStatus}>
                 <AddTaskForm setModalStatus={setModalStatus} date={date}/>

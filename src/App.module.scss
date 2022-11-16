@@ -12,5 +12,7 @@
 .App {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: start;
+
+  margin-top: -3rem;
 }

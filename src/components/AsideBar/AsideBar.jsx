@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {removeTask} from "../../store/taskManagerSlice";
 import Button from "../UI/Button/Button";
 
-const AsideBar = () => {
+const AsideBar = ({setModalStatus, setDate}) => {
     const tasks = useSelector(state => state.tasks.currentCell);
     const date = useSelector(state => state.tasks.currentCellDate);
 
@@ -13,7 +13,7 @@ const AsideBar = () => {
     const remove = (taskId) => dispatch(removeTask(taskId));
 
     return (
-        <div>
+        <div className={styles.Container}>
             <div className={styles.AsideBar__header}>
                 <h2 className={styles.AsideBar__title}>Tasks</h2>
                 <h3 style={{textDecoration:"underline"}}>{date ? date : "Select date"}</h3>
@@ -37,6 +37,16 @@ const AsideBar = () => {
                         )
                         : <h3 className={styles.AsideBar__tasksIsEmpty}>No task today</h3>}
                 </ul>
+            </div>
+            <div className={styles.AsideBar__button}>
+                <Button
+                    text="+"
+                    onClick={() => {
+                        setModalStatus(true)
+                        setDate(`${date}`)}
+                    }
+                        title="Add another task for this day"
+                />
             </div>
         </div>
     );
