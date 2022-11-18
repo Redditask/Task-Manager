@@ -7,8 +7,6 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- анимации удаления и добавления тасок (TransitionGroup)
- //
  изменить (+расположение) переключатели года/месяца (например оставить только переключение месяца, а год будет просто отображаться) (?)
  //
  вынести данные из render(), в Calendar, в отдельный компонент (что-то типо CalendarDataList)

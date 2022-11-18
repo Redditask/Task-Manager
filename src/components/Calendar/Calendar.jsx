@@ -72,31 +72,34 @@ const Calendar = ({setModalStatus, setDate}) => {
                             <div
                                 className={className}
                                 key={data.day + "" + data.month + "" + data.year}
-                                onClick={()=>dispatch(setCurrentCell(data.day + "-" + data.month + "-" + data.year))}
+                                onClick={() => dispatch(setCurrentCell(data.day + "-" + data.month + "-" + data.year))}
                             >
                                 <div className={styles.Calendar__cellTitle}>
                                     {data.day}
                                     <Button text="+" onClick={() => {
-                                            setModalStatus(true)
-                                            setDate(`${data.day}-${data.month}-${data.year}`)}
+                                        setModalStatus(true)
+                                        setDate(`${data.day}-${data.month}-${data.year}`)
+                                        }
                                     }
                                             title="Add task"
                                     />
                                 </div>
                                 <div className={styles.Calendar__tasks}>
-                                    {tasks.map((task, index) => {
-                                        if (task.day === data.day
-                                            && task.month === data.month
-                                            && task.year === data.year)
-                                            return (
-                                                <div
-                                                    key={task.taskText + index}
-                                                    className={styles.Calendar__task}
-                                                >
-                                                    {task.taskText}
-                                                </div>
-                                            )
-                                    })}
+                                    {
+                                        tasks.map((task, index) => {
+                                            if (task.day === data.day
+                                                && task.month === data.month
+                                                && task.year === data.year)
+                                                return (
+                                                    <div
+                                                        key={task.taskText + index}
+                                                        className={styles.Calendar__task}
+                                                    >
+                                                        {task.taskText}
+                                                    </div>
+                                                )
+                                            })
+                                    }
                                 </div>
                             </div>
                         )
