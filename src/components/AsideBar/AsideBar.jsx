@@ -20,7 +20,7 @@ const AsideBar = ({setModalStatus, setDate}) => {
         <div className={styles.Container}>
             <div className={styles.AsideBar__header}>
                 <h2 className={styles.AsideBar__title}>Tasks</h2>
-                <h3 style={{textDecoration:"underline"}}>{date ? date : "Select date"}</h3>
+                <h3 className={styles.AsideBar__date}>{date ? date : "Select date"}</h3>
             </div>
             <hr/>
             <TransitionGroup className={styles.AsideBar}>

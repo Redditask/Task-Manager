@@ -48,6 +48,12 @@
     margin: 0 0 1rem;
   }
 
+  &__date {
+    color: rgba(0, 0, 0, 0.65);
+
+    font-style: oblique;
+  }
+
   &__tasksIsEmpty {
     font-weight: normal;
     font-size: 2.5rem;
