@@ -1,13 +1,15 @@
 import styles from './App.module.scss';
+
+import {useState} from "react";
+
 import AsideBar from "./components/AsideBar/AsideBar";
 import Calendar from "./components/Calendar/Calendar";
-import {useState} from "react";
 import Modal from "./components/UI/Modal/Modal";
 import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- добавить возможность выбирать цвет таски (?)
+ адаптивная вёрстка
  темная тема
 */
 

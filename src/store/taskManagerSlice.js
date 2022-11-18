@@ -14,15 +14,16 @@ const taskManagerSlice = createSlice({
                 taskText: action.payload.taskText,
                 year: action.payload.year,
                 month: action.payload.month,
-                day: action.payload.day
-            })
+                day: action.payload.day,
+                color: action.payload.color
+            });
 
             state.currentCellTasks = [];
             for (let i = 0; i < state.tasks.length; i++) {
                 if (state.tasks[i].year === action.payload.year
                     && state.tasks[i].month === action.payload.month
                     && state.tasks[i].day === action.payload.day) {
-                        state.currentCellTasks.push(state.tasks[i])
+                        state.currentCellTasks.push(state.tasks[i]);
                 }
             }
         },

@@ -2,7 +2,7 @@
   height: 2.5rem;
   width: 15rem;
 
-  margin: 1rem 4rem;
+  margin: 1rem 0;
 
   border: silver solid;
   border-radius: 1rem;
@@ -12,10 +12,10 @@
   transition: 0.5s;
 
   &:focus {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }

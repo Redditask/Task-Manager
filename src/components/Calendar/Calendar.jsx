@@ -1,11 +1,13 @@
 import styles from "./Calendar.module.scss";
 
 import React, {useMemo, useState} from 'react';
-import {isActiveMonth} from "./utils/utils";
 import {useDispatch, useSelector} from "react-redux";
+import {setCurrentCell} from "../../store/taskManagerSlice";
+
+import {isActiveMonth} from "./utils/utils";
+
 import Button from "../UI/Button/Button";
 import ChangeDateForm from "./SupportComponents/ChangeDateForm";
-import {setCurrentCell} from "../../store/taskManagerSlice";
 
 const utils = require ("./utils/utils");
 const infoData = require("./utils/infoData");
@@ -84,6 +86,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                                                     <div
                                                         key={task.taskText + index}
                                                         className={styles.Calendar__task}
+                                                        style={{backgroundColor:task.color}}
                                                     >
                                                         {task.taskText}
                                                     </div>

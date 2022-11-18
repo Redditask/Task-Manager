@@ -13,11 +13,19 @@
     margin: 1rem 0;
   }
 
+  &__inputArea{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    margin:0rem 2rem;
+  }
+
   &__buttonArea{
     font-size: 1.5rem;
 
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
 
     border: 0.2rem silver solid;
     border-radius: 1rem;

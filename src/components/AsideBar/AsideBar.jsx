@@ -4,8 +4,10 @@ import "./Transition.scss";
 import React from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {removeTask} from "../../store/taskManagerSlice";
-import Button from "../UI/Button/Button";
+
 import {CSSTransition, TransitionGroup} from "react-transition-group";
+
+import Button from "../UI/Button/Button";
 
 const AsideBar = ({setModalStatus, setDate}) => {
     const tasks = useSelector(state => state.tasks.currentCellTasks);
@@ -31,7 +33,10 @@ const AsideBar = ({setModalStatus, setDate}) => {
                             >
                             <div className={styles.AsideBar__task}>
                                 <li className={styles.AsideBar__content}>
-                                    <div className={styles.AsideBar__contentColor}/>
+                                    <div
+                                        className={styles.AsideBar__contentColor}
+                                        style={{background:task.color}}
+                                    />
                                     {task.taskText}
                                 </li>
                                 <div style={{marginTop:"-1.5rem"}}>
