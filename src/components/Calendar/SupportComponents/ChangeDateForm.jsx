@@ -3,17 +3,14 @@ import styles from "./ChangeDateForm.module.scss";
 import React from 'react';
 import Button from "../../UI/Button/Button";
 
-const ChangeDateForm = ({year, month, prevYear, nextYear, prevMonth, nextMonth}) => {
+const ChangeDateForm = ({year, month, prevMonth, nextMonth}) => {
     return (
         <div  className={styles.ChangeDateForm}>
-            <div className={styles.ChangeDateForm__item}>
-                <Button text="<" onClick={prevYear}/>
-                <p className={styles.ChangeDateForm__text}>{year}</p>
-                <Button text=">" onClick={nextYear}/>
-            </div>
-            <div className={styles.ChangeDateForm__item}>
+            <div className={styles.ChangeDateForm__switch}>
                 <Button text="<" onClick={prevMonth}/>
-                <p className={styles.ChangeDateForm__text}>{month}</p>
+                <div className={styles.ChangeDateForm__text}>
+                    {month} / {year}
+                </div>
                 <Button text=">" onClick={nextMonth}/>
             </div>
         </div>

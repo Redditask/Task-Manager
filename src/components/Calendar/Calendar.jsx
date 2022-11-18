@@ -27,14 +27,6 @@ const Calendar = ({setModalStatus, setDate}) => {
         return [...prevMonth, ...currMonth, ...nextMonth];
     }, [onCalendarYear, onCalendarMonth]);
 
-    const nextYear = () => {
-        setOnCalendarYear(year => year + 1);
-    }
-
-    const prevYear = () => {
-        setOnCalendarYear(onCalendarYear - 1);
-    }
-
     const nextMonth = () => {
         if (onCalendarMonth === 11) {
             setOnCalendarYear(onCalendarYear + 1);
@@ -50,13 +42,11 @@ const Calendar = ({setModalStatus, setDate}) => {
     }
 
     return (
-        <div>
+        <div className={styles.Container}>
             <ChangeDateForm
                 year={onCalendarYear}
                 month={infoData.monthsList[onCalendarMonth]}
-                nextYear={nextYear}
                 nextMonth={nextMonth}
-                prevYear={prevYear}
                 prevMonth={prevMonth}
             />
             <div className={styles.Calendar}>
@@ -74,7 +64,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                                 key={data.day + "" + data.month + "" + data.year}
                                 onClick={() => dispatch(setCurrentCell(data.day + "-" + data.month + "-" + data.year))}
                             >
-                                <div className={styles.Calendar__cellTitle}>
+                                <div className={styles.Calendar__cellTitleArea}>
                                     {data.day}
                                     <Button text="+" onClick={() => {
                                         setModalStatus(true)

@@ -1,18 +1,27 @@
 .Container{
   margin-top: 4.5rem;
 
-  border-top: 0.2rem silver solid;
-  border-right: 0.2rem silver solid;
-  border-bottom: 0.2rem silver solid;
+  border-top: 0.1rem silver solid;
+  border-right: 0.1rem silver solid;
+  border-bottom: 0.1rem silver solid;
   border-bottom-right-radius: 1rem;
   border-top-right-radius: 1rem;
+
+  box-shadow: 0 0 10px silver;
 }
 
 .AsideBar {
-  width: 25rem;
+  width: 20rem;
   height: 40rem;
 
   overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  padding: 1rem;
 
   &::-webkit-scrollbar {
     border: none;
@@ -22,12 +31,14 @@
     }
   }
 
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
 
-  padding: 1rem;
+    margin: 0rem 0 2rem 2rem;
+  }
 
   &__title {
     font-weight: bold;
@@ -43,38 +54,39 @@
   }
 
   &__task {
-    font-size: 1.5rem;
-    text-align: center;
-
-    background-color: beige;
-
-    border-radius: 1rem;
-
-    box-shadow: 0 0 10px silver;
-
-    margin: 1rem;
-    padding: 1rem;
-  }
-
-  &__element {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: self-start;
     justify-content: space-between;
 
     margin-bottom: 1.5rem;
   }
 
-  &__header {
+  &__content {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    text-align: center;
 
-    margin: 0rem 0 2rem 0;
+    gap: 1rem;
+
+    font-size: 1.5rem;
+
+    margin: 1rem;
+    padding: 1rem 1rem 1rem 0.7rem;
+
+    &Color{
+      width: 1.5rem;
+      height: 1.5rem;
+
+      border-radius: 50%;
+      background-color: beige;
+      box-shadow: 0 0 10px silver;
+
+      margin: auto;
+    }
   }
 
-  &__button {
+  &__buttonArea {
     font-size: 3rem;
 
     border-bottom-right-radius: 0.5rem;

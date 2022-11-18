@@ -20,6 +20,7 @@ const AsideBar = ({setModalStatus, setDate}) => {
                 <h2 className={styles.AsideBar__title}>Tasks</h2>
                 <h3 style={{textDecoration:"underline"}}>{date ? date : "Select date"}</h3>
             </div>
+            <hr/>
             <TransitionGroup className={styles.AsideBar}>
                     {tasks.length
                         ? tasks.map((task,index)=>(
@@ -28,12 +29,17 @@ const AsideBar = ({setModalStatus, setDate}) => {
                                 timeout={500}
                                 classNames="item"
                             >
-                            <div className={styles.AsideBar__element}>
-                                <li className={styles.AsideBar__task}>{task.taskText}</li>
-                                <Button
-                                    text="Remove this task"
-                                    onClick={()=>remove(task.id)}
-                                />
+                            <div className={styles.AsideBar__task}>
+                                <li className={styles.AsideBar__content}>
+                                    <div className={styles.AsideBar__contentColor}/>
+                                    {task.taskText}
+                                </li>
+                                <div style={{marginTop:"-1.5rem"}}>
+                                    <Button
+                                        text="Remove"
+                                        onClick={()=>remove(task.id)}
+                                    />
+                                </div>
                             </div>
                             </CSSTransition>
                             )
@@ -47,7 +53,8 @@ const AsideBar = ({setModalStatus, setDate}) => {
                         </CSSTransition>
                     }
             </TransitionGroup>
-            <div className={styles.AsideBar__button}>
+            <hr/>
+            <div className={styles.AsideBar__buttonArea}>
                 <Button
                     text="+"
                     onClick={() => {

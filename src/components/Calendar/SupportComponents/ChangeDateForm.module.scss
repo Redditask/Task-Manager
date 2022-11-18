@@ -1,11 +1,11 @@
 .ChangeDateForm {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   margin-top: 3.5rem;
   padding-bottom: 2rem;
 
-  &__item {
+  &__switch {
     font-size: 2rem ;
 
     display: flex;
