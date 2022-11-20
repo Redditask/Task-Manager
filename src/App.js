@@ -9,6 +9,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
+ добавить возможность edit-ить таску (кнопка в asideBar возле remove?)
+ //
  адаптивная вёрстка
  темная тема
 */

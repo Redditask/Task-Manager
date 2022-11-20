@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, current} from "@reduxjs/toolkit";
 
 const taskManagerSlice = createSlice({
     name: "tasks",
@@ -26,6 +26,9 @@ const taskManagerSlice = createSlice({
                         state.currentCellTasks.push(state.tasks[i]);
                 }
             }
+
+            state.currentCellDate = action.payload.day + "-" + action.payload.month + "-" + action.payload.year;
+            //console.log(current(state)) для просмотра состояния tasks
         },
         removeTask(state, action) {
             state.tasks = state.tasks.filter(task=>task.id!==action.payload);

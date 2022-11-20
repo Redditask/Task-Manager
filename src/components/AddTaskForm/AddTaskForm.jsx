@@ -19,7 +19,6 @@ const AddTaskForm = ({setModalStatus, date}) => {
 
     if(date) [day, month, year] = date.split("-");
 
-
     const dispatch = useDispatch();
     const add = (text, color) => dispatch(addTask({
         taskText: text,

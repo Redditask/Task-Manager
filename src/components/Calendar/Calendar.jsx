@@ -2,7 +2,7 @@ import styles from "./Calendar.module.scss";
 
 import React, {useMemo, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentCell} from "../../store/taskManagerSlice";
+import {addTask, removeTask, setCurrentCell} from "../../store/taskManagerSlice";
 
 import {isActiveMonth} from "./utils/utils";
 
@@ -13,6 +13,7 @@ const utils = require ("./utils/utils");
 const infoData = require("./utils/infoData");
 
 const Calendar = ({setModalStatus, setDate}) => {
+    //base calendar functionality
     const startValue = new Date();
 
     const tasks = useSelector(state => state.tasks.tasks);
@@ -43,6 +44,35 @@ const Calendar = ({setModalStatus, setDate}) => {
         } else setOnCalendarMonth(onCalendarMonth - 1);
     }
 
+    //drag and drop functionality
+    const [dropTask, setDropTask] = useState({});
+
+    function dragOverHandler(event) {
+        event.preventDefault();
+    }
+
+    function dragStartHandler(task) {
+        setDropTask(task);
+    }
+
+    function dropHandler(event, data) {
+        event.preventDefault();
+        if (!(data.year === dropTask.year
+            && data.month === dropTask.month
+            && data.day === dropTask.day))
+        {
+            dispatch(removeTask(dropTask.id));
+
+            dispatch(addTask({
+                taskText: dropTask.taskText,
+                year: data.year,
+                month: data.month,
+                day: data.day,
+                color: dropTask.color,
+            }))
+        }
+    }
+
     return (
         <div className={styles.Container}>
             <ChangeDateForm
@@ -65,6 +95,9 @@ const Calendar = ({setModalStatus, setDate}) => {
                                 className={className}
                                 key={data.day + "" + data.month + "" + data.year}
                                 onClick={() => dispatch(setCurrentCell(data.day + "-" + data.month + "-" + data.year))}
+
+                                onDragOver={event=>dragOverHandler(event)}
+                                onDrop={event=>dropHandler(event, data)}
                             >
                                 <div className={styles.Calendar__cellTitleArea}>
                                     {data.day}
@@ -87,6 +120,9 @@ const Calendar = ({setModalStatus, setDate}) => {
                                                         key={task.taskText + index}
                                                         className={styles.Calendar__task}
                                                         style={{backgroundColor:task.color}}
+
+                                                        draggable={true}
+                                                        onDragStart={() => dragStartHandler(task)}
                                                     >
                                                         {task.taskText}
                                                     </div>
