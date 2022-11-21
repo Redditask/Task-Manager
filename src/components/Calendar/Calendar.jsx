@@ -59,8 +59,7 @@ const Calendar = ({setModalStatus, setDate}) => {
         event.preventDefault();
         if (!(data.year === dropTask.year
             && data.month === dropTask.month
-            && data.day === dropTask.day))
-        {
+            && data.day === dropTask.day)) {
             dispatch(removeTask(dropTask.id));
 
             dispatch(addTask({
@@ -96,15 +95,15 @@ const Calendar = ({setModalStatus, setDate}) => {
                                 key={data.day + "" + data.month + "" + data.year}
                                 onClick={() => dispatch(setCurrentCell(data.day + "-" + data.month + "-" + data.year))}
 
-                                onDragOver={event=>dragOverHandler(event)}
-                                onDrop={event=>dropHandler(event, data)}
+                                onDragOver={event => dragOverHandler(event)}
+                                onDrop={event => dropHandler(event, data)}
                             >
                                 <div className={styles.Calendar__cellTitleArea}>
                                     {data.day}
                                     <Button text="+" onClick={() => {
                                         setModalStatus(true)
                                         setDate(`${data.day}-${data.month}-${data.year}`)
-                                        }
+                                    }
                                     }
                                             title="Add task"
                                     />
@@ -119,7 +118,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                                                     <div
                                                         key={task.taskText + index}
                                                         className={styles.Calendar__task}
-                                                        style={{backgroundColor:task.color}}
+                                                        style={{backgroundColor: task.color}}
 
                                                         draggable={true}
                                                         onDragStart={() => dragStartHandler(task)}
@@ -127,7 +126,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                                                         {task.taskText}
                                                     </div>
                                                 )
-                                            })
+                                        })
                                     }
                                 </div>
                             </div>

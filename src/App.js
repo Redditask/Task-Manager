@@ -9,7 +9,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- добавить возможность edit-ить таску (кнопка в asideBar возле remove?)
+ как-то совместить edit- и add-TaskForm
+ разбить Calendar на компоненты
  //
  адаптивная вёрстка
  темная тема

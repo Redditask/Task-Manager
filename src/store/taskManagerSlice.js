@@ -34,6 +34,20 @@ const taskManagerSlice = createSlice({
             state.tasks = state.tasks.filter(task=>task.id!==action.payload);
             state.currentCellTasks = state.currentCellTasks.filter(task=>task.id!==action.payload);
         },
+        editTask(state, action){
+            state.tasks.forEach(task=>{
+                if(task.id===action.payload.id){
+                  task.taskText=action.payload.text;
+                  task.color=action.payload.color;
+                }
+            })
+            state.currentCellTasks.forEach(task=>{
+                if(task.id===action.payload.id){
+                    task.taskText=action.payload.text;
+                    task.color=action.payload.color;
+                }
+            })
+        },
         setCurrentCell(state, action) {
             const [day, month, year] = action.payload.split("-");
 
@@ -54,6 +68,7 @@ const taskManagerSlice = createSlice({
 export const {
     addTask,
     removeTask,
+    editTask,
     setCurrentCell,
 } = taskManagerSlice.actions;
 

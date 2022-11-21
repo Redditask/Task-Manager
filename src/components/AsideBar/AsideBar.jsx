@@ -1,15 +1,20 @@
 import styles from "./AsideBar.module.scss";
 import "./Transition.scss";
 
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {removeTask} from "../../store/taskManagerSlice";
+import {removeTask, editTask} from "../../store/taskManagerSlice";
 
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 import Button from "../UI/Button/Button";
+import EditTaskForm from "../EditTaskForm/EditTaskForm";
+import Modal from "../UI/Modal/Modal";
 
 const AsideBar = ({setModalStatus, setDate}) => {
+    const [editModalStatus, setEditModalStatus] = useState(false);
+    const [task, setTask] = useState({});
+
     const tasks = useSelector(state => state.tasks.currentCellTasks);
     const date = useSelector(state => state.tasks.currentCellDate);
 
@@ -37,9 +42,16 @@ const AsideBar = ({setModalStatus, setDate}) => {
                                         className={styles.AsideBar__contentColor}
                                         style={{background:task.color}}
                                     />
-                                    {task.taskText}
+                                    <div style={{textAlign:"justify"}}>{task.taskText}</div>
                                 </li>
-                                <div style={{marginTop:"-1.5rem"}}>
+                                <div className={styles.AsideBar__deleteEditButtonArea}>
+                                    <Button
+                                        text="Edit"
+                                        onClick={()=> {
+                                            setEditModalStatus(true)
+                                            setTask(task)
+                                        }}
+                                    />
                                     <Button
                                         text="Remove"
                                         onClick={()=>remove(task.id)}
@@ -59,7 +71,7 @@ const AsideBar = ({setModalStatus, setDate}) => {
                     }
             </TransitionGroup>
             <hr/>
-            <div className={styles.AsideBar__buttonArea}>
+            <div className={styles.AsideBar__addButtonArea}>
                 <Button
                     text="+"
                     onClick={() => {
@@ -69,6 +81,9 @@ const AsideBar = ({setModalStatus, setDate}) => {
                         title="Add another task for this day"
                 />
             </div>
+            <Modal visible={editModalStatus} setVisible={setEditModalStatus}>
+                <EditTaskForm setEditModalStatus={setEditModalStatus} task={task}/>
+            </Modal>
         </div>
     );
 };

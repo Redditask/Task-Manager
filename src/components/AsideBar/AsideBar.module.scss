@@ -79,8 +79,8 @@
     padding: 1rem 1rem 1rem 0.7rem;
 
     &Color{
-      width: 1.5rem;
-      height: 1.5rem;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
 
       border-radius: 50%;
       box-shadow: 0 0 10px silver;
@@ -89,7 +89,7 @@
     }
   }
 
-  &__buttonArea {
+  &__addButtonArea {
     font-size: 3rem;
 
     border-bottom-right-radius: 0.5rem;
@@ -99,5 +99,18 @@
 
       transition: 1s;
     }
+  }
+
+  &__deleteEditButtonArea {
+    display: flex;
+    flex-direction: row;
+
+    border: 1px silver solid;
+    border-radius: 1rem;
+
+    gap: 2rem;
+
+    margin-top: -1.5rem;
+    margin-left: 1rem;
   }
 }
