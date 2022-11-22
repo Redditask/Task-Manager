@@ -9,10 +9,6 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- как-то совместить edit- и add-TaskForm
- кнопки edit и remove поменять (справа с помощью react icons ?)
- разбить Calendar на подкомпоненты
- //
  адаптивная вёрстка
  темная тема
 */
@@ -26,7 +22,11 @@ function App() {
             <AsideBar setModalStatus={setModalStatus} setDate={setDate}/>
             <Calendar setModalStatus={setModalStatus} setDate={setDate}/>
             <Modal visible={modalStatus} setVisible={setModalStatus}>
-                <AddTaskForm setModalStatus={setModalStatus} date={date}/>
+                {
+                    modalStatus
+                        ? <AddTaskForm setModalStatus={setModalStatus} date={date}/>
+                        : null
+                }
             </Modal>
         </div>
     );

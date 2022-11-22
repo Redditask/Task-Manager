@@ -3,13 +3,15 @@ import "./Transition.scss";
 
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {removeTask, editTask} from "../../store/taskManagerSlice";
+import {removeTask} from "../../store/taskManagerSlice";
 
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 import Button from "../UI/Button/Button";
 import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import Modal from "../UI/Modal/Modal";
+import {AiOutlineEdit} from "react-icons/ai";
+import {MdDeleteOutline} from "react-icons/md";
 
 const AsideBar = ({setModalStatus, setDate}) => {
     const [editModalStatus, setEditModalStatus] = useState(false);
@@ -42,18 +44,20 @@ const AsideBar = ({setModalStatus, setDate}) => {
                                         className={styles.AsideBar__contentColor}
                                         style={{background:task.color}}
                                     />
-                                    {task.taskText}
+                                    <div>{task.taskText}</div>
                                 </li>
                                 <div className={styles.AsideBar__deleteEditButtonArea}>
                                     <Button
-                                        text="Edit"
+                                        title="Edit"
+                                        text={<AiOutlineEdit size={25}/>}
                                         onClick={()=> {
                                             setEditModalStatus(true)
                                             setTask(task)
                                         }}
                                     />
                                     <Button
-                                        text="Remove"
+                                        title="Remove"
+                                        text={<MdDeleteOutline size={25}/>}
                                         onClick={()=>remove(task.id)}
                                     />
                                 </div>

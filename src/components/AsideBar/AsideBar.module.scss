@@ -11,8 +11,8 @@
 }
 
 .AsideBar {
-  width: 20rem;
-  height: 40rem;
+  width: 22rem;
+  height: 44rem;
 
   overflow: auto;
 
@@ -60,7 +60,7 @@
   &__task {
     display: flex;
     flex-direction: column;
-    align-items: self-start;
+    align-items: start;
     justify-content: space-between;
 
     margin-bottom: 1.5rem;
@@ -69,7 +69,8 @@
   &__content {
     display: flex;
     flex-direction: row;
-    text-align: center;
+    align-items: start;
+    text-align: left;
 
     gap: 1rem;
 
@@ -79,13 +80,15 @@
     padding: 1rem 1rem 1rem 0.7rem;
 
     &Color{
+      position: inherit;
+
       min-width: 1.5rem;
       min-height: 1.5rem;
 
       border-radius: 50%;
       box-shadow: 0 0 10px silver;
 
-      margin: auto;
+      margin-top: 0.4rem;
     }
   }
 
@@ -105,12 +108,9 @@
     display: flex;
     flex-direction: row;
 
-    border: 1px silver solid;
-    border-radius: 1rem;
+    gap: 1rem;
 
-    gap: 2rem;
-
-    margin-top: -1.5rem;
-    margin-left: 1rem;
+    margin-top: -1.3rem;
+    margin-left: 3.5rem;
   }
 }
