@@ -1,13 +1,17 @@
 .Input{
-  height: 2.5rem;
+  height: 5rem;
   width: 15rem;
-
-  margin: 1rem 0;
 
   border: silver solid;
   border-radius: 1rem;
 
-  text-align: center;
+  text-align: start;
+
+  resize: none;
+  overflow: auto;
+
+  margin: 1rem 0;
+  padding: 0.5rem;
 
   transition: 0.5s;
 
@@ -17,5 +21,13 @@
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  &::-webkit-scrollbar{
+    border: none;
+
+    &-thumb{
+      border: none;
+    }
   }
 }

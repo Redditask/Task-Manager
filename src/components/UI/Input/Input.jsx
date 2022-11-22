@@ -4,7 +4,7 @@ import React from 'react';
 
 const Input = ({...props}) => {
     return (
-        <input className={styles.Input} {...props}/>
+        <textarea className={styles.Input} {...props}/>
     );
 };
 

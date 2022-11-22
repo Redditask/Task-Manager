@@ -42,7 +42,7 @@ const AsideBar = ({setModalStatus, setDate}) => {
                                         className={styles.AsideBar__contentColor}
                                         style={{background:task.color}}
                                     />
-                                    <div style={{textAlign:"justify"}}>{task.taskText}</div>
+                                    {task.taskText}
                                 </li>
                                 <div className={styles.AsideBar__deleteEditButtonArea}>
                                     <Button
@@ -82,7 +82,10 @@ const AsideBar = ({setModalStatus, setDate}) => {
                 />
             </div>
             <Modal visible={editModalStatus} setVisible={setEditModalStatus}>
-                <EditTaskForm setEditModalStatus={setEditModalStatus} task={task}/>
+                {editModalStatus
+                    ? <EditTaskForm setEditModalStatus={setEditModalStatus} task={task}/>
+                    : null
+                }
             </Modal>
         </div>
     );

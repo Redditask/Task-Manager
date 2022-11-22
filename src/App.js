@@ -10,7 +10,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 /*
 ToDo
  как-то совместить edit- и add-TaskForm
- разбить Calendar на компоненты
+ кнопки edit и remove поменять (справа с помощью react icons ?)
+ разбить Calendar на подкомпоненты
  //
  адаптивная вёрстка
  темная тема

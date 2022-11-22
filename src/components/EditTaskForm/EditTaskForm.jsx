@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {editTask} from "../../store/taskManagerSlice";
 
@@ -9,14 +9,8 @@ import Select from "../UI/Select/Select";
 import Button from "../UI/Button/Button";
 
 const EditTaskForm = ({setEditModalStatus, task}) => {
-    const [text, setText] = useState("Your task");
-    const [color, setColor] = useState("beige");
-
-    //пофиксить это, чтобы не было ошибки про неуправляемый input
-    useEffect(()=>{
-        setText(task.taskText);
-        setColor(task.color);
-    }, [task]);
+    const [text, setText] = useState(task.taskText);
+    const [color, setColor] = useState(task.color);
 
     const dispatch = useDispatch();
     const edit = (id, text, color) => dispatch(editTask({
