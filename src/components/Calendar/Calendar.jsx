@@ -1,6 +1,6 @@
 import styles from "./Calendar.module.scss";
 
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addTask, removeTask, setCurrentCell, changeTheme} from "../../store/taskManagerSlice";
 
@@ -21,7 +21,12 @@ const Calendar = ({setModalStatus, setDate}) => {
 
     const tasks = useSelector(state => state.tasks.tasks);
     const theme = useSelector(state => state.tasks.theme) || "light";
+
     const dispatch = useDispatch();
+    useEffect(()=> {
+        dispatch(changeTheme({theme: theme}))
+        //auto "return"
+    }, []);
 
     const [onCalendarYear, setOnCalendarYear] = useState(() => startValue.getFullYear());
     const [onCalendarMonth, setOnCalendarMonth] = useState(() => startValue.getMonth());
