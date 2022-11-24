@@ -1,0 +1,37 @@
+:root{
+  --darkColor: silver;
+  --lightColor: black;
+  --defaultColor: var(--lightColor);
+
+  --darkBgColor: #2f2e2e;
+  --lightBgColor: white;
+  --defaultBgColor: var(--lightBgColor);
+
+  --darkBorderColor: #4b4848;
+  --lightBorderColor: silver;
+  --defaultBorderColor: var(--lightBorderColor);
+
+  --darkButtonColor: silver;
+  --lightButtonColor: rgba(0, 0, 0, 0.65);
+  --defaultButtonColor: var(--lightButtonColor);
+
+  --darkShadowColor: black;
+  --lightShadowColor: silver;
+  --defaultShadowColor: var(--lightShadowColor);
+
+  --darkHoverBgColor: rgba(211, 209, 209, 0.2);
+  --lightHoverBgColor: silver;
+  --defaultHoverBgColor: var(--lightHoverBgColor);
+
+  --darkHoverColor: rgba(211, 209, 209, 0.2);
+  --lightHoverColor: whitesmoke;
+  --defaultHoverColor: var(--lightHoverColor);
+
+  --darkActiveMonthColor: white;
+  --lightActiveMonthColor: black;
+  --defaultActiveMonthColor: var(--lightActiveMonthColor);
+
+  --darkUnActiveMonthColor: rgba(211, 209, 209, 0.2);
+  --lightUnActiveMonthColor: silver;
+  --defaultUnActiveMonthColor: var(--lightUnActiveMonthColor);
+}

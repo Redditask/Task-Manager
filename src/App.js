@@ -9,8 +9,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
+ пофиксить баг с темой при первом запуске
  адаптивная вёрстка
- темная тема
 */
 
 function App() {

@@ -15,7 +15,7 @@
   }
 
   &__text {
-    color: rgba(0, 0, 0, 0.65);
+    color: var(--defaultButtonColor);
 
     margin-left: 1.3rem;
     margin-right: 1.3rem;

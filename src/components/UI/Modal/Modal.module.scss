@@ -1,3 +1,5 @@
+@import "./src/varieble";
+
 .Modal {
   position: fixed;
 
@@ -23,7 +25,7 @@
   }
 
   &Content{
-    background-color: white;
+    background-color: var(--defaultBgColor);
 
     border: 0.3rem silver solid;
     border-radius: 0.4rem;

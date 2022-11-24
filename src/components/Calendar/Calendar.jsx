@@ -2,12 +2,15 @@ import styles from "./Calendar.module.scss";
 
 import React, {useMemo, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {addTask, removeTask, setCurrentCell} from "../../store/taskManagerSlice";
+import {addTask, removeTask, setCurrentCell, changeTheme} from "../../store/taskManagerSlice";
 
 import {isActiveMonth} from "./utils/utils";
 
 import Button from "../UI/Button/Button";
 import ChangeDateForm from "./SupportComponents/ChangeDateForm";
+
+import {MdDarkMode} from "react-icons/md";
+import {CiLight} from "react-icons/ci";
 
 const utils = require ("./utils/utils");
 const infoData = require("./utils/infoData");
@@ -17,6 +20,7 @@ const Calendar = ({setModalStatus, setDate}) => {
     const startValue = new Date();
 
     const tasks = useSelector(state => state.tasks.tasks);
+    const theme = useSelector(state => state.tasks.theme) || "light";
     const dispatch = useDispatch();
 
     const [onCalendarYear, setOnCalendarYear] = useState(() => startValue.getFullYear());
@@ -74,12 +78,31 @@ const Calendar = ({setModalStatus, setDate}) => {
 
     return (
         <div className={styles.Container}>
-            <ChangeDateForm
-                year={onCalendarYear}
-                month={infoData.monthsList[onCalendarMonth]}
-                nextMonth={nextMonth}
-                prevMonth={prevMonth}
-            />
+            <div className={styles.Calendar__header}>
+                <ChangeDateForm
+                    year={onCalendarYear}
+                    month={infoData.monthsList[onCalendarMonth]}
+                    nextMonth={nextMonth}
+                    prevMonth={prevMonth}
+                />
+                {
+                    theme === "light"
+                        ? <MdDarkMode
+                            title="Dark theme"
+                            size={40}
+                            style={{marginTop: "3.5rem", cursor: "pointer"}}
+                            onClick={() => dispatch(changeTheme({theme: "dark"}))}
+                        />
+                        :
+                        <CiLight
+                            title="Light theme"
+                            size={40}
+                            style={{marginTop: "3.5rem", cursor: "pointer", color: "white"}}
+                            onClick={() => dispatch(changeTheme({theme: "light"}))}
+                        />
+
+                }
+            </div>
             <div className={styles.Calendar}>
                 {infoData.weekDayList.map(weekDay =>
                     <div className={styles.Calendar__weekDay} key={weekDay}>{weekDay}</div>

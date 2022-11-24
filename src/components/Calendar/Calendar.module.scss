@@ -1,3 +1,5 @@
+@import "./src/varieble";
+
 @mixin cell($color){
   max-height: 5.9rem;
   max-width: 11.5rem;
@@ -11,12 +13,12 @@
 
   font-size: 1rem;
 
-  border-top: silver 0.01rem solid;
-  border-right: silver 0.01rem solid;
+  border-top: var(--defaultBorderColor) 0.1rem solid;
+  border-right: var(--defaultBorderColor) 0.1rem solid;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 
-  background-color: white;
+  background-color: var(--defaultBgColor);
 
   padding-top: 0.25rem;
   padding-left: 0.25rem;
@@ -45,17 +47,29 @@
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 0.4fr repeat(6, 1fr);
 
-  border: silver 0.1rem solid;
+  border: var(--defaultBorderColor) 0.1rem solid;
   border-radius: 1rem;
 
-  background-color: white;
+  background-color: var(--defaultBgColor);
 
   margin-right: 5rem;
 
-  box-shadow: 0 0 10px silver;
+  box-shadow: 0 0 10px var(--defaultShadowColor);
+
+  &__header {
+    width: 79rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   &__cell {
-    @include cell(silver);
+    @include cell(var(--defaultUnActiveMonthColor));
+
+    &:hover {
+      background-color: var(--defaultHoverColor);
+    }
   }
 
   &__cellTitleArea{
@@ -70,10 +84,10 @@
   }
 
   &__activeMonth {
-    @include cell(black);
+    @include cell(var(--defaultActiveMonthColor));
 
     &:hover {
-      background-color: whitesmoke;
+      background-color: var(--defaultHoverColor);
     }
   }
 
@@ -81,7 +95,7 @@
     @include cell(red);
 
     &:hover {
-      background-color: whitesmoke;
+      background-color: var(--defaultHoverColor);
     }
   }
 
@@ -90,7 +104,7 @@
     border-radius: 1rem;
 
     color: silver;
-    background-color: white;
+    background-color: var(--defaultBgColor);
 
     font-size: 2rem;
     text-align: center;

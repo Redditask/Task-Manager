@@ -1,19 +1,23 @@
+@import "./src/varieble";
+
 .Container{
   margin-top: 4.5rem;
 
-  border-top: 0.1rem silver solid;
-  border-right: 0.1rem silver solid;
-  border-bottom: 0.1rem silver solid;
+  border-top: var(--defaultBorderColor) 0.1rem solid;
+  border-right: var(--defaultBorderColor) 0.1rem solid;
+  border-bottom: var(--defaultBorderColor) 0.1rem solid;
   border-bottom-right-radius: 1rem;
   border-top-right-radius: 1rem;
 
-  box-shadow: 0 0 10px silver;
+  box-shadow: 0 0 10px var(--defaultShadowColor);
+
+  background-color: var(--defaultBgColor);
+  color: var(--defaultColor);
 }
 
 .AsideBar {
   width: 22rem;
   height: 44rem;
-
   overflow: auto;
 
   display: flex;
@@ -49,7 +53,7 @@
   }
 
   &__date {
-    color: rgba(0, 0, 0, 0.65);
+    color: var(--defaultButtonColor);
   }
 
   &__tasksIsEmpty {
@@ -86,7 +90,8 @@
       min-height: 1.5rem;
 
       border-radius: 50%;
-      box-shadow: 0 0 10px silver;
+
+      box-shadow: 0 0 10px var(--defaultShadowColor);
 
       margin-top: 0.4rem;
     }
@@ -98,7 +103,7 @@
     border-bottom-right-radius: 0.5rem;
 
     &:hover{
-      background-color: silver;
+      background-color: var(--defaultHoverBgColor);
 
       transition: 1s;
     }

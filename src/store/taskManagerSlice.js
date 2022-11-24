@@ -6,6 +6,7 @@ const taskManagerSlice = createSlice({
         tasks: [],
         currentCellTasks: [],
         currentCellDate: "",
+        theme: "",
     },
     reducers: {
         addTask(state, action) {
@@ -23,7 +24,7 @@ const taskManagerSlice = createSlice({
                 if (state.tasks[i].year === action.payload.year
                     && state.tasks[i].month === action.payload.month
                     && state.tasks[i].day === action.payload.day) {
-                        state.currentCellTasks.push(state.tasks[i]);
+                    state.currentCellTasks.push(state.tasks[i]);
                 }
             }
 
@@ -31,20 +32,20 @@ const taskManagerSlice = createSlice({
             //console.log(current(state)) для просмотра состояния tasks
         },
         removeTask(state, action) {
-            state.tasks = state.tasks.filter(task=>task.id!==action.payload);
-            state.currentCellTasks = state.currentCellTasks.filter(task=>task.id!==action.payload);
+            state.tasks = state.tasks.filter(task => task.id !== action.payload);
+            state.currentCellTasks = state.currentCellTasks.filter(task => task.id !== action.payload);
         },
-        editTask(state, action){
-            state.tasks.forEach(task=>{
-                if(task.id===action.payload.id){
-                  task.taskText=action.payload.text;
-                  task.color=action.payload.color;
+        editTask(state, action) {
+            state.tasks.forEach(task => {
+                if (task.id === action.payload.id) {
+                    task.taskText = action.payload.text;
+                    task.color = action.payload.color;
                 }
             })
-            state.currentCellTasks.forEach(task=>{
-                if(task.id===action.payload.id){
-                    task.taskText=action.payload.text;
-                    task.color=action.payload.color;
+            state.currentCellTasks.forEach(task => {
+                if (task.id === action.payload.id) {
+                    task.taskText = action.payload.text;
+                    task.color = action.payload.color;
                 }
             })
         },
@@ -56,11 +57,30 @@ const taskManagerSlice = createSlice({
                 if (state.tasks[i].year === Number(year)
                     && state.tasks[i].month === Number(month)
                     && state.tasks[i].day === Number(day)) {
-                        state.currentCellTasks.push(state.tasks[i])
+                    state.currentCellTasks.push(state.tasks[i])
                 }
             }
 
             state.currentCellDate = action.payload;
+        },
+        changeTheme(state, action) {
+            const root = document.querySelector(":root");
+
+            const themeVariable = [
+                "Color", "BgColor",
+                "BorderColor", "ButtonColor",
+                "ShadowColor", "HoverBgColor",
+                "HoverColor", "ActiveMonthColor",
+                "UnActiveMonthColor"
+            ];
+
+            themeVariable.forEach(variable => {
+                root.style.setProperty(
+                    `--default${variable}`,
+                    `var(--${action.payload.theme}${variable}`)
+            });
+
+            state.theme = action.payload.theme;
         },
     }
 });
@@ -70,6 +90,7 @@ export const {
     removeTask,
     editTask,
     setCurrentCell,
+    changeTheme,
 } = taskManagerSlice.actions;
 
 export default taskManagerSlice.reducer;
