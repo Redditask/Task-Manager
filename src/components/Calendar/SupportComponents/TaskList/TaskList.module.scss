@@ -1,0 +1,24 @@
+.Tasks{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  overflow: auto;
+  &::-webkit-scrollbar{
+    border: none;
+
+    &-thumb{
+      border: none;
+    }
+  }
+
+  gap: 1rem;
+}
+
+.Task {
+  color: rgba(0, 0, 0, 0.65);
+
+  padding: 0.35rem;
+
+  border-radius: 1rem;
+}

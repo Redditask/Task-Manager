@@ -8,9 +8,9 @@ import Input from "../UI/Input/Input";
 import Select from "../UI/Select/Select";
 import Button from "../UI/Button/Button";
 
-const EditTaskForm = ({setEditModalStatus, task}) => {
-    const [text, setText] = useState(task.taskText);
-    const [color, setColor] = useState(task.color);
+const EditTaskForm = ({setEditModalStatus, selectedTask}) => {
+    const [text, setText] = useState(selectedTask.taskText);
+    const [color, setColor] = useState(selectedTask.color);
 
     const dispatch = useDispatch();
     const edit = (id, text, color) => dispatch(editTask({
@@ -35,7 +35,7 @@ const EditTaskForm = ({setEditModalStatus, task}) => {
                         ? <Button
                             text="Edit"
                             onClick={()=>{
-                                edit(task.id, text, color)
+                                edit(selectedTask.id, text, color)
                                 setEditModalStatus(false)
                             }}
                         />

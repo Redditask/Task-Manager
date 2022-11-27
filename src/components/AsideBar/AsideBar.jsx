@@ -2,26 +2,21 @@ import styles from "./AsideBar.module.scss";
 import "./Transition.scss";
 
 import React, {useState} from 'react';
-import {useSelector, useDispatch} from "react-redux";
-import {removeTask} from "../../store/taskManagerSlice";
+import {useSelector} from "react-redux";
 
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 import Button from "../UI/Button/Button";
 import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import Modal from "../UI/Modal/Modal";
-import {AiOutlineEdit} from "react-icons/ai";
-import {MdDeleteOutline} from "react-icons/md";
+import Task from "./SupportComponents/Task/Task";
 
 const AsideBar = ({setModalStatus, setDate}) => {
     const [editModalStatus, setEditModalStatus] = useState(false);
-    const [task, setTask] = useState({});
+    const [selectedTask, setSelectedTask] = useState({});
 
     const tasks = useSelector(state => state.tasks.currentCellTasks);
     const date = useSelector(state => state.tasks.currentCellDate);
-
-    const dispatch = useDispatch();
-    const remove = (taskId) => dispatch(removeTask(taskId));
 
     return (
         <div className={styles.Container}>
@@ -38,30 +33,11 @@ const AsideBar = ({setModalStatus, setDate}) => {
                                 timeout={500}
                                 classNames="item"
                             >
-                            <div className={styles.AsideBar__task}>
-                                <li className={styles.AsideBar__content}>
-                                    <div
-                                        className={styles.AsideBar__contentColor}
-                                        style={{background:task.color}}
-                                    />
-                                    <div>{task.taskText}</div>
-                                </li>
-                                <div className={styles.AsideBar__deleteEditButtonArea}>
-                                    <Button
-                                        title="Edit"
-                                        text={<AiOutlineEdit size={25}/>}
-                                        onClick={()=> {
-                                            setEditModalStatus(true)
-                                            setTask(task)
-                                        }}
-                                    />
-                                    <Button
-                                        title="Remove"
-                                        text={<MdDeleteOutline size={25}/>}
-                                        onClick={()=>remove(task.id)}
-                                    />
-                                </div>
-                            </div>
+                                <Task
+                                    task={task}
+                                    setTask={setSelectedTask}
+                                    setEditModalStatus={setEditModalStatus}
+                                />
                             </CSSTransition>
                             )
                         )
@@ -87,7 +63,7 @@ const AsideBar = ({setModalStatus, setDate}) => {
             </div>
             <Modal visible={editModalStatus} setVisible={setEditModalStatus}>
                 {editModalStatus
-                    ? <EditTaskForm setEditModalStatus={setEditModalStatus} task={task}/>
+                    ? <EditTaskForm setEditModalStatus={setEditModalStatus} selectedTask={selectedTask}/>
                     : null
                 }
             </Modal>

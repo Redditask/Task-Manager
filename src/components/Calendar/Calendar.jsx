@@ -1,16 +1,15 @@
 import styles from "./Calendar.module.scss";
 
-import React, {useEffect, useMemo, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {addTask, removeTask, setCurrentCell, changeTheme} from "../../store/taskManagerSlice";
+import React, {useMemo, useState} from 'react';
+import {useDispatch} from "react-redux";
+import {addTask, removeTask, setCurrentCell} from "../../store/taskManagerSlice";
 
 import {isActiveMonth} from "./utils/utils";
 
 import Button from "../UI/Button/Button";
-import ChangeDateForm from "./SupportComponents/ChangeDateForm";
-
-import {MdDarkMode} from "react-icons/md";
-import {CiLight} from "react-icons/ci";
+import ChangeDateForm from "./SupportComponents/ChangeDateForm/ChangeDateForm";
+import ThemeSelector from "./SupportComponents/ThemeSelector/ThemeSelector";
+import TaskList from "./SupportComponents/TaskList/TaskList";
 
 const utils = require ("./utils/utils");
 const infoData = require("./utils/infoData");
@@ -19,14 +18,7 @@ const Calendar = ({setModalStatus, setDate}) => {
     //base calendar functionality
     const startValue = new Date();
 
-    const tasks = useSelector(state => state.tasks.tasks);
-    const theme = useSelector(state => state.tasks.theme) || "light";
-
     const dispatch = useDispatch();
-    useEffect(()=> {
-        dispatch(changeTheme({theme: theme}))
-        //auto "return"
-    }, []);
 
     const [onCalendarYear, setOnCalendarYear] = useState(() => startValue.getFullYear());
     const [onCalendarMonth, setOnCalendarMonth] = useState(() => startValue.getMonth());
@@ -60,10 +52,6 @@ const Calendar = ({setModalStatus, setDate}) => {
         event.preventDefault();
     }
 
-    function dragStartHandler(task) {
-        setDropTask(task);
-    }
-
     function dropHandler(event, data) {
         event.preventDefault();
         if (!(data.year === dropTask.year
@@ -90,23 +78,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                     nextMonth={nextMonth}
                     prevMonth={prevMonth}
                 />
-                {
-                    theme === "light"
-                        ? <MdDarkMode
-                            title="Dark theme"
-                            size={40}
-                            style={{marginTop: "3.5rem", cursor: "pointer"}}
-                            onClick={() => dispatch(changeTheme({theme: "dark"}))}
-                        />
-                        :
-                        <CiLight
-                            title="Light theme"
-                            size={40}
-                            style={{marginTop: "3.5rem", cursor: "pointer", color: "white"}}
-                            onClick={() => dispatch(changeTheme({theme: "light"}))}
-                        />
-
-                }
+                <ThemeSelector/>
             </div>
             <div className={styles.Calendar}>
                 {infoData.weekDayList.map(weekDay =>
@@ -131,32 +103,11 @@ const Calendar = ({setModalStatus, setDate}) => {
                                     <Button text="+" onClick={() => {
                                         setModalStatus(true)
                                         setDate(`${data.day}-${data.month}-${data.year}`)
-                                    }
-                                    }
+                                    }}
                                             title="Add task"
                                     />
                                 </div>
-                                <div className={styles.Calendar__tasks}>
-                                    {
-                                        tasks.map((task, index) => {
-                                            if (task.day === data.day
-                                                && task.month === data.month
-                                                && task.year === data.year)
-                                                return (
-                                                    <div
-                                                        key={task.taskText + index}
-                                                        className={styles.Calendar__task}
-                                                        style={{backgroundColor: task.color}}
-
-                                                        draggable={true}
-                                                        onDragStart={() => dragStartHandler(task)}
-                                                    >
-                                                        {task.taskText}
-                                                    </div>
-                                                )
-                                        })
-                                    }
-                                </div>
+                                <TaskList data={data} setDropTask={setDropTask}/>
                             </div>
                         )
                     }
