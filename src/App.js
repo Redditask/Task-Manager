@@ -9,6 +9,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
+ закончить unit-тесты
+ //
  адаптивная вёрстка
 */
 

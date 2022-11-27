@@ -2,7 +2,7 @@ import styles from "./Calendar.module.scss";
 
 import React, {useMemo, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {addTask, removeTask, setCurrentCell} from "../../store/taskManagerSlice";
+import {addTask, removeTask, setSelectedCell} from "../../store/taskManagerSlice";
 
 import {isActiveMonth} from "./utils/utils";
 
@@ -93,7 +93,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                             <div
                                 className={className}
                                 key={data.day + "" + data.month + "" + data.year}
-                                onClick={() => dispatch(setCurrentCell(data.day + "-" + data.month + "-" + data.year))}
+                                onClick={() => dispatch(setSelectedCell(data.day + "-" + data.month + "-" + data.year))}
 
                                 onDragOver={event => dragOverHandler(event)}
                                 onDrop={event => dropHandler(event, data)}

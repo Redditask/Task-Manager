@@ -49,7 +49,7 @@ const taskManagerSlice = createSlice({
                 }
             })
         },
-        setCurrentCell(state, action) {
+        setSelectedCell(state, action) {
             const [day, month, year] = action.payload.split("-");
 
             state.selectedTasks = [];
@@ -89,7 +89,7 @@ export const {
     addTask,
     removeTask,
     editTask,
-    setCurrentCell,
+    setSelectedCell,
     changeTheme,
 } = taskManagerSlice.actions;
 
