@@ -3,6 +3,7 @@ import "./Transition.scss";
 
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
+import {selectSelectedDate, selectSelectedTasks} from "../../store/selectors";
 
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
@@ -15,8 +16,8 @@ const AsideBar = ({setModalStatus, setDate}) => {
     const [editModalStatus, setEditModalStatus] = useState(false);
     const [selectedTask, setSelectedTask] = useState({});
 
-    const tasks = useSelector(state => state.tasks.currentCellTasks);
-    const date = useSelector(state => state.tasks.currentCellDate);
+    const tasks = useSelector(selectSelectedTasks);
+    const date = useSelector(selectSelectedDate);
 
     return (
         <div className={styles.Container}>

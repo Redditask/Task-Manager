@@ -3,11 +3,13 @@ import styles from "./ThemeSelector.module.scss";
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {changeTheme} from "../../../../store/taskManagerSlice";
+import {selectTheme} from "../../../../store/selectors";
+
 import {MdDarkMode} from "react-icons/md";
 import {CiLight} from "react-icons/ci";
 
 const ThemeSelector = () => {
-    const theme = useSelector(state => state.tasks.theme) || "light";
+    const theme = useSelector(selectTheme) || "light";
 
     const dispatch = useDispatch();
     useEffect(()=> {

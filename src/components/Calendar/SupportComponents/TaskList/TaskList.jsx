@@ -2,9 +2,10 @@ import styles from "./TaskList.module.scss";
 
 import React from 'react';
 import {useSelector} from "react-redux";
+import {selectTasks} from "../../../../store/selectors";
 
 const TaskList = ({data, setDropTask}) => {
-    const tasks = useSelector(state => state.tasks.tasks);
+    const tasks = useSelector(selectTasks);
 
     function dragStartHandler(task) {
         setDropTask(task);

@@ -4,8 +4,8 @@ const taskManagerSlice = createSlice({
     name: "tasks",
     initialState: {
         tasks: [],
-        currentCellTasks: [],
-        currentCellDate: "",
+        selectedTasks: [],
+        selectedDate: "",
         theme: "",
     },
     reducers: {
@@ -19,21 +19,21 @@ const taskManagerSlice = createSlice({
                 color: action.payload.color
             });
 
-            state.currentCellTasks = [];
+            state.selectedTasks = [];
             for (let i = 0; i < state.tasks.length; i++) {
                 if (state.tasks[i].year === action.payload.year
                     && state.tasks[i].month === action.payload.month
                     && state.tasks[i].day === action.payload.day) {
-                    state.currentCellTasks.push(state.tasks[i]);
+                    state.selectedTasks.push(state.tasks[i]);
                 }
             }
 
-            state.currentCellDate = action.payload.day + "-" + action.payload.month + "-" + action.payload.year;
+            state.selectedDate = action.payload.day + "-" + action.payload.month + "-" + action.payload.year;
             //console.log(current(state)) для просмотра состояния tasks
         },
         removeTask(state, action) {
             state.tasks = state.tasks.filter(task => task.id !== action.payload);
-            state.currentCellTasks = state.currentCellTasks.filter(task => task.id !== action.payload);
+            state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload);
         },
         editTask(state, action) {
             state.tasks.forEach(task => {
@@ -42,7 +42,7 @@ const taskManagerSlice = createSlice({
                     task.color = action.payload.color;
                 }
             })
-            state.currentCellTasks.forEach(task => {
+            state.selectedTasks.forEach(task => {
                 if (task.id === action.payload.id) {
                     task.taskText = action.payload.text;
                     task.color = action.payload.color;
@@ -52,16 +52,16 @@ const taskManagerSlice = createSlice({
         setCurrentCell(state, action) {
             const [day, month, year] = action.payload.split("-");
 
-            state.currentCellTasks = [];
+            state.selectedTasks = [];
             for (let i = 0; i < state.tasks.length; i++) {
                 if (state.tasks[i].year === Number(year)
                     && state.tasks[i].month === Number(month)
                     && state.tasks[i].day === Number(day)) {
-                    state.currentCellTasks.push(state.tasks[i])
+                    state.selectedTasks.push(state.tasks[i])
                 }
             }
 
-            state.currentCellDate = action.payload;
+            state.selectedDate = action.payload;
         },
         changeTheme(state, action) {
             const root = document.querySelector(":root");
