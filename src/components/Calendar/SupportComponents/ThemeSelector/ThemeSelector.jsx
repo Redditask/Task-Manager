@@ -21,7 +21,8 @@ const ThemeSelector = () => {
         <div>
             {
                 theme === "light"
-                    ? <MdDarkMode
+                    ?
+                    <MdDarkMode
                         title="Dark theme"
                         size={40}
                         className={styles.DarkSelector}

@@ -57,7 +57,7 @@ const Calendar = ({setModalStatus, setDate}) => {
         if (!(data.year === dropTask.year
             && data.month === dropTask.month
             && data.day === dropTask.day)) {
-            dispatch(removeTask(dropTask.id));
+            dispatch(removeTask({id: dropTask.id}));
 
             dispatch(addTask({
                 taskText: dropTask.taskText,

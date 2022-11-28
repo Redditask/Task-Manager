@@ -11,7 +11,7 @@ import {removeTask} from "../../../../store/taskManagerSlice";
 
 const Task = ({task, setTask, setEditModalStatus}) => {
     const dispatch = useDispatch();
-    const remove = (taskId) => dispatch(removeTask(taskId));
+    const remove = (taskId) => dispatch(removeTask({id: taskId}));
 
     return (
         <div className={styles.Task}>

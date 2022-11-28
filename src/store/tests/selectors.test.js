@@ -8,7 +8,7 @@ describe("redux selectors", ()=>{
 
             const result = selectTasks({tasks:{tasks, theme:"light"}});
 
-            expect(result).toEqual(tasks);
+            expect(result).toEqual([]);
         });
 
         it("should select tasks from state object", ()=>{
@@ -35,8 +35,6 @@ describe("redux selectors", ()=>{
 
             expect(result).toEqual(tasks);
         });
-
-        //... more ...
     });
 
     describe("theme selector", ()=>{
@@ -45,7 +43,7 @@ describe("redux selectors", ()=>{
 
             const result = selectTheme({tasks: {tasks:[], theme:"dark"}});
 
-            expect(result).toEqual(theme);
+            expect(result).toEqual("dark");
         });
 
         it("should select empty state from state object", ()=>{
@@ -55,12 +53,10 @@ describe("redux selectors", ()=>{
 
             expect(result).toEqual("");
         });
-
-        //... more ...
     });
 
     describe("selected tasks selector", ()=>{
-        it("should select selectedTasks from state object", ()=>{
+        it("should select tasks with the same date from state object", ()=>{
             const tasks = [
                 {
                     id: "2021-11-27T16:33:22.812Z",
@@ -107,16 +103,14 @@ describe("redux selectors", ()=>{
                 }
             ];
 
-            const result = selectSelectedTasks({tasks: {tasks, theme:"dark", selectedTasks}});
+            const result = selectSelectedTasks({tasks: {tasks, theme:"dark", selectedTasks:[tasks[0], tasks[2]]}});
 
             expect(result).toEqual(selectedTasks);
         });
-
-        //... more ...
     });
 
     describe("selected date selector", ()=>{
-        it("should select selectedDate from state object", ()=>{
+        it("should select date of selectedTasks from state object", ()=>{
             const selectedTasks = [
                 {
                     id: "2021-11-27T16:33:22.812Z",
@@ -136,32 +130,20 @@ describe("redux selectors", ()=>{
                 }
             ];
 
-            const result = selectSelectedDate({tasks: {tasks: selectedTasks, theme:"light", selectedTasks, selectedDate:selectedTasks[0].day+"-"+selectedTasks[0].month+"-"+selectedTasks[0].year}});
+            const result = selectSelectedDate({tasks: {
+                    tasks: selectedTasks,
+                    theme:"light",
+                    selectedTasks,
+                    selectedDate:selectedTasks[0].day+"-"+selectedTasks[0].month+"-"+selectedTasks[0].year
+            }});
 
             expect(result).toEqual("27-11-2021");
         });
 
-        it("should select empty selectedDate from state object", ()=>{
-            const selectedTasks = [
-                {
-                    id: "2021-11-27T16:33:22.812Z",
-                    taskText: "Your task",
-                    year: 2021,
-                    month: 12,
-                    day: 27,
-                    color: "beige"
-                },
-                {
-                    id: "2021-11-27T16:33:22.812Z",
-                    taskText: "Your task 2",
-                    year: 2023,
-                    month: 10,
-                    day: 13,
-                    color: "beige"
-                }
-            ];
+        it("should select empty date from state object", ()=>{
+            const selectedTasks = [];
 
-            const result = selectSelectedDate({tasks: {tasks: selectedTasks, theme:"light", selectedTasks, selectedDate:""}});
+            const result = selectSelectedDate({tasks: {tasks: selectedTasks, theme:"light", selectedTasks, selectedDate: ""}});
 
             expect(result).toEqual("");
         });

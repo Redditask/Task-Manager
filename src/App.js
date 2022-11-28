@@ -9,7 +9,9 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- закончить unit-тесты
+ тестирование компонентов React
+ //
+ transition анимации подправить
  //
  адаптивная вёрстка
 */

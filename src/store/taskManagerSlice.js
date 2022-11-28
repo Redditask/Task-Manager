@@ -32,8 +32,8 @@ const taskManagerSlice = createSlice({
             //console.log(current(state)) для просмотра состояния tasks
         },
         removeTask(state, action) {
-            state.tasks = state.tasks.filter(task => task.id !== action.payload);
-            state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload);
+            state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
+            state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
         },
         editTask(state, action) {
             state.tasks.forEach(task => {
