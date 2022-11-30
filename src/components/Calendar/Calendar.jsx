@@ -1,15 +1,11 @@
 import styles from "./Calendar.module.scss";
 
 import React, {useMemo, useState} from 'react';
-import {useDispatch} from "react-redux";
-import {addTask, removeTask, setSelectedCell} from "../../store/taskManagerSlice";
 
 import {isActiveMonth} from "./utils/utils";
 
-import Button from "../UI/Button/Button";
 import ChangeDateForm from "./SupportComponents/ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "./SupportComponents/ThemeSelector/ThemeSelector";
-import CalendarTaskList from "./SupportComponents/CalendarTaskList/CalendarTaskList";
 import CalendarCell from "./SupportComponents/CalendarCell/CalendarCell";
 
 const utils = require ("./utils/utils");

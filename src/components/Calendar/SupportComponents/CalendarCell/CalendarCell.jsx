@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {useDispatch} from "react-redux";
 import {addTask, removeTask, setSelectedCell} from "../../../../store/taskManagerSlice";
@@ -35,6 +35,7 @@ const CalendarCell = ({className, data, setModalStatus, setDate, dropTask, setDr
 
     return (
         <div
+            title="Cell"
             className={className}
             onClick={() => dispatch(setSelectedCell(data.day + "-" + data.month + "-" + data.year))}
 
