@@ -70,17 +70,6 @@
     }
   }
 
-  &__cellTitleArea{
-    font-size: 1.5rem;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    padding-right: 0.1rem;
-  }
-
   &__activeMonth {
     @include cell(var(--defaultActiveMonthColor));
 

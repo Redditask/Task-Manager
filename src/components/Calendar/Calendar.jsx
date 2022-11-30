@@ -10,15 +10,16 @@ import Button from "../UI/Button/Button";
 import ChangeDateForm from "./SupportComponents/ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "./SupportComponents/ThemeSelector/ThemeSelector";
 import CalendarTaskList from "./SupportComponents/CalendarTaskList/CalendarTaskList";
+import CalendarCell from "./SupportComponents/CalendarCell/CalendarCell";
 
 const utils = require ("./utils/utils");
 const infoData = require("./utils/infoData");
 
 const Calendar = ({setModalStatus, setDate}) => {
+    const [dropTask, setDropTask] = useState({});
+
     //base calendar functionality
     const startValue = new Date();
-
-    const dispatch = useDispatch();
 
     const [onCalendarYear, setOnCalendarYear] = useState(() => startValue.getFullYear());
     const [onCalendarMonth, setOnCalendarMonth] = useState(() => startValue.getMonth());
@@ -45,30 +46,6 @@ const Calendar = ({setModalStatus, setDate}) => {
         } else setOnCalendarMonth(onCalendarMonth - 1);
     }
 
-    //drag and drop functionality
-    const [dropTask, setDropTask] = useState({});
-
-    function dragOverHandler(event) {
-        event.preventDefault();
-    }
-
-    function dropHandler(event, data) {
-        event.preventDefault();
-        if (!(data.year === dropTask.year
-            && data.month === dropTask.month
-            && data.day === dropTask.day)) {
-            dispatch(removeTask({id: dropTask.id}));
-
-            dispatch(addTask({
-                taskText: dropTask.taskText,
-                year: data.year,
-                month: data.month,
-                day: data.day,
-                color: dropTask.color,
-            }))
-        }
-    }
-
     return (
         <div className={styles.Container}>
             <div className={styles.Calendar__header}>
@@ -90,25 +67,15 @@ const Calendar = ({setModalStatus, setDate}) => {
                         if (utils.isToday(data)) className = styles.Calendar__currentDay;
 
                         return (
-                            <div
-                                className={className}
+                            <CalendarCell
                                 key={data.day + "" + data.month + "" + data.year}
-                                onClick={() => dispatch(setSelectedCell(data.day + "-" + data.month + "-" + data.year))}
-
-                                onDragOver={event => dragOverHandler(event)}
-                                onDrop={event => dropHandler(event, data)}
-                            >
-                                <div className={styles.Calendar__cellTitleArea}>
-                                    {data.day}
-                                    <Button text="+" onClick={() => {
-                                        setModalStatus(true)
-                                        setDate(`${data.day}-${data.month}-${data.year}`)
-                                    }}
-                                            title="Add task"
-                                    />
-                                </div>
-                                <CalendarTaskList data={data} setDropTask={setDropTask}/>
-                            </div>
+                                className={className}
+                                data={data}
+                                setDate={setDate}
+                                setModalStatus={setModalStatus}
+                                dropTask={dropTask}
+                                setDropTask={setDropTask}
+                            />
                         )
                     }
                 )}
