@@ -9,7 +9,7 @@ import {isActiveMonth} from "./utils/utils";
 import Button from "../UI/Button/Button";
 import ChangeDateForm from "./SupportComponents/ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "./SupportComponents/ThemeSelector/ThemeSelector";
-import TaskList from "./SupportComponents/TaskList/TaskList";
+import CalendarTaskList from "./SupportComponents/CalendarTaskList/CalendarTaskList";
 
 const utils = require ("./utils/utils");
 const infoData = require("./utils/infoData");
@@ -107,7 +107,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                                             title="Add task"
                                     />
                                 </div>
-                                <TaskList data={data} setDropTask={setDropTask}/>
+                                <CalendarTaskList data={data} setDropTask={setDropTask}/>
                             </div>
                         )
                     }

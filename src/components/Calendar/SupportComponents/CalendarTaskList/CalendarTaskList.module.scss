@@ -1,4 +1,4 @@
-.Tasks{
+.CalendarTaskList{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -13,12 +13,4 @@
   }
 
   gap: 1rem;
-}
-
-.Task {
-  color: rgba(0, 0, 0, 0.65);
-
-  padding: 0.35rem;
-
-  border-radius: 1rem;
 }

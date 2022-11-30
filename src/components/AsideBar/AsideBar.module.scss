@@ -56,11 +56,6 @@
     color: var(--defaultButtonColor);
   }
 
-  &__tasksIsEmpty {
-    font-weight: normal;
-    font-size: 2.5rem;
-  }
-
   &__addButtonArea {
     font-size: 3rem;
 
@@ -68,8 +63,6 @@
 
     &:hover{
       background-color: var(--defaultHoverBgColor);
-
-      transition: 1s;
     }
   }
 }

@@ -11,7 +11,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 ToDo
  тестирование компонентов React
  //
- transition анимации подправить
+ время для задач добавить
+ авторизация
  //
  адаптивная вёрстка
 */

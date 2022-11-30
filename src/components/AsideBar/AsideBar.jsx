@@ -1,56 +1,33 @@
 import styles from "./AsideBar.module.scss";
-import "./Transition.scss";
 
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
-import {selectSelectedDate, selectSelectedTasks} from "../../store/selectors";
-
-import {CSSTransition, TransitionGroup} from "react-transition-group";
+import {selectSelectedDate} from "../../store/selectors";
 
 import Button from "../UI/Button/Button";
 import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import Modal from "../UI/Modal/Modal";
-import Task from "./SupportComponents/Task/Task";
+import AsideTaskList from "./SupportComponents/AsideTaskList/AsideTaskList";
 
 const AsideBar = ({setModalStatus, setDate}) => {
     const [editModalStatus, setEditModalStatus] = useState(false);
     const [selectedTask, setSelectedTask] = useState({});
 
-    const tasks = useSelector(selectSelectedTasks);
     const date = useSelector(selectSelectedDate);
 
     return (
-        <div className={styles.Container}>
+        <aside className={styles.Container}>
             <div className={styles.AsideBar__header}>
                 <h2 className={styles.AsideBar__title}>Tasks</h2>
                 <h3 className={styles.AsideBar__date}>{date ? date : "Select date"}</h3>
             </div>
             <hr/>
-            <TransitionGroup className={styles.AsideBar}>
-                    {tasks.length
-                        ? tasks.map((task,index)=>(
-                            <CSSTransition
-                                key = {task+index}
-                                timeout={500}
-                                classNames="item"
-                            >
-                                <Task
-                                    task={task}
-                                    setTask={setSelectedTask}
-                                    setEditModalStatus={setEditModalStatus}
-                                />
-                            </CSSTransition>
-                            )
-                        )
-                        : <CSSTransition
-                            key="tasksIsEmpty"
-                            timeout={500}
-                            classNames="item"
-                        >
-                            <h3 className={styles.AsideBar__tasksIsEmpty}>No task today</h3>
-                        </CSSTransition>
-                    }
-            </TransitionGroup>
+            <div className={styles.AsideBar}>
+                    <AsideTaskList
+                        setEditModalStatus={setEditModalStatus}
+                        setSelectedTask={setSelectedTask}
+                    />
+            </div>
             <hr/>
             <div className={styles.AsideBar__addButtonArea}>
                 <Button
@@ -68,7 +45,7 @@ const AsideBar = ({setModalStatus, setDate}) => {
                     : null
                 }
             </Modal>
-        </div>
+        </aside>
     );
 };
 

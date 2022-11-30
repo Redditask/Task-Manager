@@ -9,7 +9,7 @@ import {MdDarkMode} from "react-icons/md";
 import {CiLight} from "react-icons/ci";
 
 const ThemeSelector = () => {
-    const theme = useSelector(selectTheme) || "light";
+    const theme = useSelector(selectTheme);
 
     const dispatch = useDispatch();
     useEffect(()=> {

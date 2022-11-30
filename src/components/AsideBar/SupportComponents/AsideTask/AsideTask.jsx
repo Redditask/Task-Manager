@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from "./Task.module.scss";
+import styles from "./AsideTask.module.scss";
 
 import Button from "../../../UI/Button/Button";
 
@@ -9,7 +9,7 @@ import {MdDeleteOutline} from "react-icons/md";
 import {useDispatch} from "react-redux";
 import {removeTask} from "../../../../store/taskManagerSlice";
 
-const Task = ({task, setTask, setEditModalStatus}) => {
+const AsideTask = ({task, setTask, setEditModalStatus}) => {
     const dispatch = useDispatch();
     const remove = (taskId) => dispatch(removeTask({id: taskId}));
 
@@ -41,4 +41,4 @@ const Task = ({task, setTask, setEditModalStatus}) => {
     );
 };
 
-export default Task;
+export default AsideTask;

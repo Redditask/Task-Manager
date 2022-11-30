@@ -41,17 +41,17 @@ describe("redux selectors", ()=>{
         it("should select theme from state object", ()=>{
             const theme = "dark";
 
-            const result = selectTheme({tasks: {tasks:[], theme:"dark"}});
+            const result = selectTheme({tasks: {tasks:[], theme: theme}});
 
             expect(result).toEqual("dark");
         });
 
-        it("should select empty state from state object", ()=>{
+        it("should select light from empty state in state object", ()=>{
             const theme = "";
 
             const result = selectTheme({tasks:{tasks:[], theme:theme}});
 
-            expect(result).toEqual("");
+            expect(result).toEqual("light");
         });
     });
 
