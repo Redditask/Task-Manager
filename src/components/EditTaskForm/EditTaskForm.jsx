@@ -33,6 +33,7 @@ const EditTaskForm = ({setEditModalStatus, selectedTask}) => {
                 {
                     text
                         ? <Button
+                            title="Edit"
                             text="Edit"
                             onClick={()=>{
                                 edit(selectedTask.id, text, color)

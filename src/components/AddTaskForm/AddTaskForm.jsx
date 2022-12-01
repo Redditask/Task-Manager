@@ -42,6 +42,7 @@ const AddTaskForm = ({setModalStatus, date}) => {
                 {
                     text
                         ? <Button
+                            title="Add task"
                             text="Create"
                             onClick={()=>{
                                 add(text, color)

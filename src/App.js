@@ -9,9 +9,7 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- тестирование компонентов React
- //
- время для задач добавить
+ время для задач
  авторизация
  //
  разобраться с оптимизацией

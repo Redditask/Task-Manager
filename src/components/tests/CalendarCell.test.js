@@ -21,7 +21,7 @@ const someTask = {
 describe("CalendarCell", ()=>{
     it("should create CalendarCell", ()=>{
         mockedUseDispatch.mockReturnValue(jest.fn());
-        mockedUseSelector.mockReturnValue([]);
+        mockedUseSelector.mockReturnValue([]); //for children component CalendarTaskList
 
         // eslint-disable-next-line testing-library/render-result-naming-convention
         const component = render(
