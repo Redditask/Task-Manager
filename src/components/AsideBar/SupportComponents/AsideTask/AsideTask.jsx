@@ -20,7 +20,15 @@ const AsideTask = ({task, setTask, setEditModalStatus}) => {
                     className={styles.Content__color}
                     style={{background:task.color}}
                 />
-                <div>{task.taskText}</div>
+                <div>
+                    {task.taskText}
+                    <div
+                        className={styles.Time}
+                        title="Task time"
+                    >
+                        {task.startTime.hour}:{task.startTime.min}-{task.endTime.hour}:{task.endTime.min}
+                    </div>
+                </div>
             </li>
             <div className={styles.ButtonsArea}>
                 <Button

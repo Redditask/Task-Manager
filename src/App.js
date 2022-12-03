@@ -9,7 +9,10 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- время для задач
+ фильтрация задач по времени начала
+ editTask в Slice отрефакторить
+ обновить тесты
+ //
  авторизация
  //
  разобраться с оптимизацией

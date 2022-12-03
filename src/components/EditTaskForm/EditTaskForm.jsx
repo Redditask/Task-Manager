@@ -7,15 +7,20 @@ import styles from "./EditTaskForm.module.scss";
 import Input from "../UI/Input/Input";
 import Select from "../UI/Select/Select";
 import Button from "../UI/Button/Button";
+import TimePicker from "../UI/TimePicker/TimePicker";
 
 const EditTaskForm = ({setEditModalStatus, selectedTask}) => {
     const [text, setText] = useState(selectedTask.taskText);
     const [color, setColor] = useState(selectedTask.color);
+    const [startTime, setStartTime] = useState({hour: selectedTask.startTime.hour, min: selectedTask.startTime.min});
+    const [endTime, setEndTime] = useState({hour: selectedTask.endTime.hour, min: selectedTask.endTime.min});
 
     const dispatch = useDispatch();
-    const edit = (id, text, color) => dispatch(editTask({
+    const edit = (id, text, color, startTime, endTime) => dispatch(editTask({
             id: id,
             text: text,
+            startTime: startTime,
+            endTime: endTime,
             color: color
     }));
 
@@ -27,6 +32,12 @@ const EditTaskForm = ({setEditModalStatus, selectedTask}) => {
                     value={text}
                     onChange={event=>setText(event.target.value)}
                 />
+                <TimePicker
+                    startTime={startTime}
+                    setStartTime={setStartTime}
+                    endTime={endTime}
+                    setEndTime={setEndTime}
+                />
                 <Select color={color} setColor={setColor}/>
             </div>
             <div className={styles.EditTaskForm__buttonArea}>
@@ -36,7 +47,7 @@ const EditTaskForm = ({setEditModalStatus, selectedTask}) => {
                             title="Edit"
                             text="Edit"
                             onClick={()=>{
-                                edit(selectedTask.id, text, color)
+                                edit(selectedTask.id, text, color, startTime, endTime)
                                 setEditModalStatus(false)
                             }}
                         />

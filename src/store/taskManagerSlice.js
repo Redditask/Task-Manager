@@ -16,6 +16,8 @@ const taskManagerSlice = createSlice({
                 year: action.payload.year,
                 month: action.payload.month,
                 day: action.payload.day,
+                startTime: action.payload.startTime,
+                endTime: action.payload.endTime,
                 color: action.payload.color
             });
 
@@ -36,16 +38,22 @@ const taskManagerSlice = createSlice({
             state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
         },
         editTask(state, action) {
+            //как-то это совместить (или переработать сам store в целом)
+            //сделать так, чтобы обновлялось только то, что изменилось
             state.tasks.forEach(task => {
                 if (task.id === action.payload.id) {
                     task.taskText = action.payload.text;
                     task.color = action.payload.color;
+                    task.startTime = action.payload.startTime;
+                    task.endTime = action.payload.endTime;
                 }
             })
             state.selectedTasks.forEach(task => {
                 if (task.id === action.payload.id) {
                     task.taskText = action.payload.text;
                     task.color = action.payload.color;
+                    task.startTime = action.payload.startTime;
+                    task.endTime = action.payload.endTime;
                 }
             })
         },
