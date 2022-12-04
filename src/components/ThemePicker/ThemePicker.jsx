@@ -6,16 +6,26 @@ import {colors} from "./utils/utils";
 
 const ThemePicker = ({color, setColor}) => {
     return (
-        <select
-            title="Task color"
-            className={styles.ThemePicker}
-            onChange={event => setColor(event.target.value)}
-            style={{backgroundColor:color}}
-        >
-            {colors.map((item)=>
-                <option style={{backgroundColor: item.color}} value={item.color}>{item.name}</option>
-            )}
-        </select>
+        <div>
+            <p className={styles.ThemePicker__title}>Theme:</p>
+            <select
+                title="Task color"
+                defaultValue={color}
+                className={styles.ThemePicker}
+                onChange={event => setColor(event.target.value)}
+                style={{backgroundColor:color}}
+            >
+                {colors.map((item)=>
+                    <option
+                        style={{backgroundColor: item.color}}
+                        value={item.color}
+                        key={item.name}
+                    >
+                        {item.name}
+                    </option>
+                )}
+            </select>
+        </div>
     );
 };
 

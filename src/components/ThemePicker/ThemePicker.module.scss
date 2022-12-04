@@ -1,3 +1,5 @@
+@import "../../variable";
+
 .ThemePicker {
   font-size: 1.3rem;
   text-align: center;
@@ -9,6 +11,12 @@
   border-radius: 1rem;
 
   padding: 0 1rem;
+
+  &__title {
+    color: var(--defaultColor);
+
+    margin-bottom: 0.5rem;
+  }
 
   &:focus {
     transform: scale(1.2);

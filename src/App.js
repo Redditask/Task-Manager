@@ -9,8 +9,6 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- фильтрация задач по времени начала
- стили TimePicker возможно как-то улучшить
  editTask в Slice отрефакторить
  обновить тесты
  //

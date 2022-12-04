@@ -9,6 +9,16 @@ import {MdDeleteOutline} from "react-icons/md";
 import {useDispatch} from "react-redux";
 import {removeTask} from "../../../../store/taskManagerSlice";
 
+const formattedTime = (task) => {
+    let startZero = "";
+    let endZero = "";
+
+    if(task.startTime.min<=9) startZero = "0";
+    if(task.endTime.min<=9) endZero = "0";
+
+    return `${task.startTime.hour}:${startZero}${task.startTime.min}-${task.endTime.hour}:${endZero}${task.endTime.min}`;
+};
+
 const AsideTask = ({task, setTask, setEditModalStatus}) => {
     const dispatch = useDispatch();
     const remove = (taskId) => dispatch(removeTask({id: taskId}));
@@ -22,11 +32,8 @@ const AsideTask = ({task, setTask, setEditModalStatus}) => {
                 />
                 <div>
                     {task.taskText}
-                    <div
-                        className={styles.Time}
-                        title="Task time"
-                    >
-                        {task.startTime.hour}:{task.startTime.min}-{task.endTime.hour}:{task.endTime.min}
+                    <div className={styles.Time} title="Task time">
+                        {formattedTime(task)}
                     </div>
                 </div>
             </li>

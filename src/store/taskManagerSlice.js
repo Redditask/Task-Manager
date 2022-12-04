@@ -1,4 +1,9 @@
 import {createSlice, current} from "@reduxjs/toolkit";
+import {selectTasks} from "./selectors";
+
+const taskSorting = (task1, task2) => {
+    return (task1.startTime.hour - task2.startTime.hour)
+};
 
 const taskManagerSlice = createSlice({
     name: "tasks",
@@ -20,6 +25,7 @@ const taskManagerSlice = createSlice({
                 endTime: action.payload.endTime,
                 color: action.payload.color
             });
+            state.tasks.sort(taskSorting);
 
             state.selectedTasks = [];
             for (let i = 0; i < state.tasks.length; i++) {
@@ -47,7 +53,9 @@ const taskManagerSlice = createSlice({
                     task.startTime = action.payload.startTime;
                     task.endTime = action.payload.endTime;
                 }
-            })
+            });
+            state.tasks.sort(taskSorting);
+
             state.selectedTasks.forEach(task => {
                 if (task.id === action.payload.id) {
                     task.taskText = action.payload.text;
@@ -55,7 +63,7 @@ const taskManagerSlice = createSlice({
                     task.startTime = action.payload.startTime;
                     task.endTime = action.payload.endTime;
                 }
-            })
+            });
         },
         setSelectedCell(state, action) {
             const [day, month, year] = action.payload.split("-");
