@@ -1,5 +1,4 @@
 import {createSlice, current} from "@reduxjs/toolkit";
-import {selectTasks} from "./selectors";
 
 const taskSorting = (task1, task2) => {
     return (task1.startTime.hour - task2.startTime.hour)
@@ -15,6 +14,8 @@ const taskManagerSlice = createSlice({
     },
     reducers: {
         addTask(state, action) {
+            console.log(action.payload)
+
             state.tasks.push({
                 id: new Date().toISOString(),
                 taskText: action.payload.taskText,
@@ -64,6 +65,7 @@ const taskManagerSlice = createSlice({
                     task.endTime = action.payload.endTime;
                 }
             });
+            state.selectedTasks.sort(taskSorting);
         },
         setSelectedCell(state, action) {
             const [day, month, year] = action.payload.split("-");

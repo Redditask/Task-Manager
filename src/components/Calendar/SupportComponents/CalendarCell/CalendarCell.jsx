@@ -28,6 +28,8 @@ const CalendarCell = ({className, data, setModalStatus, setDate, dropTask, setDr
                 year: data.year,
                 month: data.month,
                 day: data.day,
+                startTime: dropTask.startTime,
+                endTime: dropTask.endTime,
                 color: dropTask.color,
             }))
         }
