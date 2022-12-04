@@ -1,4 +1,4 @@
-@import "/src/variable";
+@import "../../variable";
 
 .TimeSelect {
   font-size: 1.3rem;
@@ -13,7 +13,7 @@
   padding: 0 1rem;
 
   &:focus {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }
 

@@ -5,9 +5,9 @@ import {editTask} from "../../store/taskManagerSlice";
 import styles from "./EditTaskForm.module.scss";
 
 import Input from "../UI/Input/Input";
-import Select from "../UI/Select/Select";
+import ThemePicker from "../ThemePicker/ThemePicker";
 import Button from "../UI/Button/Button";
-import TimePicker from "../UI/TimePicker/TimePicker";
+import TimePicker from "../TimePicker/TimePicker";
 
 const EditTaskForm = ({setEditModalStatus, selectedTask}) => {
     const [text, setText] = useState(selectedTask.taskText);
@@ -38,7 +38,7 @@ const EditTaskForm = ({setEditModalStatus, selectedTask}) => {
                     endTime={endTime}
                     setEndTime={setEndTime}
                 />
-                <Select color={color} setColor={setColor}/>
+                <ThemePicker color={color} setColor={setColor}/>
             </div>
             <div className={styles.EditTaskForm__buttonArea}>
                 {

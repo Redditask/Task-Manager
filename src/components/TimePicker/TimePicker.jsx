@@ -9,6 +9,7 @@ const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
             Start time:
             <div className={styles.Container__startTime}>
                 <select
+                    title="Start hour"
                     value={startTime.hour}
                     className={styles.TimeSelect}
                     onChange={event => setStartTime({...startTime, hour: Number(event.target.value)})}
@@ -17,7 +18,9 @@ const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
                         <option key={`startTimeHour - ${hour}`}>{hour}</option>
                     )}
                 </select>
+                <b style={{fontSize:"1.3rem"}}> : </b>
                 <select
+                    title="Start minute"
                     value={startTime.min}
                     className={styles.TimeSelect}
                     onChange={event => setStartTime({...startTime, min: Number(event.target.value)})}
@@ -30,6 +33,7 @@ const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
             End time:
             <div  className={styles.Container__endTime}>
                 <select
+                    title="End hour"
                     value={endTime.hour}
                     className={styles.TimeSelect}
                     onChange={event => setEndTime({...endTime, hour: Number(event.target.value)})}
@@ -48,7 +52,9 @@ const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
                             </option>
                     )}
                 </select>
+                <b style={{fontSize:"1.3rem"}}> : </b>
                 <select
+                    title="End minute"
                     value={endTime.min}
                     className={styles.TimeSelect}
                     onChange={event => setEndTime({...endTime, min: Number(event.target.value)})}

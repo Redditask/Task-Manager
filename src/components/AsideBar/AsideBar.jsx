@@ -19,7 +19,7 @@ const AsideBar = ({setModalStatus, setDate}) => {
         <aside className={styles.Container}>
             <div className={styles.AsideBar__header}>
                 <h2 className={styles.AsideBar__title}>Tasks</h2>
-                <h3 className={styles.AsideBar__date}>{date ? date : "Select date"}</h3>
+                <h3 className={styles.AsideBar__date}>{date ? date : "ThemePicker date"}</h3>
             </div>
             <hr/>
             <div className={styles.AsideBar}>
