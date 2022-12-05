@@ -16,6 +16,8 @@ const someTasks = [
         year: 2021,
         month: 11,
         day: 27,
+        startTime: {hour: 3, min: 30},
+        endTime: {hour: 5, min: 50},
         color: "beige"
     },
     {
@@ -24,6 +26,8 @@ const someTasks = [
         year: 2022,
         month: 5,
         day: 17,
+        startTime: {hour: 22, min: 10},
+        endTime: {hour: 22, min: 15},
         color: "#00FF7F"
     }
 ];
@@ -39,7 +43,15 @@ describe("redux slice", ()=> {
 
     describe("action tests", () => {
         it("should add new task with 'addTask' action", () => {
-            const task = {taskText: "Your task", year: 2022, month: 11, day: 28, color: "beige"};
+            const task = {
+                taskText: "Your task",
+                year: 2022,
+                month: 11,
+                day: 28,
+                startTime: {hour: 2, min: 1},
+                endTime: {hour: 2, min: 5},
+                color: "beige"
+            };
 
             const action = {type: addTask, payload: task};
 
@@ -49,6 +61,8 @@ describe("redux slice", ()=> {
             expect(result.tasks[0].year).toEqual(2022);
             expect(result.tasks[0].month).toEqual(11);
             expect(result.tasks[0].day).toEqual(28);
+            expect(result.tasks[0].startTime).toEqual({hour: 2, min: 1});
+            expect(result.tasks[0].endTime).toEqual({hour: 2, min: 5});
             expect(result.tasks[0].color).toEqual("beige");
 
             //check selectedTasks state after add new task
@@ -72,6 +86,8 @@ describe("redux slice", ()=> {
                 type: editTask, payload: {
                     id: "2021-11-27T16:33:22.812Z",
                     text: "New taskText",
+                    startTime: {hour: 10, min: 10},
+                    endTime: {hour: 11, min: 11},
                     color: "#00FF7F",
                 }
             }
@@ -80,9 +96,13 @@ describe("redux slice", ()=> {
 
             expect(result.tasks[0].taskText).toEqual("New taskText");
             expect(result.tasks[0].color).toEqual("#00FF7F");
+            expect(result.tasks[0].startTime).toEqual({hour: 10, min: 10});
+            expect(result.tasks[0].endTime).toEqual({hour: 11, min: 11});
 
             expect(result.selectedTasks[0].taskText).toEqual("New taskText");
             expect(result.selectedTasks[0].color).toEqual("#00FF7F");
+            expect(result.selectedTasks[0].startTime).toEqual({hour: 10, min: 10});
+            expect(result.selectedTasks[0].endTime).toEqual({hour: 11, min: 11});
         });
 
         it("should set selectedDate with 'setSelectedDate' action", () => {

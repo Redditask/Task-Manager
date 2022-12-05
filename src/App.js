@@ -9,9 +9,6 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- editTask в Slice отрефакторить
- обновить тесты
- //
  авторизация
  //
  разобраться с оптимизацией

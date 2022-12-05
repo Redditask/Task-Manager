@@ -15,6 +15,8 @@ const someTask = {
     year: 2022,
     month: 5,
     day: 18,
+    startTime: {hour: 13, min: 8},
+    endTime: {hour: 14, min: 25},
     color: "beige"
 };
 
@@ -76,7 +78,9 @@ describe("CalendarCell", ()=>{
                 year: 2022,
                 month: 5,
                 day: 17,
-                color: "beige"
+                startTime: {hour: 13, min: 8},
+                endTime: {hour: 14, min: 25},
+                color: "beige",
             }
         );
 

@@ -14,7 +14,9 @@ const someTasks = [
         year: 2022,
         month: 5,
         day: 17,
-        color: "beige"
+        startTime: {hour: 3, min: 14},
+        endTime: {hour: 23, min: 5},
+        color: "beige",
     },
     {
         id: "2022-5-17T16:33:22.812Z",
@@ -22,7 +24,9 @@ const someTasks = [
         year: 2022,
         month: 5,
         day: 17,
-        color: "#00FF7F"
+        startTime: {hour: 13, min: 8},
+        endTime: {hour: 14, min: 25},
+        color: "#00FF7F",
     }
 ];
 

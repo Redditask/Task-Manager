@@ -6,7 +6,7 @@ import {addTask} from "../../store/taskManagerSlice";
 
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-import ThemePicker from "../ThemePicker/ThemePicker";
+import ColorPicker from "../ColorPicker/ColorPicker";
 import TimePicker from "../TimePicker/TimePicker";
 
 const AddTaskForm = ({setModalStatus, date}) => {
@@ -48,7 +48,7 @@ const AddTaskForm = ({setModalStatus, date}) => {
                     endTime={endTime}
                     setEndTime={setEndTime}
                 />
-                <ThemePicker color={color} setColor={setColor}/>
+                <ColorPicker color={color} setColor={setColor}/>
             </div>
             <div className={styles.AddTaskForm__buttonArea}>
                 {

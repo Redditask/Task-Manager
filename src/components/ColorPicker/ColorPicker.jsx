@@ -1,17 +1,17 @@
-import styles from "./ThemePicker.module.scss";
+import styles from "./ColorPicker.module.scss";
 
 import React from 'react';
 import "./utils/utils";
 import {colors} from "./utils/utils";
 
-const ThemePicker = ({color, setColor}) => {
+const ColorPicker = ({color, setColor}) => {
     return (
         <div>
-            <p className={styles.ThemePicker__title}>Theme:</p>
+            <p className={styles.ColorPicker__title}>Theme:</p>
             <select
                 title="Task color"
                 defaultValue={color}
-                className={styles.ThemePicker}
+                className={styles.ColorPicker}
                 onChange={event => setColor(event.target.value)}
                 style={{backgroundColor:color}}
             >
@@ -29,4 +29,4 @@ const ThemePicker = ({color, setColor}) => {
     );
 };
 
-export default ThemePicker;
+export default ColorPicker;

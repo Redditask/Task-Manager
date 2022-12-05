@@ -95,6 +95,12 @@ Object {
             />
             <div>
               Your task
+              <div
+                class="Time"
+                title="Task time"
+              >
+                3:14-23:05
+              </div>
             </div>
           </li>
           <div
@@ -154,6 +160,12 @@ Object {
             />
             <div>
               Your task
+              <div
+                class="Time"
+                title="Task time"
+              >
+                13:08-14:25
+              </div>
             </div>
           </li>
           <div
@@ -218,6 +230,12 @@ Object {
           />
           <div>
             Your task
+            <div
+              class="Time"
+              title="Task time"
+            >
+              3:14-23:05
+            </div>
           </div>
         </li>
         <div
@@ -277,6 +295,12 @@ Object {
           />
           <div>
             Your task
+            <div
+              class="Time"
+              title="Task time"
+            >
+              13:08-14:25
+            </div>
           </div>
         </li>
         <div

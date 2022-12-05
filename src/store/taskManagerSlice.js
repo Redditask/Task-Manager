@@ -4,6 +4,18 @@ const taskSorting = (task1, task2) => {
     return (task1.startTime.hour - task2.startTime.hour)
 };
 
+const taskEditing = (stateVariable, action) => {
+    stateVariable.forEach(task => {
+        if (task.id === action.payload.id) {
+            task.taskText = action.payload.text;
+            task.color = action.payload.color;
+            task.startTime = action.payload.startTime;
+            task.endTime = action.payload.endTime;
+        }
+    });
+    stateVariable.sort(taskSorting);
+};
+
 const taskManagerSlice = createSlice({
     name: "tasks",
     initialState: {
@@ -14,8 +26,6 @@ const taskManagerSlice = createSlice({
     },
     reducers: {
         addTask(state, action) {
-            console.log(action.payload)
-
             state.tasks.push({
                 id: new Date().toISOString(),
                 taskText: action.payload.taskText,
@@ -45,27 +55,9 @@ const taskManagerSlice = createSlice({
             state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
         },
         editTask(state, action) {
-            //как-то это совместить (или переработать сам store в целом)
-            //сделать так, чтобы обновлялось только то, что изменилось
-            state.tasks.forEach(task => {
-                if (task.id === action.payload.id) {
-                    task.taskText = action.payload.text;
-                    task.color = action.payload.color;
-                    task.startTime = action.payload.startTime;
-                    task.endTime = action.payload.endTime;
-                }
-            });
-            state.tasks.sort(taskSorting);
+            taskEditing(state.tasks, action);
 
-            state.selectedTasks.forEach(task => {
-                if (task.id === action.payload.id) {
-                    task.taskText = action.payload.text;
-                    task.color = action.payload.color;
-                    task.startTime = action.payload.startTime;
-                    task.endTime = action.payload.endTime;
-                }
-            });
-            state.selectedTasks.sort(taskSorting);
+            taskEditing(state.selectedTasks, action);
         },
         setSelectedCell(state, action) {
             const [day, month, year] = action.payload.split("-");

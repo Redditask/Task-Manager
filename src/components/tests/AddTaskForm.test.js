@@ -39,13 +39,16 @@ describe("AddTaskForm", ()=>{
 
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(mockedAddTask).toHaveBeenCalledTimes(1);
+        //standard input values
         expect(mockedAddTask).toHaveBeenCalledWith(
             {
                 taskText: "Your task",
                 year: 2022,
                 month: 5,
                 day: 18,
-                color: "beige"
+                startTime: {hour: 0, min: 0},
+                endTime: {hour: 23, min: 59},
+                color: "beige",
             }
         );
     });
