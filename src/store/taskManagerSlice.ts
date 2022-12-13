@@ -1,13 +1,14 @@
-import {createSlice, current} from "@reduxjs/toolkit";
+import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
+import {Task} from "../types/data";
 
-const taskSorting = (task1, task2) => {
+const taskSorting = (task1: Task, task2: Task) => {
     return (task1.startTime.hour - task2.startTime.hour)
 };
 
-const taskEditing = (stateVariable, action) => {
+const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>) => {
     stateVariable.forEach(task => {
         if (task.id === action.payload.id) {
-            task.taskText = action.payload.text;
+            task.taskText = action.payload.taskText;
             task.color = action.payload.color;
             task.startTime = action.payload.startTime;
             task.endTime = action.payload.endTime;
@@ -16,16 +17,25 @@ const taskEditing = (stateVariable, action) => {
     stateVariable.sort(taskSorting);
 };
 
+export type TaskManagerState = {
+    tasks: Task[];
+    selectedTasks: Task[];
+    selectedDate: string;
+    theme: string;
+};
+
+const initialState: TaskManagerState = {
+    tasks: [],
+    selectedTasks: [],
+    selectedDate: "",
+    theme: "",
+};
+
 const taskManagerSlice = createSlice({
     name: "tasks",
-    initialState: {
-        tasks: [],
-        selectedTasks: [],
-        selectedDate: "",
-        theme: "",
-    },
+    initialState,
     reducers: {
-        addTask(state, action) {
+        addTask(state, action: PayloadAction<Task>) {
             state.tasks.push({
                 id: new Date().toISOString(),
                 taskText: action.payload.taskText,
@@ -50,16 +60,16 @@ const taskManagerSlice = createSlice({
             state.selectedDate = action.payload.day + "-" + action.payload.month + "-" + action.payload.year;
             //console.log(current(state)) для просмотра состояния tasks
         },
-        removeTask(state, action) {
+        removeTask(state, action: PayloadAction<{id: string}>) {
             state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
             state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
         },
-        editTask(state, action) {
+        editTask(state, action: PayloadAction<Task>) {
             taskEditing(state.tasks, action);
 
             taskEditing(state.selectedTasks, action);
         },
-        setSelectedCell(state, action) {
+        setSelectedCell(state, action: PayloadAction<string>) {
             const [day, month, year] = action.payload.split("-");
 
             state.selectedTasks = [];
@@ -73,7 +83,7 @@ const taskManagerSlice = createSlice({
 
             state.selectedDate = action.payload;
         },
-        changeTheme(state, action) {
+        changeTheme(state, action:PayloadAction<{theme: string}>) {
             const root = document.querySelector(":root");
 
             const themeVariable = [
@@ -85,6 +95,7 @@ const taskManagerSlice = createSlice({
             ];
 
             themeVariable.forEach(variable => {
+                // @ts-ignore
                 root.style.setProperty(
                     `--default${variable}`,
                     `var(--${action.payload.theme}${variable}`)

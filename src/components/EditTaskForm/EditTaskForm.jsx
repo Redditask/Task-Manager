@@ -18,7 +18,7 @@ const EditTaskForm = ({setEditModalStatus, selectedTask}) => {
     const dispatch = useDispatch();
     const edit = (id, text, color, startTime, endTime) => dispatch(editTask({
             id: id,
-            text: text,
+            taskText: text,
             startTime: startTime,
             endTime: endTime,
             color: color
