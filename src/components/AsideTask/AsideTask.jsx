@@ -2,12 +2,12 @@ import React from 'react';
 
 import styles from "./AsideTask.module.scss";
 
-import Button from "../../../UI/Button/Button";
+import Button from "../UI/Button/Button";
 
 import {AiOutlineEdit} from "react-icons/ai";
 import {MdDeleteOutline} from "react-icons/md";
 import {useDispatch} from "react-redux";
-import {removeTask} from "../../../../store/taskManagerSlice";
+import {removeTask} from "../../store/taskManagerSlice";
 
 const formattedTime = (task) => {
     let startZero = "";

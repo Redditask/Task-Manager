@@ -7,7 +7,7 @@ import styles from "./AsideTaskList.module.scss";
 import "../../Transition.scss";
 
 import {useSelector} from "react-redux";
-import {selectSelectedTasks} from "../../../../store/selectors";
+import {selectSelectedTasks} from "../../store/selectors";
 
 const AsideTaskList = ({setSelectedTask, setEditModalStatus}) => {
     const tasks = useSelector(selectSelectedTasks);

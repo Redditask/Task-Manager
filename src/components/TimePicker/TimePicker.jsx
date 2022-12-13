@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from "./TimePicker.module.scss";
-const utils = require("./utils/utils");
+const utils = require("../../utils/utils");
 
 const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
     return (

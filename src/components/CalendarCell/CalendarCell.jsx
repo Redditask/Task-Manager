@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {useDispatch} from "react-redux";
-import {addTask, removeTask, setSelectedCell} from "../../../../store/taskManagerSlice";
+import {addTask, removeTask, setSelectedCell} from "../../store/taskManagerSlice";
 
-import Button from "../../../UI/Button/Button";
+import Button from "../UI/Button/Button";
 import CalendarTaskList from "../CalendarTaskList/CalendarTaskList";
 
 import styles from "./CalendarCell.module.scss";

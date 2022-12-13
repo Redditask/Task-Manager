@@ -9,7 +9,9 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- авторизация
+ тип для Theme
+ //
+ авторизация (бд + сервер)
  //
  разобраться с оптимизацией
  //

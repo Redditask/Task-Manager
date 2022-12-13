@@ -2,7 +2,7 @@ import styles from "./ChangeDateForm.module.scss";
 
 import React from 'react';
 
-import Button from "../../../UI/Button/Button";
+import Button from "../UI/Button/Button";
 
 const ChangeDateForm = ({year, month, prevMonth, nextMonth}) => {
     return (

@@ -2,7 +2,8 @@ import styles from "./ColorPicker.module.scss";
 
 import React from 'react';
 import "./utils/utils";
-import {colors} from "./utils/utils";
+
+const utils = require("../../utils/utils");
 
 const ColorPicker = ({color, setColor}) => {
     return (
@@ -15,7 +16,7 @@ const ColorPicker = ({color, setColor}) => {
                 onChange={event => setColor(event.target.value)}
                 style={{backgroundColor:color}}
             >
-                {colors.map((item)=>
+                {utils.colors.map((item)=>
                     <option
                         style={{backgroundColor: item.color}}
                         value={item.color}

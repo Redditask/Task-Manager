@@ -2,7 +2,7 @@ import styles from "./CalendarTaskList.module.scss";
 
 import React from 'react';
 import {useSelector} from "react-redux";
-import {selectTasks} from "../../../../store/selectors";
+import {selectTasks} from "../../store/selectors";
 import CalendarTask from "../CalendarTask/CalendarTask";
 
 const CalendarTaskList = ({data, setDropTask}) => {

@@ -2,14 +2,11 @@ import styles from "./Calendar.module.scss";
 
 import React, {useMemo, useState} from 'react';
 
-import {isActiveMonth} from "./utils/utils";
+import ChangeDateForm from "../ChangeDateForm/ChangeDateForm";
+import ThemeSelector from "../ThemeSelector/ThemeSelector";
+import CalendarCell from "../CalendarCell/CalendarCell";
 
-import ChangeDateForm from "./SupportComponents/ChangeDateForm/ChangeDateForm";
-import ThemeSelector from "./SupportComponents/ThemeSelector/ThemeSelector";
-import CalendarCell from "./SupportComponents/CalendarCell/CalendarCell";
-
-const utils = require ("./utils/utils");
-const infoData = require("./utils/infoData");
+const utils = require ("../../utils/utils");
 
 const Calendar = ({setModalStatus, setDate}) => {
     const [dropTask, setDropTask] = useState({});
@@ -47,19 +44,19 @@ const Calendar = ({setModalStatus, setDate}) => {
             <div className={styles.Calendar__header}>
                 <ChangeDateForm
                     year={onCalendarYear}
-                    month={infoData.monthsList[onCalendarMonth]}
+                    month={utils.monthsList[onCalendarMonth]}
                     nextMonth={nextMonth}
                     prevMonth={prevMonth}
                 />
                 <ThemeSelector/>
             </div>
             <div className={styles.Calendar}>
-                {infoData.weekDayList.map(weekDay =>
+                {utils.weekDayList.map(weekDay =>
                     <div className={styles.Calendar__weekDay} key={weekDay}>{weekDay}</div>
                 )}
                 {calendarData.map(data => {
                         let className = styles.Calendar__cell;
-                        if (isActiveMonth(data, onCalendarMonth)) className = styles.Calendar__activeMonth;
+                        if (utils.isActiveMonth(data, onCalendarMonth)) className = styles.Calendar__activeMonth;
                         if (utils.isToday(data)) className = styles.Calendar__currentDay;
 
                         return (

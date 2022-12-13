@@ -7,7 +7,7 @@ import {selectSelectedDate} from "../../store/selectors";
 import Button from "../UI/Button/Button";
 import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import Modal from "../UI/Modal/Modal";
-import AsideTaskList from "./SupportComponents/AsideTaskList/AsideTaskList";
+import AsideTaskList from "../AsideTaskList/AsideTaskList";
 
 const AsideBar = ({setModalStatus, setDate}) => {
     const [editModalStatus, setEditModalStatus] = useState(false);
