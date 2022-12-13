@@ -1,15 +1,23 @@
+// @ts-ignore
 import styles from "./AddTaskForm.module.scss";
 
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+
+import {useAppDispatch} from "../../hooks/hooks";
 import {addTask} from "../../store/taskManagerSlice";
 
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import TimePicker from "../TimePicker/TimePicker";
+import {Time} from "../../types/data";
 
-const AddTaskForm = ({setModalStatus, date}) => {
+interface IAddTaskFormProps {
+    setModalStatus: (modalStatus: boolean) => void;
+    date: string;
+}
+
+const AddTaskForm:React.FC<IAddTaskFormProps> = ({setModalStatus, date}) => {
     const [text, setText] = useState("Your task");
     const [color, setColor] = useState("beige");
 
@@ -17,14 +25,14 @@ const AddTaskForm = ({setModalStatus, date}) => {
     const [endTime, setEndTime] = useState({hour: 23, min: 59});
 
     const today = new Date();
-    let day=today.getDate();
-    let month=today.getMonth();
-    let year=today.getFullYear();
+    let day= String(today.getDate());
+    let month= String(today.getMonth());
+    let year=String(today.getFullYear());
 
     if(date) [day, month, year] = date.split("-");
 
-    const dispatch = useDispatch();
-    const add = (text, color, startTime, endTime) => dispatch(addTask({
+    const dispatch = useAppDispatch();
+    const add = (text: string, color: string, startTime: Time, endTime:Time) => dispatch(addTask({
         taskText: text,
         year: Number(year),
         month: Number(month),

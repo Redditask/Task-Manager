@@ -1,9 +1,20 @@
 import React from 'react';
 
+import {Time} from "../../types/data";
+
+// @ts-ignore
 import styles from "./TimePicker.module.scss";
+
 const utils = require("../../utils/utils");
 
-const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
+interface ITimePickerProps {
+    startTime: Time;
+    setStartTime: (startTime: Time)=>void;
+    endTime: Time;
+    setEndTime: (endTime: Time)=>void;
+}
+
+const TimePicker: React.FC<ITimePickerProps> = ({startTime, setStartTime, endTime, setEndTime}) => {
     return (
         <div className={styles.Container}>
             Start time:
@@ -14,7 +25,7 @@ const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
                     className={styles.TimeSelect}
                     onChange={event => setStartTime({...startTime, hour: Number(event.target.value)})}
                 >
-                    {utils.hours.map((hour)=>
+                    {utils.hours.map((hour:number)=>
                         <option key={`startTimeHour - ${hour}`}>{hour}</option>
                     )}
                 </select>
@@ -25,7 +36,7 @@ const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
                     className={styles.TimeSelect}
                     onChange={event => setStartTime({...startTime, min: Number(event.target.value)})}
                 >
-                    {utils.mins.map((min)=>
+                    {utils.mins.map((min:number)=>
                         <option key={`startTimeMin - ${min}`}>{min}</option>
                     )}
                 </select>
@@ -38,7 +49,7 @@ const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
                     className={styles.TimeSelect}
                     onChange={event => setEndTime({...endTime, hour: Number(event.target.value)})}
                 >
-                    {utils.hours.map((hour)=>
+                    {utils.hours.map((hour:number)=>
                         hour >= startTime.hour
                             ?
                             <option key={`endTimeHour - ${hour}`}>{hour}</option>
@@ -59,7 +70,7 @@ const TimePicker = ({startTime, setStartTime, endTime, setEndTime}) => {
                     className={styles.TimeSelect}
                     onChange={event => setEndTime({...endTime, min: Number(event.target.value)})}
                 >
-                    {utils.mins.map((min)=>
+                    {utils.mins.map((min:number)=>
                         startTime.hour === endTime.hour
                             ?
                             min > startTime.min

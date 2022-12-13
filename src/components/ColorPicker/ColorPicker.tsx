@@ -1,11 +1,18 @@
+// @ts-ignore
 import styles from "./ColorPicker.module.scss";
 
 import React from 'react';
-import "./utils/utils";
+
+import {Color} from '../../types/data';
 
 const utils = require("../../utils/utils");
 
-const ColorPicker = ({color, setColor}) => {
+interface IColorPickerProps {
+    color: string;
+    setColor: (color: string) => void;
+}
+
+const ColorPicker: React.FC<IColorPickerProps> = ({color, setColor}) => {
     return (
         <div>
             <p className={styles.ColorPicker__title}>Theme:</p>
@@ -16,7 +23,7 @@ const ColorPicker = ({color, setColor}) => {
                 onChange={event => setColor(event.target.value)}
                 style={{backgroundColor:color}}
             >
-                {utils.colors.map((item)=>
+                {utils.colors.map((item: Color)=>
                     <option
                         style={{backgroundColor: item.color}}
                         value={item.color}

@@ -1,15 +1,18 @@
 import React from 'react';
 
+// @ts-ignore
 import styles from "./AsideTask.module.scss";
 
 import Button from "../UI/Button/Button";
 
 import {AiOutlineEdit} from "react-icons/ai";
 import {MdDeleteOutline} from "react-icons/md";
-import {useDispatch} from "react-redux";
+import {useAppDispatch} from "../../hooks/hooks";
 import {removeTask} from "../../store/taskManagerSlice";
 
-const formattedTime = (task) => {
+import {Task} from "../../types/data";
+
+const formattedTime = (task: Task) => {
     let startZero = "";
     let endZero = "";
 
@@ -19,9 +22,15 @@ const formattedTime = (task) => {
     return `${task.startTime.hour}:${startZero}${task.startTime.min}-${task.endTime.hour}:${endZero}${task.endTime.min}`;
 };
 
-const AsideTask = ({task, setTask, setEditModalStatus}) => {
-    const dispatch = useDispatch();
-    const remove = (taskId) => dispatch(removeTask({id: taskId}));
+interface IAsideTaskProps {
+    task: Task;
+    setTask: (task: Task)=>void;
+    setEditModalStatus: (editModalStatus: boolean)=>void;
+}
+
+const AsideTask: React.FC<IAsideTaskProps> = ({task, setTask, setEditModalStatus}) => {
+    const dispatch = useAppDispatch();
+    const remove = (taskId: string | undefined) => dispatch(removeTask({id: taskId || "undefindeId"}));
 
     return (
         <div className={styles.Task}>

@@ -1,27 +1,42 @@
 import React from 'react';
 
-import {useDispatch} from "react-redux";
+import {useAppDispatch} from "../../hooks/hooks";
 import {addTask, removeTask, setSelectedCell} from "../../store/taskManagerSlice";
 
 import Button from "../UI/Button/Button";
 import CalendarTaskList from "../CalendarTaskList/CalendarTaskList";
 
+// @ts-ignore
 import styles from "./CalendarCell.module.scss";
 
-const CalendarCell = ({className, data, setModalStatus, setDate, dropTask, setDropTask}) => {
-    const dispatch = useDispatch();
+import {CustomDate, Task} from "../../types/data";
+
+interface ICalendarCellProps {
+    className: string;
+    data: CustomDate;
+    setModalStatus: (modalStatus: boolean) => void;
+    setDate: (date: string) => void;
+    dropTask: Task;
+    setDropTask: (dropTask: Task)=>void;
+}
+
+const CalendarCell:React.FC<ICalendarCellProps> = ({className, data, setModalStatus, setDate, dropTask, setDropTask}) => {
+    const dispatch = useAppDispatch();
 
     //drag and drop functionality
-    function dragOverHandler(event) {
+    function dragOverHandler(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
     }
 
-    function dropHandler(event, data) {
+    function dropHandler(event: React.DragEvent<HTMLDivElement>, data: CustomDate) {
         event.preventDefault();
         if (!(data.year === dropTask.year
             && data.month === dropTask.month
             && data.day === dropTask.day)) {
-            dispatch(removeTask({id: dropTask.id}));
+
+            if(dropTask.id) {
+                dispatch(removeTask({id: dropTask.id}));
+            }
 
             dispatch(addTask({
                 taskText: dropTask.taskText,

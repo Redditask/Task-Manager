@@ -1,8 +1,15 @@
+// @ts-ignore
 import styles from "./Modal.module.scss";
 
 import React from 'react';
 
-const Modal = ({children, visible, setVisible}) => {
+interface IModalProps {
+    children: React.ReactNode;
+    visible: boolean;
+    setVisible: (visible: boolean) => void;
+}
+
+const Modal: React.FC<IModalProps> = ({children, visible, setVisible}) => {
 
     const root = [styles.Modal];
     if(visible) root.push(styles.active);

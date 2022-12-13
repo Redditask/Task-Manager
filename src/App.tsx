@@ -1,3 +1,4 @@
+// @ts-ignore
 import styles from './App.module.scss';
 
 import {useState} from "react";
@@ -11,6 +12,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 ToDo
  тип для Theme
  //
+ тесты на ts
+ //
  авторизация (бд + сервер)
  //
  разобраться с оптимизацией
@@ -19,7 +22,7 @@ ToDo
 */
 
 function App() {
-    const [date, setDate] = useState();
+    const [date, setDate] = useState("");
     const [modalStatus, setModalStatus] = useState(false);
 
     return (

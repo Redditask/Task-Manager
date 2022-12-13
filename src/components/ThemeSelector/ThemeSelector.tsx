@@ -1,17 +1,18 @@
+// @ts-ignore
 import styles from "./ThemeSelector.module.scss";
 
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {changeTheme} from "../../store/taskManagerSlice";
 import {selectTheme} from "../../store/selectors";
 
 import {MdDarkMode} from "react-icons/md";
 import {CiLight} from "react-icons/ci";
 
-const ThemeSelector = () => {
-    const theme = useSelector(selectTheme);
+const ThemeSelector: React.FC = () => {
+    const theme = useAppSelector(selectTheme);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     useEffect(()=> {
         dispatch(changeTheme({theme: theme}))
         //auto "return"
@@ -35,7 +36,6 @@ const ThemeSelector = () => {
                         className={styles.LightSelector}
                         onClick={() => dispatch(changeTheme({theme: "light"}))}
                     />
-
             }
         </div>
     );

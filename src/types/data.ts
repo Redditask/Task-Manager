@@ -14,8 +14,19 @@ export type Time = {
     min: number;
 };
 
+export type Color = {
+    name: string;
+    color: string;
+};
+
 export type CustomDate = {
     year: number;
     month: number;
     day: number;
+};
+
+export type StringChangeEvent = {
+    target: {
+        value: string
+    }
 };

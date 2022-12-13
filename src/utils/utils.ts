@@ -1,4 +1,3 @@
-// @ts-ignore
 import {CustomDate} from "../types/data";
 
 const hours: number[] = [];
@@ -22,13 +21,13 @@ const colors = [
 const monthsList = [
     "Jan", "Feb", "Mar", "Apr",
     "May", "Jun", "Jul", "Aug",
-    "Sep", "Oct", "Nov", "Dec"
+    "Sep", "Oct", "Nov", "Dec",
 ];
 
 const weekDayList = [
     "Mon", "Tue", "Wed",
     "Thu", "Fri", "Sat",
-    "Sun"
+    "Sun",
 ];
 
 const weekDays = {
@@ -39,8 +38,6 @@ const weekDays = {
 
 const visibleDays = 7 * 6;
 
-const infoData = require("./infoData");
-
 const getDaysAmount = (year: number, month: number) => {
     const nextMonth = new Date(year, month+1, 1);
     //получаем сколько в месяце дней путём вычитания из следующего месяца 1 минуты
@@ -48,14 +45,15 @@ const getDaysAmount = (year: number, month: number) => {
     return nextMonth.getDate();
 };
 
-const getWeekDay = (date: Date) => {
+const getWeekDay = (date: Date): number => {
     const day = date.getDay();
 
-    return infoData.weekDays[day];
+    // @ts-ignore
+    return weekDays[day];
 };
 
 const getNextMonthDays = (year: number, month: number) => {
-    const nextMonthDaysAmount = infoData.visibleDays - getCurrMonthDays(year, month).length - getPrevMonthDays(year, month).length;
+    const nextMonthDaysAmount = visibleDays - getCurrMonthDays(year, month).length - getPrevMonthDays(year, month).length;
 
     const [nextYear, nextMonth] = (month === 11) ? [year+1, 0] : [year, month+1];
     const dates = [];

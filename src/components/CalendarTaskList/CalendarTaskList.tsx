@@ -1,12 +1,22 @@
+// @ts-ignore
 import styles from "./CalendarTaskList.module.scss";
 
 import React from 'react';
-import {useSelector} from "react-redux";
+
+import {useAppSelector} from "../../hooks/hooks";
 import {selectTasks} from "../../store/selectors";
+
 import CalendarTask from "../CalendarTask/CalendarTask";
 
-const CalendarTaskList = ({data, setDropTask}) => {
-    const tasks = useSelector(selectTasks);
+import {CustomDate, Task} from "../../types/data";
+
+interface ICalendarTaskListProps {
+    data: CustomDate;
+    setDropTask: (dropTask: Task) => void;
+}
+
+const CalendarTaskList:React.FC<ICalendarTaskListProps> = ({data, setDropTask}) => {
+    const tasks = useAppSelector(selectTasks);
 
     return (
         <div className={styles.CalendarTaskList}>

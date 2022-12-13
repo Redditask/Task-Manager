@@ -1,3 +1,4 @@
+// @ts-ignore
 import styles from "./Calendar.module.scss";
 
 import React, {useMemo, useState} from 'react';
@@ -6,10 +7,27 @@ import ChangeDateForm from "../ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import CalendarCell from "../CalendarCell/CalendarCell";
 
+import {Task} from "../../types/data";
+
 const utils = require ("../../utils/utils");
 
-const Calendar = ({setModalStatus, setDate}) => {
-    const [dropTask, setDropTask] = useState({});
+interface ICalendarProps {
+    setModalStatus: (modalStatus: boolean)=>void;
+    setDate: (date: string)=> void;
+}
+
+const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
+    //проверить это!!!
+    const [dropTask, setDropTask] = useState<Task>({
+        color: "beige",
+        day: 0,
+        endTime: {hour: 1, min: 0},
+        id: "",
+        month: 0,
+        startTime: {hour: 1, min: 0},
+        taskText: "",
+        year: 0
+    });
 
     //base calendar functionality
     const startValue = new Date();
@@ -51,7 +69,7 @@ const Calendar = ({setModalStatus, setDate}) => {
                 <ThemeSelector/>
             </div>
             <div className={styles.Calendar}>
-                {utils.weekDayList.map(weekDay =>
+                {utils.weekDayList.map((weekDay:string) =>
                     <div className={styles.Calendar__weekDay} key={weekDay}>{weekDay}</div>
                 )}
                 {calendarData.map(data => {
