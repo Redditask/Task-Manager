@@ -1,7 +1,7 @@
 // @ts-ignore
 import styles from './App.module.scss';
 
-import {useState} from "react";
+import React, {useState} from "react";
 
 import AsideBar from "./components/AsideBar/AsideBar";
 import Calendar from "./components/Calendar/Calendar";
@@ -10,6 +10,7 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
+ месяц в AsideBar + 1 должен быть
  тип для Theme
  //
  тесты на ts
@@ -21,7 +22,7 @@ ToDo
  адаптивная вёрстка
 */
 
-function App() {
+const App: React.FC = () => {
     const [date, setDate] = useState("");
     const [modalStatus, setModalStatus] = useState(false);
 

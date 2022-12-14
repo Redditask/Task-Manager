@@ -5,7 +5,7 @@ import {Time} from "../../types/data";
 // @ts-ignore
 import styles from "./TimePicker.module.scss";
 
-const utils = require("../../utils/utils");
+import {hours, mins} from "../../utils/utils";
 
 interface ITimePickerProps {
     startTime: Time;
@@ -25,7 +25,7 @@ const TimePicker: React.FC<ITimePickerProps> = ({startTime, setStartTime, endTim
                     className={styles.TimeSelect}
                     onChange={event => setStartTime({...startTime, hour: Number(event.target.value)})}
                 >
-                    {utils.hours.map((hour:number)=>
+                    {hours.map((hour:number)=>
                         <option key={`startTimeHour - ${hour}`}>{hour}</option>
                     )}
                 </select>
@@ -36,7 +36,7 @@ const TimePicker: React.FC<ITimePickerProps> = ({startTime, setStartTime, endTim
                     className={styles.TimeSelect}
                     onChange={event => setStartTime({...startTime, min: Number(event.target.value)})}
                 >
-                    {utils.mins.map((min:number)=>
+                    {mins.map((min:number)=>
                         <option key={`startTimeMin - ${min}`}>{min}</option>
                     )}
                 </select>
@@ -49,7 +49,7 @@ const TimePicker: React.FC<ITimePickerProps> = ({startTime, setStartTime, endTim
                     className={styles.TimeSelect}
                     onChange={event => setEndTime({...endTime, hour: Number(event.target.value)})}
                 >
-                    {utils.hours.map((hour:number)=>
+                    {hours.map((hour:number)=>
                         hour >= startTime.hour
                             ?
                             <option key={`endTimeHour - ${hour}`}>{hour}</option>
@@ -70,7 +70,7 @@ const TimePicker: React.FC<ITimePickerProps> = ({startTime, setStartTime, endTim
                     className={styles.TimeSelect}
                     onChange={event => setEndTime({...endTime, min: Number(event.target.value)})}
                 >
-                    {utils.mins.map((min:number)=>
+                    {mins.map((min:number)=>
                         startTime.hour === endTime.hour
                             ?
                             min > startTime.min

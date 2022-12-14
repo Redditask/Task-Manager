@@ -5,7 +5,7 @@ import React from 'react';
 
 import {Color} from '../../types/data';
 
-const utils = require("../../utils/utils");
+import {colors} from "../../utils/utils";
 
 interface IColorPickerProps {
     color: string;
@@ -23,7 +23,7 @@ const ColorPicker: React.FC<IColorPickerProps> = ({color, setColor}) => {
                 onChange={event => setColor(event.target.value)}
                 style={{backgroundColor:color}}
             >
-                {utils.colors.map((item: Color)=>
+                {colors.map((item: Color)=>
                     <option
                         style={{backgroundColor: item.color}}
                         value={item.color}

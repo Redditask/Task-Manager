@@ -20,15 +20,14 @@ interface IAsideBarProps {
 
 const AsideBar: React.FC<IAsideBarProps> = ({setModalStatus, setDate}) => {
     const [editModalStatus, setEditModalStatus] = useState(false);
-    //проверить это!!
     const [selectedTask, setSelectedTask] = useState<Task>({
         color: "beige",
         day: 0,
         endTime: {hour: 1, min: 0},
-        id: "",
+        id: "without id",
         month: 0,
         startTime: {hour: 1, min: 0},
-        taskText: "",
+        taskText: "Your task",
         year: 0
     });
 

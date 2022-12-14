@@ -10,9 +10,9 @@ interface IInputProps {
     onChange?: (event: StringChangeEvent) => void;
 }
 
-const Input:React.FC<IInputProps> = (...props) => {
+const Input:React.FC<IInputProps> = ({value, onChange}) => {
     return (
-        <textarea title="Input" className={styles.Input} {...props}/>
+        <textarea title="Input" className={styles.Input} value={value} onChange={onChange}/>
     );
 };
 
