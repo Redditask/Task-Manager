@@ -10,9 +10,6 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- месяц в AsideBar + 1 должен быть
- тип для Theme
- //
  тесты на ts
  //
  авторизация (бд + сервер)

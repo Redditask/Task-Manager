@@ -30,3 +30,5 @@ export type StringChangeEvent = {
         value: string
     }
 };
+
+export type Theme = "light" | "dark";

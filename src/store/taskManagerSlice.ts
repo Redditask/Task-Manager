@@ -1,5 +1,5 @@
 import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
-import {Task} from "../types/data";
+import {Task, Theme} from "../types/data";
 
 const taskSorting = (task1: Task, task2: Task) => {
     return (task1.startTime.hour - task2.startTime.hour)
@@ -21,14 +21,14 @@ export type TaskManagerState = {
     tasks: Task[];
     selectedTasks: Task[];
     selectedDate: string;
-    theme: string;
+    theme: Theme;
 };
 
 const initialState: TaskManagerState = {
     tasks: [],
     selectedTasks: [],
     selectedDate: "",
-    theme: "",
+    theme: "light",
 };
 
 const taskManagerSlice = createSlice({
@@ -57,7 +57,8 @@ const taskManagerSlice = createSlice({
                 }
             }
 
-            state.selectedDate = action.payload.day + "-" + action.payload.month + "-" + action.payload.year;
+            const formattedMonth: number = Number(action.payload.month) + 1;
+            state.selectedDate = action.payload.day + "-" + formattedMonth + "-" + action.payload.year;
             //console.log(current(state)) для просмотра состояния tasks
         },
         removeTask(state, action: PayloadAction<{id: string}>) {
@@ -81,9 +82,10 @@ const taskManagerSlice = createSlice({
                 }
             }
 
-            state.selectedDate = action.payload;
+            const formattedMonth: number = Number(month) + 1;
+            state.selectedDate = day + "-" + formattedMonth + "-" + year;
         },
-        changeTheme(state, action:PayloadAction<{theme: string}>) {
+        changeTheme(state, action:PayloadAction<{theme: Theme}>) {
             const root = document.querySelector(":root");
 
             const themeVariable = [
