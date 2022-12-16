@@ -10,8 +10,6 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- тесты на ts
- //
  авторизация (бд + сервер)
  //
  разобраться с оптимизацией
