@@ -30,7 +30,7 @@ interface IAsideTaskProps {
 
 const AsideTask: React.FC<IAsideTaskProps> = ({task, setTask, setEditModalStatus}) => {
     const dispatch = useAppDispatch();
-    const remove = (taskId: string | undefined) => dispatch(removeTask({id: taskId || "undefindeId"}));
+    const remove = (taskId: string | undefined) => dispatch(removeTask({id: taskId || "undefinedId"}));
 
     return (
         <div className={styles.Task}>
