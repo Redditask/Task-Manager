@@ -1,0 +1,54 @@
+@import "../../variable";
+
+.Task {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+
+  margin-bottom: 1.5rem;
+}
+
+.Time{
+  font-size: 1rem;
+  font-weight: bold;
+
+  margin: 0.5rem 0;
+}
+
+.Content {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  text-align: left;
+
+  gap: 1rem;
+
+  font-size: 1.5rem;
+
+  margin: 1rem;
+  padding: 1rem 1rem 1rem 0.7rem;
+
+  &__color {
+    position: inherit;
+
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 10px var(--defaultShadowColor);
+
+    margin-top: 0.4rem;
+  }
+}
+
+.ButtonsArea {
+  display: flex;
+  flex-direction: row;
+
+  gap: 1rem;
+
+  margin-top: -1.3rem;
+  margin-left: 3.5rem;
+}
