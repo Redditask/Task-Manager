@@ -10,7 +10,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- поправить timePicker, когда начальную дату выбирают больше чем конечную
+ исправить отсчёт месяцев с 0 до 11
+ поправить timePicker, когда начальное время выбирают больше чем конечное
  //
  авторизация (бд + сервер)
  //
@@ -20,8 +21,8 @@ ToDo
 */
 
 const App: React.FC = () => {
-    const [date, setDate] = useState("");
-    const [modalStatus, setModalStatus] = useState(false);
+    const [date, setDate] = useState<string>("");
+    const [modalStatus, setModalStatus] = useState<boolean>(false);
 
     return (
         <div className={styles.App}>

@@ -18,14 +18,14 @@ interface AsideTaskListProps {
 }
 
 const AsideTaskList: React.FC<AsideTaskListProps> = ({setSelectedTask, setEditModalStatus}) => {
-    const tasks = useAppSelector(selectSelectedTasks);
+    const tasks: Task[] = useAppSelector(selectSelectedTasks);
 
     return (
         <TransitionGroup>
             {tasks.length
                 ? tasks.map((task, index) => (
                         <CSSTransition
-                            key={index + (task.id || "undefinedId")}
+                            key={`${index}-${task.id || "undefinedId"}`}
                             timeout={500}
                             classNames="item"
                         >

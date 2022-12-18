@@ -19,7 +19,7 @@ interface AsideBarProps {
 }
 
 const AsideBar: React.FC<AsideBarProps> = ({setModalStatus, setDate}) => {
-    const [editModalStatus, setEditModalStatus] = useState(false);
+    const [editModalStatus, setEditModalStatus] = useState<boolean>(false);
     const [selectedTask, setSelectedTask] = useState<Task>({
         color: "beige",
         day: 0,
@@ -31,7 +31,7 @@ const AsideBar: React.FC<AsideBarProps> = ({setModalStatus, setDate}) => {
         year: 0
     });
 
-    const date = useAppSelector(selectSelectedDate);
+    const date: string = useAppSelector(selectSelectedDate);
 
     const openAddTaskForm = (): void => {
         setModalStatus(true);

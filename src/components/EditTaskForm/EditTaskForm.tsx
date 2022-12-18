@@ -19,19 +19,12 @@ interface EditTaskFormProps {
 }
 
 const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selectedTask}) => {
-    const [text, setText] = useState(selectedTask.taskText);
-    const [color, setColor] = useState(selectedTask.color);
-    const [startTime, setStartTime] = useState({hour: selectedTask.startTime.hour, min: selectedTask.startTime.min});
-    const [endTime, setEndTime] = useState({hour: selectedTask.endTime.hour, min: selectedTask.endTime.min});
+    const [text, setText] = useState<string>(selectedTask.taskText);
+    const [color, setColor] = useState<string>(selectedTask.color);
+    const [startTime, setStartTime] = useState<Time>({hour: selectedTask.startTime.hour, min: selectedTask.startTime.min});
+    const [endTime, setEndTime] = useState<Time>({hour: selectedTask.endTime.hour, min: selectedTask.endTime.min});
 
     const dispatch = useAppDispatch();
-    const edit = (id: string, text: string, color: string, startTime: Time, endTime: Time) => dispatch(editTask({
-        id: id,
-        taskText: text,
-        startTime: startTime,
-        endTime: endTime,
-        color: color
-    }));
 
     const submitEdit = (): void => {
         if (selectedTask.id) {

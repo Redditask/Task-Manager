@@ -58,7 +58,7 @@ const CalendarCell:React.FC<CalendarCellProps> = ({className, data, setModalStat
     };
 
     const setThisCellSelected = (): PayloadAction<string> =>
-        dispatch(setSelectedCell(data.day + "-" + data.month + "-" + data.year));
+        dispatch(setSelectedCell(`${data.day}-${data.month}-${data.year}`));
 
     return (
         <div

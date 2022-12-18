@@ -19,16 +19,16 @@ interface AddTaskFormProps {
 }
 
 const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
-    const [text, setText] = useState("Your task");
-    const [color, setColor] = useState("beige");
+    const [text, setText] = useState<string>("Your task");
+    const [color, setColor] = useState<string>("beige");
 
-    const [startTime, setStartTime] = useState({hour: 0, min: 0});
-    const [endTime, setEndTime] = useState({hour: 23, min: 59});
+    const [startTime, setStartTime] = useState<Time>({hour: 0, min: 0});
+    const [endTime, setEndTime] = useState<Time>({hour: 23, min: 59});
 
     const today = new Date();
-    let day = String(today.getDate());
-    let month = String(today.getMonth());
-    let year = String(today.getFullYear());
+    let day: string = String(today.getDate());
+    let month: string = String(today.getMonth());
+    let year: string = String(today.getFullYear());
 
     if (date) [day, month, year] = date.split("-");
 

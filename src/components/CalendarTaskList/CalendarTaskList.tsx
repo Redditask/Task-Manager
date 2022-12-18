@@ -16,7 +16,7 @@ interface CalendarTaskListProps {
 }
 
 const CalendarTaskList:React.FC<CalendarTaskListProps> = ({data, setDropTask}) => {
-    const tasks = useAppSelector(selectTasks);
+    const tasks: Task[] = useAppSelector(selectTasks);
 
     return (
         <div className={styles.CalendarTaskList}>

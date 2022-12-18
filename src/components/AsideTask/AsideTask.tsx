@@ -14,8 +14,8 @@ import {PayloadAction} from "@reduxjs/toolkit";
 import {Task} from "../../types/data";
 
 const formattedTime = (task: Task) => {
-    let startZero = "";
-    let endZero = "";
+    let startZero: string = "";
+    let endZero: string = "";
 
     if(task.startTime.min<=9) startZero = "0";
     if(task.endTime.min<=9) endZero = "0";
