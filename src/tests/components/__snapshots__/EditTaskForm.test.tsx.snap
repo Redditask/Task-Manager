@@ -648,50 +648,48 @@ Object {
               </select>
             </div>
           </div>
-          <div>
-            <p
-              class="ColorPicker__title"
-            >
-              Theme:
-            </p>
-            <select
-              class="ColorPicker"
+          <p
+            class="ColorPicker__title"
+          >
+            Theme:
+          </p>
+          <select
+            class="ColorPicker"
+            style="background-color: beige;"
+            title="Task color"
+          >
+            <option
+              selected=""
               style="background-color: beige;"
-              title="Task color"
+              value="beige"
             >
-              <option
-                selected=""
-                style="background-color: beige;"
-                value="beige"
-              >
-                beige
-              </option>
-              <option
-                style="background-color: rgb(0, 255, 127);"
-                value="#00FF7F"
-              >
-                green
-              </option>
-              <option
-                style="background-color: rgba(205, 92, 92, 1);"
-                value="#CD5C5CFF"
-              >
-                red
-              </option>
-              <option
-                style="background-color: rgb(192, 192, 192);"
-                value="#C0C0C0"
-              >
-                silver
-              </option>
-              <option
-                style="background-color: rgb(65, 105, 225);"
-                value="#4169E1"
-              >
-                blue
-              </option>
-            </select>
-          </div>
+              beige
+            </option>
+            <option
+              style="background-color: rgb(0, 255, 127);"
+              value="#00FF7F"
+            >
+              green
+            </option>
+            <option
+              style="background-color: rgba(205, 92, 92, 1);"
+              value="#CD5C5CFF"
+            >
+              red
+            </option>
+            <option
+              style="background-color: rgb(192, 192, 192);"
+              value="#C0C0C0"
+            >
+              silver
+            </option>
+            <option
+              style="background-color: rgb(65, 105, 225);"
+              value="#4169E1"
+            >
+              blue
+            </option>
+          </select>
         </div>
         <div
           class="EditTaskForm__buttonArea"
@@ -1350,50 +1348,48 @@ Object {
             </select>
           </div>
         </div>
-        <div>
-          <p
-            class="ColorPicker__title"
-          >
-            Theme:
-          </p>
-          <select
-            class="ColorPicker"
+        <p
+          class="ColorPicker__title"
+        >
+          Theme:
+        </p>
+        <select
+          class="ColorPicker"
+          style="background-color: beige;"
+          title="Task color"
+        >
+          <option
+            selected=""
             style="background-color: beige;"
-            title="Task color"
+            value="beige"
           >
-            <option
-              selected=""
-              style="background-color: beige;"
-              value="beige"
-            >
-              beige
-            </option>
-            <option
-              style="background-color: rgb(0, 255, 127);"
-              value="#00FF7F"
-            >
-              green
-            </option>
-            <option
-              style="background-color: rgba(205, 92, 92, 1);"
-              value="#CD5C5CFF"
-            >
-              red
-            </option>
-            <option
-              style="background-color: rgb(192, 192, 192);"
-              value="#C0C0C0"
-            >
-              silver
-            </option>
-            <option
-              style="background-color: rgb(65, 105, 225);"
-              value="#4169E1"
-            >
-              blue
-            </option>
-          </select>
-        </div>
+            beige
+          </option>
+          <option
+            style="background-color: rgb(0, 255, 127);"
+            value="#00FF7F"
+          >
+            green
+          </option>
+          <option
+            style="background-color: rgba(205, 92, 92, 1);"
+            value="#CD5C5CFF"
+          >
+            red
+          </option>
+          <option
+            style="background-color: rgb(192, 192, 192);"
+            value="#C0C0C0"
+          >
+            silver
+          </option>
+          <option
+            style="background-color: rgb(65, 105, 225);"
+            value="#4169E1"
+          >
+            blue
+          </option>
+        </select>
       </div>
       <div
         class="EditTaskForm__buttonArea"

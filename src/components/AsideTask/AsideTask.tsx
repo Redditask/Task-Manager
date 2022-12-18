@@ -9,6 +9,7 @@ import {AiOutlineEdit} from "react-icons/ai";
 import {MdDeleteOutline} from "react-icons/md";
 import {useAppDispatch} from "../../hooks/hooks";
 import {removeTask} from "../../store/taskManagerSlice";
+import {PayloadAction} from "@reduxjs/toolkit";
 
 import {Task} from "../../types/data";
 
@@ -22,22 +23,30 @@ const formattedTime = (task: Task) => {
     return `${task.startTime.hour}:${startZero}${task.startTime.min}-${task.endTime.hour}:${endZero}${task.endTime.min}`;
 };
 
-interface IAsideTaskProps {
+interface AsideTaskProps {
     task: Task;
     setTask: (task: Task)=>void;
     setEditModalStatus: (editModalStatus: boolean)=>void;
 }
 
-const AsideTask: React.FC<IAsideTaskProps> = ({task, setTask, setEditModalStatus}) => {
+const AsideTask: React.FC<AsideTaskProps> = ({task, setTask, setEditModalStatus}) => {
     const dispatch = useAppDispatch();
-    const remove = (taskId: string | undefined) => dispatch(removeTask({id: taskId || "undefinedId"}));
+    const removeTaskFromStore = (taskId: string | undefined): PayloadAction<{ id: string }> =>
+        dispatch(removeTask({id: taskId || "undefinedId"}));
+
+    const submitRemove = (): PayloadAction<{ id: string }> => removeTaskFromStore(task.id);
+
+    const openEditTaskForm = (): void => {
+        setEditModalStatus(true);
+        setTask(task);
+    };
 
     return (
         <div className={styles.Task}>
             <li className={styles.Content}>
                 <div
                     className={styles.Content__color}
-                    style={{background:task.color}}
+                    style={{background: task.color}}
                 />
                 <div>
                     {task.taskText}
@@ -48,17 +57,14 @@ const AsideTask: React.FC<IAsideTaskProps> = ({task, setTask, setEditModalStatus
             </li>
             <div className={styles.ButtonsArea}>
                 <Button
-                    title="Edit"
                     text={<AiOutlineEdit size={25}/>}
-                    onClick={()=> {
-                        setEditModalStatus(true)
-                        setTask(task)
-                    }}
+                    title="Edit"
+                    onClick={openEditTaskForm}
                 />
                 <Button
-                    title="Remove"
                     text={<MdDeleteOutline size={25}/>}
-                    onClick={()=>remove(task.id)}
+                    title="Remove"
+                    onClick={submitRemove}
                 />
             </div>
         </div>

@@ -11,27 +11,43 @@ import ColorPicker from "../ColorPicker/ColorPicker";
 import Button from "../UI/Button/Button";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {Task, Time} from "../../types/data";
+import {StringChangeEvent, Task, Time} from "../../types/data";
 
-interface IEditTaskFormProps {
+interface EditTaskFormProps {
     setEditModalStatus: (editModalStatus: boolean)=>void;
     selectedTask: Task;
 }
 
-const EditTaskForm: React.FC<IEditTaskFormProps> = ({setEditModalStatus, selectedTask}) => {
+const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selectedTask}) => {
     const [text, setText] = useState(selectedTask.taskText);
     const [color, setColor] = useState(selectedTask.color);
     const [startTime, setStartTime] = useState({hour: selectedTask.startTime.hour, min: selectedTask.startTime.min});
     const [endTime, setEndTime] = useState({hour: selectedTask.endTime.hour, min: selectedTask.endTime.min});
 
     const dispatch = useAppDispatch();
-    const edit = (id: string, text: string, color:string, startTime: Time, endTime: Time) => dispatch(editTask({
-            id: id,
-            taskText: text,
-            startTime: startTime,
-            endTime: endTime,
-            color: color
+    const edit = (id: string, text: string, color: string, startTime: Time, endTime: Time) => dispatch(editTask({
+        id: id,
+        taskText: text,
+        startTime: startTime,
+        endTime: endTime,
+        color: color
     }));
+
+    const submitEdit = (): void => {
+        if (selectedTask.id) {
+            dispatch(editTask({
+                id: selectedTask.id,
+                taskText: text,
+                startTime: startTime,
+                endTime: endTime,
+                color: color
+            }));
+        }
+
+        setEditModalStatus(false);
+    };
+
+    const changeInputHandler = (event: StringChangeEvent): void => setText(event.target.value);
 
     return (
         <div className={styles.EditTaskForm}>
@@ -39,7 +55,7 @@ const EditTaskForm: React.FC<IEditTaskFormProps> = ({setEditModalStatus, selecte
             <div className={styles.EditTaskForm__inputArea}>
                 <Input
                     value={text}
-                    onChange={event=>setText(event.target.value)}
+                    onChange={changeInputHandler}
                 />
                 <TimePicker
                     startTime={startTime}
@@ -58,12 +74,7 @@ const EditTaskForm: React.FC<IEditTaskFormProps> = ({setEditModalStatus, selecte
                         ? <Button
                             title="Edit"
                             text="Edit"
-                            onClick={()=>{
-                                if (selectedTask.id != null) {
-                                    edit(selectedTask.id, text, color, startTime, endTime)
-                                }
-                                setEditModalStatus(false)
-                            }}
+                            onClick={submitEdit}
                         />
                         : <Button
                             text="Input is empty"

@@ -5,23 +5,22 @@ import styles from "./CalendarTask.module.scss";
 
 import {Task} from "../../types/data";
 
-interface ICalendarTaskProps {
+interface CalendarTaskProps {
     task: Task;
     setDropTask: (dropTask: Task) => void;
 }
 
-const CalendarTask:React.FC<ICalendarTaskProps> = ({task, setDropTask}) => {
-    function dragStartHandler(task: Task) {
+const CalendarTask:React.FC<CalendarTaskProps> = ({task, setDropTask}) => {
+    const dragStartHandler = (): void => {
         setDropTask(task);
-    }
+    };
 
     return (
         <div
             className={styles.CalendarTask}
             style={{backgroundColor: task.color}}
-
             draggable={true}
-            onDragStart={() => dragStartHandler(task)}
+            onDragStart={dragStartHandler}
         >
             {task.taskText}
         </div>

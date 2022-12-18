@@ -13,12 +13,12 @@ import AsideTaskList from "../AsideTaskList/AsideTaskList";
 
 import {Task} from "../../types/data";
 
-interface IAsideBarProps {
+interface AsideBarProps {
     setModalStatus: (modalStatus: boolean) => void;
     setDate: (date: string) => void;
 }
 
-const AsideBar: React.FC<IAsideBarProps> = ({setModalStatus, setDate}) => {
+const AsideBar: React.FC<AsideBarProps> = ({setModalStatus, setDate}) => {
     const [editModalStatus, setEditModalStatus] = useState(false);
     const [selectedTask, setSelectedTask] = useState<Task>({
         color: "beige",
@@ -33,6 +33,11 @@ const AsideBar: React.FC<IAsideBarProps> = ({setModalStatus, setDate}) => {
 
     const date = useAppSelector(selectSelectedDate);
 
+    const openAddTaskForm = (): void => {
+        setModalStatus(true);
+        setDate(`${date}`);
+    };
+
     return (
         <aside className={styles.Container}>
             <div className={styles.AsideBar__header}>
@@ -41,20 +46,17 @@ const AsideBar: React.FC<IAsideBarProps> = ({setModalStatus, setDate}) => {
             </div>
             <hr/>
             <div className={styles.AsideBar}>
-                    <AsideTaskList
-                        setEditModalStatus={setEditModalStatus}
-                        setSelectedTask={setSelectedTask}
-                    />
+                <AsideTaskList
+                    setEditModalStatus={setEditModalStatus}
+                    setSelectedTask={setSelectedTask}
+                />
             </div>
             <hr/>
             <div className={styles.AsideBar__addButtonArea}>
                 <Button
                     text="+"
-                    onClick={() => {
-                        setModalStatus(true)
-                        setDate(`${date}`)}
-                    }
-                        title="Add another task for this day"
+                    title="Add another task for this day"
+                    onClick={openAddTaskForm}
                 />
             </div>
             <Modal visible={editModalStatus} setVisible={setEditModalStatus}>

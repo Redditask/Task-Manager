@@ -13,13 +13,16 @@ const ThemeSelector: React.FC = () => {
     const theme = useAppSelector(selectTheme);
 
     const dispatch = useAppDispatch();
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(changeTheme({theme: theme}))
         //auto "return"
     }, []);
 
+    const selectLightTheme = () => dispatch(changeTheme({theme: "light"}));
+    const selectDarkTheme = () => dispatch(changeTheme({theme: "dark"}));
+
     return (
-        <div>
+        <>
             {
                 theme === "light"
                     ?
@@ -27,17 +30,17 @@ const ThemeSelector: React.FC = () => {
                         title="Dark theme"
                         size={40}
                         className={styles.DarkSelector}
-                        onClick={() => dispatch(changeTheme({theme: "dark"}))}
+                        onClick={selectDarkTheme}
                     />
                     :
                     <CiLight
                         title="Light theme"
                         size={40}
                         className={styles.LightSelector}
-                        onClick={() => dispatch(changeTheme({theme: "light"}))}
+                        onClick={selectLightTheme}
                     />
             }
-        </div>
+        </>
     );
 };
 

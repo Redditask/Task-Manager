@@ -17,7 +17,7 @@ const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>) => {
     stateVariable.sort(taskSorting);
 };
 
-export type TaskManagerState = {
+export interface TaskManagerState {
     tasks: Task[];
     selectedTasks: Task[];
     selectedDate: string;
@@ -61,7 +61,7 @@ const taskManagerSlice = createSlice({
             state.selectedDate = action.payload.day + "-" + formattedMonth + "-" + action.payload.year;
             //console.log(current(state)) для просмотра состояния tasks
         },
-        removeTask(state, action: PayloadAction<{id: string}>) {
+        removeTask(state, action: PayloadAction<{ id: string }>) {
             state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
             state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
         },
@@ -85,7 +85,7 @@ const taskManagerSlice = createSlice({
             const formattedMonth: number = Number(month) + 1;
             state.selectedDate = day + "-" + formattedMonth + "-" + year;
         },
-        changeTheme(state, action:PayloadAction<{theme: Theme}>) {
+        changeTheme(state, action: PayloadAction<{ theme: Theme }>) {
             const root = document.querySelector(":root");
 
             const themeVariable = [

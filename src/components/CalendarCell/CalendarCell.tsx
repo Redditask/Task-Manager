@@ -2,6 +2,7 @@ import React from 'react';
 
 import {useAppDispatch} from "../../hooks/hooks";
 import {addTask, removeTask, setSelectedCell} from "../../store/taskManagerSlice";
+import {PayloadAction} from "@reduxjs/toolkit";
 
 import Button from "../UI/Button/Button";
 import CalendarTaskList from "../CalendarTaskList/CalendarTaskList";
@@ -11,7 +12,7 @@ import styles from "./CalendarCell.module.scss";
 
 import {CustomDate, Task} from "../../types/data";
 
-interface ICalendarCellProps {
+interface CalendarCellProps {
     className: string;
     data: CustomDate;
     setModalStatus: (modalStatus: boolean) => void;
@@ -20,16 +21,17 @@ interface ICalendarCellProps {
     setDropTask: (dropTask: Task)=>void;
 }
 
-const CalendarCell:React.FC<ICalendarCellProps> = ({className, data, setModalStatus, setDate, dropTask, setDropTask}) => {
+const CalendarCell:React.FC<CalendarCellProps> = ({className, data, setModalStatus, setDate, dropTask, setDropTask}) => {
     const dispatch = useAppDispatch();
 
     //drag and drop functionality
-    function dragOverHandler(event: React.DragEvent<HTMLDivElement>) {
+    const dragOverHandler = (event: React.DragEvent<HTMLDivElement>): void => {
         event.preventDefault();
-    }
+    };
 
-    function dropHandler(event: React.DragEvent<HTMLDivElement>, data: CustomDate) {
+    const dropHandler = (event: React.DragEvent<HTMLDivElement>): void => {
         event.preventDefault();
+
         if (!(data.year === dropTask.year
             && data.month === dropTask.month
             && data.day === dropTask.day)) {
@@ -46,26 +48,32 @@ const CalendarCell:React.FC<ICalendarCellProps> = ({className, data, setModalSta
                 startTime: dropTask.startTime,
                 endTime: dropTask.endTime,
                 color: dropTask.color,
-            }))
+            }));
         }
-    }
+    };
+
+    const openAddTaskForm = (): void => {
+        setModalStatus(true);
+        setDate(`${data.day}-${data.month}-${data.year}`);
+    };
+
+    const setThisCellSelected = (): PayloadAction<string> =>
+        dispatch(setSelectedCell(data.day + "-" + data.month + "-" + data.year));
 
     return (
         <div
             title="Cell"
             className={className}
-            onClick={() => dispatch(setSelectedCell(data.day + "-" + data.month + "-" + data.year))}
-
-            onDragOver={event => dragOverHandler(event)}
-            onDrop={event => dropHandler(event, data)}
+            onClick={setThisCellSelected}
+            onDragOver={dragOverHandler}
+            onDrop={dropHandler}
         >
             <div className={styles.CalendarCell__title}>
                 {data.day}
-                <Button text="+" onClick={() => {
-                    setModalStatus(true)
-                    setDate(`${data.day}-${data.month}-${data.year}`)
-                }}
-                        title="Add task"
+                <Button
+                    text="+"
+                    title="Add task"
+                    onClick={openAddTaskForm}
                 />
             </div>
             <CalendarTaskList data={data} setDropTask={setDropTask}/>

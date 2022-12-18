@@ -10,6 +10,8 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
+ поправить timePicker, когда начальную дату выбирают больше чем конечную
+ //
  авторизация (бд + сервер)
  //
  разобраться с оптимизацией

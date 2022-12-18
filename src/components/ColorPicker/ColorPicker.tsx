@@ -7,23 +7,26 @@ import {Color} from '../../types/data';
 
 import {colors} from "../../utils/utils";
 
-interface IColorPickerProps {
+interface ColorPickerProps {
     color: string;
     setColor: (color: string) => void;
 }
 
-const ColorPicker: React.FC<IColorPickerProps> = ({color, setColor}) => {
+const ColorPicker: React.FC<ColorPickerProps> = ({color, setColor}) => {
+    const colorChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>): void =>
+        setColor(event.target.value);
+
     return (
-        <div>
+        <>
             <p className={styles.ColorPicker__title}>Theme:</p>
             <select
                 title="Task color"
                 defaultValue={color}
                 className={styles.ColorPicker}
-                onChange={event => setColor(event.target.value)}
-                style={{backgroundColor:color}}
+                onChange={colorChangeHandler}
+                style={{backgroundColor: color}}
             >
-                {colors.map((item: Color)=>
+                {colors.map((item: Color) =>
                     <option
                         style={{backgroundColor: item.color}}
                         value={item.color}
@@ -33,7 +36,7 @@ const ColorPicker: React.FC<IColorPickerProps> = ({color, setColor}) => {
                     </option>
                 )}
             </select>
-        </div>
+        </>
     );
 };
 

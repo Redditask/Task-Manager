@@ -5,16 +5,16 @@ import React from 'react';
 
 import Button from "../UI/Button/Button";
 
-interface IChangeDateFormProps {
+interface ChangeDateFormProps {
     year: number;
     month: string;
     prevMonth: ()=>void;
     nextMonth: ()=>void;
 }
 
-const ChangeDateForm: React.FC<IChangeDateFormProps> = ({year, month, prevMonth, nextMonth}) => {
+const ChangeDateForm: React.FC<ChangeDateFormProps> = ({year, month, prevMonth, nextMonth}) => {
     return (
-        <div  className={styles.ChangeDateForm}>
+        <div className={styles.ChangeDateForm}>
             <div className={styles.ChangeDateForm__switch}>
                 <Button text="<" onClick={prevMonth}/>
                 <div className={styles.ChangeDateForm__text}>

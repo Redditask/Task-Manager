@@ -19,12 +19,12 @@ import {
     weekDayList,
 } from "../../utils/utils";
 
-interface ICalendarProps {
+interface CalendarProps {
     setModalStatus: (modalStatus: boolean)=>void;
     setDate: (date: string)=> void;
 }
 
-const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
+const Calendar: React.FC<CalendarProps> = ({setModalStatus, setDate}) => {
     const [dropTask, setDropTask] = useState<Task>({
         color: "beige",
         day: 0,
@@ -55,14 +55,14 @@ const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
             setOnCalendarYear(onCalendarYear + 1);
             setOnCalendarMonth(0);
         } else setOnCalendarMonth(onCalendarMonth + 1);
-    }
+    };
 
     const prevMonth = () => {
         if (onCalendarMonth === 0) {
             setOnCalendarYear(onCalendarYear - 1);
             setOnCalendarMonth(11);
         } else setOnCalendarMonth(onCalendarMonth - 1);
-    }
+    };
 
     return (
         <div className={styles.Container}>
@@ -76,7 +76,7 @@ const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
                 <ThemeSelector/>
             </div>
             <div className={styles.Calendar}>
-                {weekDayList.map((weekDay:string) =>
+                {weekDayList.map((weekDay: string) =>
                     <div className={styles.Calendar__weekDay} key={weekDay}>{weekDay}</div>
                 )}
                 {calendarData.map(data => {

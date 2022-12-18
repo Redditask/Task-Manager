@@ -10,12 +10,12 @@ import CalendarTask from "../CalendarTask/CalendarTask";
 
 import {CustomDate, Task} from "../../types/data";
 
-interface ICalendarTaskListProps {
+interface CalendarTaskListProps {
     data: CustomDate;
     setDropTask: (dropTask: Task) => void;
 }
 
-const CalendarTaskList:React.FC<ICalendarTaskListProps> = ({data, setDropTask}) => {
+const CalendarTaskList:React.FC<CalendarTaskListProps> = ({data, setDropTask}) => {
     const tasks = useAppSelector(selectTasks);
 
     return (

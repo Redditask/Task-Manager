@@ -5,12 +5,12 @@ import React from 'react';
 
 import {StringChangeEvent} from "../../../types/data";
 
-interface IInputProps {
+interface InputProps {
     value?: string;
     onChange?: (event: StringChangeEvent) => void;
 }
 
-const Input:React.FC<IInputProps> = ({value, onChange}) => {
+const Input:React.FC<InputProps> = ({value, onChange}) => {
     return (
         <textarea title="Input" className={styles.Input} value={value} onChange={onChange}/>
     );
