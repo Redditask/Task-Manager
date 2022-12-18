@@ -18,7 +18,9 @@ Object {
           </h2>
           <h3
             class="AsideBar__date"
-          />
+          >
+            Select date
+          </h3>
         </div>
         <hr />
         <div
@@ -67,7 +69,9 @@ Object {
         </h2>
         <h3
           class="AsideBar__date"
-        />
+        >
+          Select date
+        </h3>
       </div>
       <hr />
       <div
@@ -174,7 +178,7 @@ Object {
           <h3
             class="AsideBar__date"
           >
-            18-5-2022
+            18-6-2022
           </h3>
         </div>
         <hr />
@@ -350,7 +354,7 @@ Object {
         <h3
           class="AsideBar__date"
         >
-          18-5-2022
+          18-6-2022
         </h3>
       </div>
       <hr />

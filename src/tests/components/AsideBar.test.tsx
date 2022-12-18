@@ -35,7 +35,7 @@ const someTasks: Task[] = [
 describe("AsideBar", ()=>{
 
     it("should create AsideBar with empty task list", ()=>{
-        mockedUseSelector.mockReturnValue([]);
+        mockedUseSelector.mockReturnValue("");
 
         const component = render(
             <AsideBar

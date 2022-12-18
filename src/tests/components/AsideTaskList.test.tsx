@@ -36,7 +36,6 @@ describe("AsideTaskList", ()=>{
     it("should create TaskList with empty task list", ()=>{
         mockedUseSelector.mockReturnValue([]);
 
-        // eslint-disable-next-line testing-library/render-result-naming-convention
         const component = render(
             <AsideTaskList
                 setEditModalStatus={jest.fn()}
@@ -50,7 +49,6 @@ describe("AsideTaskList", ()=>{
     it("should create TaskList with tasks", ()=>{
         mockedUseSelector.mockReturnValue(someTasks);
 
-        // eslint-disable-next-line testing-library/render-result-naming-convention
         const component = render(
             <AsideTaskList
                 setEditModalStatus={jest.fn()}

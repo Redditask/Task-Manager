@@ -15,17 +15,46 @@ interface TimePickerProps {
 }
 
 const TimePicker: React.FC<TimePickerProps> = ({startTime, setStartTime, endTime, setEndTime}) => {
-    const startHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) =>
-        setStartTime({...startTime, hour: Number(event.target.value)});
+    const startHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newHour: number = Number(event.target.value);
+        if (endTime.hour <= newHour) {
+            setEndTime({...endTime, hour: newHour});
+            if (endTime.min <= startTime.min) {
+                startTime.min === 59
+                    ? setEndTime({hour: newHour, min: 59})
+                    : setEndTime({hour: newHour, min: startTime.min + 1});
+            }
+        }
 
-    const startMinChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) =>
-        setStartTime({...startTime, min: Number(event.target.value)});
+        setStartTime({...startTime, hour: newHour});
+    };
 
-    const endHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) =>
-        setEndTime({...startTime, hour: Number(event.target.value)});
+    const startMinChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newMin: number = Number(event.target.value);
+        if (startTime.hour === endTime.hour) {
+            if (endTime.min <= newMin) {
+                newMin === 59
+                    ? setEndTime({...endTime, min: 59})
+                    : setEndTime({...endTime, min: newMin + 1});
+            }
+        }
+
+        setStartTime({...startTime, min: newMin});
+    };
+
+    const endHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newHour: number = Number(event.target.value);
+        if (newHour === startTime.hour) {
+            if (startTime.min >= endTime.min) {
+                startTime.min === 59
+                    ? setEndTime({hour: newHour, min: 59})
+                    : setEndTime({hour: newHour, min: startTime.min + 1});
+            }
+        } else setEndTime({...endTime, hour: newHour});
+    };
 
     const endMinChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) =>
-        setEndTime({...startTime, min: Number(event.target.value)});
+        setEndTime({...endTime, min: Number(event.target.value)});
 
     return (
         <div className={styles.Container}>

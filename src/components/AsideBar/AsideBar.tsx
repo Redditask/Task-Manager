@@ -32,6 +32,7 @@ const AsideBar: React.FC<AsideBarProps> = ({setModalStatus, setDate}) => {
     });
 
     const date: string = useAppSelector(selectSelectedDate);
+    const [day, month, year]: string[] = date.split("-");
 
     const openAddTaskForm = (): void => {
         setModalStatus(true);
@@ -42,7 +43,7 @@ const AsideBar: React.FC<AsideBarProps> = ({setModalStatus, setDate}) => {
         <aside className={styles.Container}>
             <div className={styles.AsideBar__header}>
                 <h2 className={styles.AsideBar__title}>Tasks</h2>
-                <h3 className={styles.AsideBar__date}>{date ? date : "Select date"}</h3>
+                <h3 className={styles.AsideBar__date}>{date ? `${day}-${Number(month) + 1}-${year}` : "Select date"}</h3>
             </div>
             <hr/>
             <div className={styles.AsideBar}>
