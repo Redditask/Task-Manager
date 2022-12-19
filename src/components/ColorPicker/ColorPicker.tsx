@@ -1,9 +1,9 @@
 // @ts-ignore
 import styles from "./ColorPicker.module.scss";
 
-import React from 'react';
+import React, {memo} from 'react';
 
-import {Color} from '../../types/data';
+import {Color} from '../../types/types';
 
 import {colors} from "../../utils/utils";
 
@@ -12,7 +12,7 @@ interface ColorPickerProps {
     setColor: (color: string) => void;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({color, setColor}) => {
+const ColorPicker: React.FC<ColorPickerProps> = memo(({color, setColor}) => {
     const colorChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>): void =>
         setColor(event.target.value);
 
@@ -38,6 +38,6 @@ const ColorPicker: React.FC<ColorPickerProps> = ({color, setColor}) => {
             </select>
         </>
     );
-};
+});
 
 export default ColorPicker;

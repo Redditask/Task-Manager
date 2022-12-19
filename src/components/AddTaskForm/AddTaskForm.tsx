@@ -11,7 +11,12 @@ import Button from "../UI/Button/Button";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {StringChangeEvent, Time} from "../../types/data";
+import {StringChangeEvent, Time} from "../../types/types";
+
+const today = new Date();
+let day: string = String(today.getDate());
+let month: string = String(today.getMonth());
+let year: string = String(today.getFullYear());
 
 interface AddTaskFormProps {
     setModalStatus: (modalStatus: boolean) => void;
@@ -24,11 +29,6 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
 
     const [startTime, setStartTime] = useState<Time>({hour: 0, min: 0});
     const [endTime, setEndTime] = useState<Time>({hour: 23, min: 59});
-
-    const today = new Date();
-    let day: string = String(today.getDate());
-    let month: string = String(today.getMonth());
-    let year: string = String(today.getFullYear());
 
     if (date) [day, month, year] = date.split("-");
 

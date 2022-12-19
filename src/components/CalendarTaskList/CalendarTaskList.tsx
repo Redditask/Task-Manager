@@ -8,7 +8,7 @@ import {selectTasks} from "../../store/selectors";
 
 import CalendarTask from "../CalendarTask/CalendarTask";
 
-import {CustomDate, Task} from "../../types/data";
+import {CustomDate, Task} from "../../types/types";
 
 interface CalendarTaskListProps {
     data: CustomDate;

@@ -8,23 +8,23 @@ export interface Task {
     startTime: Time;
     endTime: Time;
     color: string;
-};
+}
 
 export interface Time {
     hour: number;
     min: number;
-};
+}
 
 export interface Color {
     name: string;
     color: string;
-};
+}
 
 export interface CustomDate {
     year: number;
     month: number;
     day: number;
-};
+}
 
 export type StringChangeEvent = {
     target: {

@@ -1,13 +1,13 @@
 // @ts-ignore
 import styles from "./Calendar.module.scss";
 
-import React, {useMemo, useState} from 'react';
+import React, {memo, useMemo, useState} from 'react';
 
 import ChangeDateForm from "../ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import CalendarCell from "../CalendarCell/CalendarCell";
 
-import {CustomDate, Task} from "../../types/data";
+import {CustomDate, Task} from "../../types/types";
 
 import {
     getCurrMonthDays,
@@ -24,7 +24,7 @@ interface CalendarProps {
     setDate: (date: string)=> void;
 }
 
-const Calendar: React.FC<CalendarProps> = ({setModalStatus, setDate}) => {
+const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
     const [dropTask, setDropTask] = useState<Task>({
         color: "beige",
         day: 0,
@@ -100,6 +100,6 @@ const Calendar: React.FC<CalendarProps> = ({setModalStatus, setDate}) => {
             </div>
         </div>
     );
-};
+});
 
 export default Calendar;

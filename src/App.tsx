@@ -10,9 +10,9 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- авторизация (бд + сервер)
+ readme поправить
  //
- разобраться с оптимизацией
+ авторизация (бд + сервер)
  //
  адаптивная вёрстка
 */

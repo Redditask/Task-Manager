@@ -3,7 +3,7 @@ import * as ReduxHooks from "react-redux";
 
 import AsideTaskList from "../../components/AsideTaskList/AsideTaskList";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 jest.mock("react-redux");
 

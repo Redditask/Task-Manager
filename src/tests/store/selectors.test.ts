@@ -1,6 +1,6 @@
 import {selectTasks, selectTheme, selectSelectedDate, selectSelectedTasks} from "../../store/selectors";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 describe("redux selectors", ()=> {
 

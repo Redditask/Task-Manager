@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 import {useAppDispatch} from "../../hooks/hooks";
 import {addTask, removeTask, setSelectedCell} from "../../store/taskManagerSlice";
@@ -10,7 +10,7 @@ import CalendarTaskList from "../CalendarTaskList/CalendarTaskList";
 // @ts-ignore
 import styles from "./CalendarCell.module.scss";
 
-import {CustomDate, Task} from "../../types/data";
+import {CustomDate, Task} from "../../types/types";
 
 interface CalendarCellProps {
     className: string;
@@ -21,7 +21,7 @@ interface CalendarCellProps {
     setDropTask: (dropTask: Task)=>void;
 }
 
-const CalendarCell:React.FC<CalendarCellProps> = ({className, data, setModalStatus, setDate, dropTask, setDropTask}) => {
+const CalendarCell:React.FC<CalendarCellProps> = memo(({className, data, setModalStatus, setDate, dropTask, setDropTask}) => {
     const dispatch = useAppDispatch();
 
     //drag and drop functionality
@@ -79,6 +79,6 @@ const CalendarCell:React.FC<CalendarCellProps> = ({className, data, setModalStat
             <CalendarTaskList data={data} setDropTask={setDropTask}/>
         </div>
     );
-};
+});
 
 export default CalendarCell;

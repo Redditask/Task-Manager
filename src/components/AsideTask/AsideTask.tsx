@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 // @ts-ignore
 import styles from "./AsideTask.module.scss";
@@ -11,7 +11,7 @@ import {useAppDispatch} from "../../hooks/hooks";
 import {removeTask} from "../../store/taskManagerSlice";
 import {PayloadAction} from "@reduxjs/toolkit";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 const formattedTime = (task: Task) => {
     let startZero: string = "";
@@ -29,7 +29,7 @@ interface AsideTaskProps {
     setEditModalStatus: (editModalStatus: boolean)=>void;
 }
 
-const AsideTask: React.FC<AsideTaskProps> = ({task, setTask, setEditModalStatus}) => {
+const AsideTask: React.FC<AsideTaskProps> = memo(({task, setTask, setEditModalStatus}) => {
     const dispatch = useAppDispatch();
     const removeTaskFromStore = (taskId: string | undefined): PayloadAction<{ id: string }> =>
         dispatch(removeTask({id: taskId || "undefinedId"}));
@@ -69,6 +69,6 @@ const AsideTask: React.FC<AsideTaskProps> = ({task, setTask, setEditModalStatus}
             </div>
         </div>
     );
-};
+});
 
 export default AsideTask;

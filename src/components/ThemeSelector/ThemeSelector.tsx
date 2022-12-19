@@ -8,7 +8,7 @@ import {selectTheme} from "../../store/selectors";
 
 import {MdDarkMode} from "react-icons/md";
 import {CiLight} from "react-icons/ci";
-import {Theme} from "../../types/data";
+import {Theme} from "../../types/types";
 
 const ThemeSelector: React.FC = () => {
     const theme: Theme = useAppSelector(selectTheme);

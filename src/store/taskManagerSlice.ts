@@ -1,5 +1,6 @@
 import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
-import {Task, Theme} from "../types/data";
+
+import {Task, Theme} from "../types/types";
 
 const taskSorting = (task1: Task, task2: Task): number => task1.startTime.hour - task2.startTime.hour;
 

@@ -1,7 +1,7 @@
 // @ts-ignore
 import styles from "./AsideBar.module.scss";
 
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 
 import {useAppSelector} from "../../hooks/hooks";
 import {selectSelectedDate} from "../../store/selectors";
@@ -11,14 +11,14 @@ import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import Modal from "../UI/Modal/Modal";
 import AsideTaskList from "../AsideTaskList/AsideTaskList";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 interface AsideBarProps {
     setModalStatus: (modalStatus: boolean) => void;
     setDate: (date: string) => void;
 }
 
-const AsideBar: React.FC<AsideBarProps> = ({setModalStatus, setDate}) => {
+const AsideBar: React.FC<AsideBarProps> = memo(({setModalStatus, setDate}) => {
     const [editModalStatus, setEditModalStatus] = useState<boolean>(false);
     const [selectedTask, setSelectedTask] = useState<Task>({
         color: "beige",
@@ -68,6 +68,6 @@ const AsideBar: React.FC<AsideBarProps> = ({setModalStatus, setDate}) => {
             </Modal>
         </aside>
     );
-};
+});
 
 export default AsideBar;

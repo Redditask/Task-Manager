@@ -4,7 +4,7 @@ import * as actions from "../../store/taskManagerSlice";
 
 import CalendarCell from "../../components/CalendarCell/CalendarCell";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 jest.mock("react-redux");
 

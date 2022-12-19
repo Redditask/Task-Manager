@@ -1,4 +1,4 @@
-import {Color, CustomDate} from "../types/data";
+import {Color, CustomDate} from "../types/types";
 
 export const hours: number[] = [];
 for(let i = 0; i<24; i++){

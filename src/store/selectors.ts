@@ -1,6 +1,6 @@
 import {TaskManagerState} from "./taskManagerSlice";
 
-import {Task, Theme} from "../types/data";
+import {Task, Theme} from "../types/types";
 
 export const selectTasks = (state: { tasks: TaskManagerState; }): Task[] => state.tasks.tasks;
 export const selectSelectedTasks = (state: { tasks: TaskManagerState; }): Task[] => state.tasks.selectedTasks;

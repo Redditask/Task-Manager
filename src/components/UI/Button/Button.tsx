@@ -2,7 +2,6 @@
 import styles from "./Button.module.scss";
 
 import React from 'react';
-import {PayloadAction} from "@reduxjs/toolkit";
 
 interface ButtonProps {
     text: React.ReactNode;

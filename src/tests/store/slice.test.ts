@@ -6,7 +6,7 @@ import taskReducer, {
     changeTheme, TaskManagerState
 } from "../../store/taskManagerSlice";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 //states for testing actions
 const initialState: TaskManagerState = {tasks: [], selectedTasks:[], selectedDate: "", theme: "light"};
@@ -112,7 +112,7 @@ describe("redux slice", ()=> {
 
             const result = taskReducer(someState, action);
 
-            expect(result.selectedDate).toEqual("17-6-2022"); // +1, т.к. счёт месяцев начинается с нуля
+            expect(result.selectedDate).toEqual("17-5-2022");
             expect(result.selectedTasks[0]).toEqual(someState.tasks[1]);
         });
 

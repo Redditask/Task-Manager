@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {memo} from 'react';
 
-import {Time} from "../../types/data";
+import {Time} from "../../types/types";
 
 // @ts-ignore
 import styles from "./TimePicker.module.scss";
@@ -14,11 +14,12 @@ interface TimePickerProps {
     setEndTime: (endTime: Time)=>void;
 }
 
-const TimePicker: React.FC<TimePickerProps> = ({startTime, setStartTime, endTime, setEndTime}) => {
+const TimePicker: React.FC<TimePickerProps> = memo(({startTime, setStartTime, endTime, setEndTime}) => {
     const startHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const newHour: number = Number(event.target.value);
         if (endTime.hour <= newHour) {
             setEndTime({...endTime, hour: newHour});
+
             if (endTime.min <= startTime.min) {
                 startTime.min === 59
                     ? setEndTime({hour: newHour, min: 59})
@@ -132,6 +133,6 @@ const TimePicker: React.FC<TimePickerProps> = ({startTime, setStartTime, endTime
             </div>
         </div>
     );
-};
+});
 
 export default TimePicker;

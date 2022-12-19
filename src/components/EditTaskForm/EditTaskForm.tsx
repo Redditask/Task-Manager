@@ -11,7 +11,7 @@ import ColorPicker from "../ColorPicker/ColorPicker";
 import Button from "../UI/Button/Button";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {StringChangeEvent, Task, Time} from "../../types/data";
+import {StringChangeEvent, Task, Time} from "../../types/types";
 
 interface EditTaskFormProps {
     setEditModalStatus: (editModalStatus: boolean)=>void;
