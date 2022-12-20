@@ -353,94 +353,49 @@ Object {
                 >
                   7
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   8
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   9
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   10
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   11
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   12
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   13
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   14
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   15
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   16
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   17
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   18
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   19
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   20
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   21
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   22
                 </option>
                 <option>
@@ -456,22 +411,13 @@ Object {
                 class="TimeSelect"
                 title="End minute"
               >
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   0
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   1
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   2
                 </option>
                 <option>
@@ -648,50 +594,48 @@ Object {
               </select>
             </div>
           </div>
-          <div>
-            <p
-              class="ColorPicker__title"
-            >
-              Theme:
-            </p>
-            <select
-              class="ColorPicker"
+          <p
+            class="ColorPicker__title"
+          >
+            Theme:
+          </p>
+          <select
+            class="ColorPicker"
+            style="background-color: beige;"
+            title="Task color"
+          >
+            <option
+              selected=""
               style="background-color: beige;"
-              title="Task color"
+              value="beige"
             >
-              <option
-                selected=""
-                style="background-color: beige;"
-                value="beige"
-              >
-                beige
-              </option>
-              <option
-                style="background-color: rgb(0, 255, 127);"
-                value="#00FF7F"
-              >
-                green
-              </option>
-              <option
-                style="background-color: rgba(205, 92, 92, 1);"
-                value="#CD5C5CFF"
-              >
-                red
-              </option>
-              <option
-                style="background-color: rgb(192, 192, 192);"
-                value="#C0C0C0"
-              >
-                silver
-              </option>
-              <option
-                style="background-color: rgb(65, 105, 225);"
-                value="#4169E1"
-              >
-                blue
-              </option>
-            </select>
-          </div>
+              beige
+            </option>
+            <option
+              style="background-color: rgb(0, 255, 127);"
+              value="#00FF7F"
+            >
+              green
+            </option>
+            <option
+              style="background-color: rgba(205, 92, 92, 1);"
+              value="#CD5C5CFF"
+            >
+              red
+            </option>
+            <option
+              style="background-color: rgb(192, 192, 192);"
+              value="#C0C0C0"
+            >
+              silver
+            </option>
+            <option
+              style="background-color: rgb(65, 105, 225);"
+              value="#4169E1"
+            >
+              blue
+            </option>
+          </select>
         </div>
         <div
           class="EditTaskForm__buttonArea"
@@ -1055,94 +999,49 @@ Object {
               >
                 7
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 8
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 9
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 10
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 11
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 12
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 13
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 14
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 15
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 16
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 17
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 18
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 19
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 20
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 21
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 22
               </option>
               <option>
@@ -1158,22 +1057,13 @@ Object {
               class="TimeSelect"
               title="End minute"
             >
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 0
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 1
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 2
               </option>
               <option>
@@ -1350,50 +1240,48 @@ Object {
             </select>
           </div>
         </div>
-        <div>
-          <p
-            class="ColorPicker__title"
-          >
-            Theme:
-          </p>
-          <select
-            class="ColorPicker"
+        <p
+          class="ColorPicker__title"
+        >
+          Theme:
+        </p>
+        <select
+          class="ColorPicker"
+          style="background-color: beige;"
+          title="Task color"
+        >
+          <option
+            selected=""
             style="background-color: beige;"
-            title="Task color"
+            value="beige"
           >
-            <option
-              selected=""
-              style="background-color: beige;"
-              value="beige"
-            >
-              beige
-            </option>
-            <option
-              style="background-color: rgb(0, 255, 127);"
-              value="#00FF7F"
-            >
-              green
-            </option>
-            <option
-              style="background-color: rgba(205, 92, 92, 1);"
-              value="#CD5C5CFF"
-            >
-              red
-            </option>
-            <option
-              style="background-color: rgb(192, 192, 192);"
-              value="#C0C0C0"
-            >
-              silver
-            </option>
-            <option
-              style="background-color: rgb(65, 105, 225);"
-              value="#4169E1"
-            >
-              blue
-            </option>
-          </select>
-        </div>
+            beige
+          </option>
+          <option
+            style="background-color: rgb(0, 255, 127);"
+            value="#00FF7F"
+          >
+            green
+          </option>
+          <option
+            style="background-color: rgba(205, 92, 92, 1);"
+            value="#CD5C5CFF"
+          >
+            red
+          </option>
+          <option
+            style="background-color: rgb(192, 192, 192);"
+            value="#C0C0C0"
+          >
+            silver
+          </option>
+          <option
+            style="background-color: rgb(65, 105, 225);"
+            value="#4169E1"
+          >
+            blue
+          </option>
+        </select>
       </div>
       <div
         class="EditTaskForm__buttonArea"

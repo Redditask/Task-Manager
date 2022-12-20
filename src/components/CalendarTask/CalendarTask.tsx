@@ -1,31 +1,30 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 // @ts-ignore
 import styles from "./CalendarTask.module.scss";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
-interface ICalendarTaskProps {
+interface CalendarTaskProps {
     task: Task;
     setDropTask: (dropTask: Task) => void;
 }
 
-const CalendarTask:React.FC<ICalendarTaskProps> = ({task, setDropTask}) => {
-    function dragStartHandler(task: Task) {
+const CalendarTask:React.FC<CalendarTaskProps> = memo(({task, setDropTask}) => {
+    const dragStartHandler = (): void => {
         setDropTask(task);
-    }
+    };
 
     return (
         <div
             className={styles.CalendarTask}
             style={{backgroundColor: task.color}}
-
             draggable={true}
-            onDragStart={() => dragStartHandler(task)}
+            onDragStart={dragStartHandler}
         >
             {task.taskText}
         </div>
     );
-};
+});
 
 export default CalendarTask;

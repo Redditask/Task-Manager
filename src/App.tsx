@@ -10,16 +10,16 @@ import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
 /*
 ToDo
- авторизация (бд + сервер)
+ readme поправить
  //
- разобраться с оптимизацией
+ авторизация (бд + сервер)
  //
  адаптивная вёрстка
 */
 
 const App: React.FC = () => {
-    const [date, setDate] = useState("");
-    const [modalStatus, setModalStatus] = useState(false);
+    const [date, setDate] = useState<string>("");
+    const [modalStatus, setModalStatus] = useState<boolean>(false);
 
     return (
         <div className={styles.App}>

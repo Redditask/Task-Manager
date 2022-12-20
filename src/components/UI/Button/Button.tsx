@@ -3,13 +3,13 @@ import styles from "./Button.module.scss";
 
 import React from 'react';
 
-interface IButtonProps {
+interface ButtonProps {
     text: React.ReactNode;
     title?: string;
     onClick?: ()=>void;
 }
 
-const Button: React.FC<IButtonProps> = ({text, ...props}) => {
+const Button: React.FC<ButtonProps> = ({text, ...props}) => {
     return (
         <div {...props} className={styles.Button}>
             {text}

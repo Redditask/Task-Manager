@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 // @ts-ignore
 import styles from "./AsideTask.module.scss";
@@ -9,12 +9,13 @@ import {AiOutlineEdit} from "react-icons/ai";
 import {MdDeleteOutline} from "react-icons/md";
 import {useAppDispatch} from "../../hooks/hooks";
 import {removeTask} from "../../store/taskManagerSlice";
+import {PayloadAction} from "@reduxjs/toolkit";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 const formattedTime = (task: Task) => {
-    let startZero = "";
-    let endZero = "";
+    let startZero: string = "";
+    let endZero: string = "";
 
     if(task.startTime.min<=9) startZero = "0";
     if(task.endTime.min<=9) endZero = "0";
@@ -22,22 +23,30 @@ const formattedTime = (task: Task) => {
     return `${task.startTime.hour}:${startZero}${task.startTime.min}-${task.endTime.hour}:${endZero}${task.endTime.min}`;
 };
 
-interface IAsideTaskProps {
+interface AsideTaskProps {
     task: Task;
     setTask: (task: Task)=>void;
     setEditModalStatus: (editModalStatus: boolean)=>void;
 }
 
-const AsideTask: React.FC<IAsideTaskProps> = ({task, setTask, setEditModalStatus}) => {
+const AsideTask: React.FC<AsideTaskProps> = memo(({task, setTask, setEditModalStatus}) => {
     const dispatch = useAppDispatch();
-    const remove = (taskId: string | undefined) => dispatch(removeTask({id: taskId || "undefinedId"}));
+    const removeTaskFromStore = (taskId: string | undefined): PayloadAction<{ id: string }> =>
+        dispatch(removeTask({id: taskId || "undefinedId"}));
+
+    const submitRemove = (): PayloadAction<{ id: string }> => removeTaskFromStore(task.id);
+
+    const openEditTaskForm = (): void => {
+        setEditModalStatus(true);
+        setTask(task);
+    };
 
     return (
         <div className={styles.Task}>
             <li className={styles.Content}>
                 <div
                     className={styles.Content__color}
-                    style={{background:task.color}}
+                    style={{background: task.color}}
                 />
                 <div>
                     {task.taskText}
@@ -48,21 +57,18 @@ const AsideTask: React.FC<IAsideTaskProps> = ({task, setTask, setEditModalStatus
             </li>
             <div className={styles.ButtonsArea}>
                 <Button
-                    title="Edit"
                     text={<AiOutlineEdit size={25}/>}
-                    onClick={()=> {
-                        setEditModalStatus(true)
-                        setTask(task)
-                    }}
+                    title="Edit"
+                    onClick={openEditTaskForm}
                 />
                 <Button
-                    title="Remove"
                     text={<MdDeleteOutline size={25}/>}
-                    onClick={()=>remove(task.id)}
+                    title="Remove"
+                    onClick={submitRemove}
                 />
             </div>
         </div>
     );
-};
+});
 
 export default AsideTask;

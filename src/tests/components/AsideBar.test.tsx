@@ -3,7 +3,7 @@ import * as ReduxHooks from "react-redux";
 
 import AsideBar from "../../components/AsideBar/AsideBar";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 jest.mock("react-redux");
 
@@ -35,7 +35,7 @@ const someTasks: Task[] = [
 describe("AsideBar", ()=>{
 
     it("should create AsideBar with empty task list", ()=>{
-        mockedUseSelector.mockReturnValue([]);
+        mockedUseSelector.mockReturnValue("");
 
         const component = render(
             <AsideBar

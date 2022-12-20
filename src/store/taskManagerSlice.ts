@@ -1,11 +1,10 @@
 import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
-import {Task, Theme} from "../types/data";
 
-const taskSorting = (task1: Task, task2: Task) => {
-    return (task1.startTime.hour - task2.startTime.hour)
-};
+import {Task, Theme} from "../types/types";
 
-const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>) => {
+const taskSorting = (task1: Task, task2: Task): number => task1.startTime.hour - task2.startTime.hour;
+
+const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>): void => {
     stateVariable.forEach(task => {
         if (task.id === action.payload.id) {
             task.taskText = action.payload.taskText;
@@ -17,12 +16,12 @@ const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>) => {
     stateVariable.sort(taskSorting);
 };
 
-export type TaskManagerState = {
+export interface TaskManagerState {
     tasks: Task[];
     selectedTasks: Task[];
     selectedDate: string;
     theme: Theme;
-};
+}
 
 const initialState: TaskManagerState = {
     tasks: [],
@@ -57,11 +56,10 @@ const taskManagerSlice = createSlice({
                 }
             }
 
-            const formattedMonth: number = Number(action.payload.month) + 1;
-            state.selectedDate = action.payload.day + "-" + formattedMonth + "-" + action.payload.year;
+            state.selectedDate = `${action.payload.day}-${action.payload.month}-${action.payload.year}`;
             //console.log(current(state)) для просмотра состояния tasks
         },
-        removeTask(state, action: PayloadAction<{id: string}>) {
+        removeTask(state, action: PayloadAction<{ id: string }>) {
             state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
             state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
         },
@@ -71,24 +69,23 @@ const taskManagerSlice = createSlice({
             taskEditing(state.selectedTasks, action);
         },
         setSelectedCell(state, action: PayloadAction<string>) {
-            const [day, month, year] = action.payload.split("-");
+            const [day, month, year]: string[] = action.payload.split("-");
 
             state.selectedTasks = [];
             for (let i = 0; i < state.tasks.length; i++) {
                 if (state.tasks[i].year === Number(year)
                     && state.tasks[i].month === Number(month)
                     && state.tasks[i].day === Number(day)) {
-                    state.selectedTasks.push(state.tasks[i])
+                    state.selectedTasks.push(state.tasks[i]);
                 }
             }
 
-            const formattedMonth: number = Number(month) + 1;
-            state.selectedDate = day + "-" + formattedMonth + "-" + year;
+            state.selectedDate = `${day}-${month}-${year}`;
         },
-        changeTheme(state, action:PayloadAction<{theme: Theme}>) {
-            const root = document.querySelector(":root");
+        changeTheme(state, action: PayloadAction<{ theme: Theme }>) {
+            const root: Element | null = document.querySelector(":root");
 
-            const themeVariable = [
+            const themeVariable: string[] = [
                 "Color", "BgColor",
                 "BorderColor", "ButtonColor",
                 "ShadowColor", "HoverBgColor",

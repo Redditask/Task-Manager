@@ -1,13 +1,13 @@
 // @ts-ignore
 import styles from "./Calendar.module.scss";
 
-import React, {useMemo, useState} from 'react';
+import React, {memo, useMemo, useState} from 'react';
 
 import ChangeDateForm from "../ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import CalendarCell from "../CalendarCell/CalendarCell";
 
-import {Task} from "../../types/data";
+import {CustomDate, Task} from "../../types/types";
 
 import {
     getCurrMonthDays,
@@ -19,12 +19,12 @@ import {
     weekDayList,
 } from "../../utils/utils";
 
-interface ICalendarProps {
+interface CalendarProps {
     setModalStatus: (modalStatus: boolean)=>void;
     setDate: (date: string)=> void;
 }
 
-const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
+const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
     const [dropTask, setDropTask] = useState<Task>({
         color: "beige",
         day: 0,
@@ -37,32 +37,32 @@ const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
     });
 
     //base calendar functionality
-    const startValue = new Date();
+    const startValue: Date = new Date();
 
-    const [onCalendarYear, setOnCalendarYear] = useState(() => startValue.getFullYear());
-    const [onCalendarMonth, setOnCalendarMonth] = useState(() => startValue.getMonth());
+    const [onCalendarYear, setOnCalendarYear] = useState<number>(() => startValue.getFullYear());
+    const [onCalendarMonth, setOnCalendarMonth] = useState<number>(() => startValue.getMonth());
 
-    const calendarData = useMemo(() => {
-        const prevMonth = getPrevMonthDays(onCalendarYear, onCalendarMonth);
-        const currMonth = getCurrMonthDays(onCalendarYear, onCalendarMonth);
-        const nextMonth = getNextMonthDays(onCalendarYear, onCalendarMonth);
+    const calendarData: CustomDate[] = useMemo(() => {
+        const prevMonth: CustomDate[] = getPrevMonthDays(onCalendarYear, onCalendarMonth);
+        const currMonth: CustomDate[] = getCurrMonthDays(onCalendarYear, onCalendarMonth);
+        const nextMonth: CustomDate[] = getNextMonthDays(onCalendarYear, onCalendarMonth);
 
         return [...prevMonth, ...currMonth, ...nextMonth];
     }, [onCalendarYear, onCalendarMonth]);
 
-    const nextMonth = () => {
+    const nextMonth = (): void => {
         if (onCalendarMonth === 11) {
             setOnCalendarYear(onCalendarYear + 1);
             setOnCalendarMonth(0);
         } else setOnCalendarMonth(onCalendarMonth + 1);
-    }
+    };
 
-    const prevMonth = () => {
+    const prevMonth = (): void => {
         if (onCalendarMonth === 0) {
             setOnCalendarYear(onCalendarYear - 1);
             setOnCalendarMonth(11);
         } else setOnCalendarMonth(onCalendarMonth - 1);
-    }
+    };
 
     return (
         <div className={styles.Container}>
@@ -76,7 +76,7 @@ const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
                 <ThemeSelector/>
             </div>
             <div className={styles.Calendar}>
-                {weekDayList.map((weekDay:string) =>
+                {weekDayList.map((weekDay: string) =>
                     <div className={styles.Calendar__weekDay} key={weekDay}>{weekDay}</div>
                 )}
                 {calendarData.map(data => {
@@ -86,7 +86,7 @@ const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
 
                         return (
                             <CalendarCell
-                                key={data.day + "" + data.month + "" + data.year}
+                                key={`${data.day}${data.month}${data.year}`}
                                 className={className}
                                 data={data}
                                 setDate={setDate}
@@ -100,6 +100,6 @@ const Calendar: React.FC<ICalendarProps> = ({setModalStatus, setDate}) => {
             </div>
         </div>
     );
-};
+});
 
 export default Calendar;

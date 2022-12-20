@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import AsideTask from "../AsideTask/AsideTask";
 
 import {CSSTransition, TransitionGroup} from "react-transition-group";
@@ -8,23 +8,24 @@ import styles from "./AsideTaskList.module.scss";
 import "../../Transition.scss";
 
 import {selectSelectedTasks} from "../../store/selectors";
-import {Task} from "../../types/data";
 import {useAppSelector} from "../../hooks/hooks";
 
-interface IAsideTaskListProps {
+import {Task} from "../../types/types";
+
+interface AsideTaskListProps {
     setSelectedTask: (task: Task) => void;
     setEditModalStatus: (editModalStatus: boolean) => void;
 }
 
-const AsideTaskList: React.FC<IAsideTaskListProps> = ({setSelectedTask, setEditModalStatus}) => {
-    const tasks = useAppSelector(selectSelectedTasks);
+const AsideTaskList: React.FC<AsideTaskListProps> = memo(({setSelectedTask, setEditModalStatus}) => {
+    const tasks: Task[] = useAppSelector(selectSelectedTasks);
 
     return (
         <TransitionGroup>
             {tasks.length
-                ? tasks.map((task,index)=>(
+                ? tasks.map((task, index) => (
                         <CSSTransition
-                            key = {index + (task.id || "undefinedId")}
+                            key={`${index}-${task.id || "undefinedId"}`}
                             timeout={500}
                             classNames="item"
                         >
@@ -46,6 +47,6 @@ const AsideTaskList: React.FC<IAsideTaskListProps> = ({setSelectedTask, setEditM
             }
         </TransitionGroup>
     );
-};
+});
 
 export default AsideTaskList;

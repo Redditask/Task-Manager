@@ -8,18 +8,22 @@ import {selectTheme} from "../../store/selectors";
 
 import {MdDarkMode} from "react-icons/md";
 import {CiLight} from "react-icons/ci";
+import {Theme} from "../../types/types";
 
 const ThemeSelector: React.FC = () => {
-    const theme = useAppSelector(selectTheme);
+    const theme: Theme = useAppSelector(selectTheme);
 
     const dispatch = useAppDispatch();
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(changeTheme({theme: theme}))
         //auto "return"
     }, []);
 
+    const selectLightTheme = () => dispatch(changeTheme({theme: "light"}));
+    const selectDarkTheme = () => dispatch(changeTheme({theme: "dark"}));
+
     return (
-        <div>
+        <>
             {
                 theme === "light"
                     ?
@@ -27,17 +31,17 @@ const ThemeSelector: React.FC = () => {
                         title="Dark theme"
                         size={40}
                         className={styles.DarkSelector}
-                        onClick={() => dispatch(changeTheme({theme: "dark"}))}
+                        onClick={selectDarkTheme}
                     />
                     :
                     <CiLight
                         title="Light theme"
                         size={40}
                         className={styles.LightSelector}
-                        onClick={() => dispatch(changeTheme({theme: "light"}))}
+                        onClick={selectLightTheme}
                     />
             }
-        </div>
+        </>
     );
 };
 

@@ -11,37 +11,46 @@ import Button from "../UI/Button/Button";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {Time} from "../../types/data";
+import {StringChangeEvent, Time} from "../../types/types";
 
-interface IAddTaskFormProps {
+const today = new Date();
+let day: string = String(today.getDate());
+let month: string = String(today.getMonth());
+let year: string = String(today.getFullYear());
+
+interface AddTaskFormProps {
     setModalStatus: (modalStatus: boolean) => void;
     date: string;
 }
 
-const AddTaskForm:React.FC<IAddTaskFormProps> = ({setModalStatus, date}) => {
-    const [text, setText] = useState("Your task");
-    const [color, setColor] = useState("beige");
+const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
+    const [text, setText] = useState<string>("Your task");
+    const [color, setColor] = useState<string>("beige");
 
-    const [startTime, setStartTime] = useState({hour: 0, min: 0});
-    const [endTime, setEndTime] = useState({hour: 23, min: 59});
+    const [startTime, setStartTime] = useState<Time>({hour: 0, min: 0});
+    const [endTime, setEndTime] = useState<Time>({hour: 23, min: 59});
 
-    const today = new Date();
-    let day= String(today.getDate());
-    let month= String(today.getMonth());
-    let year=String(today.getFullYear());
-
-    if(date) [day, month, year] = date.split("-");
+    if (date) [day, month, year] = date.split("-");
 
     const dispatch = useAppDispatch();
-    const add = (text: string, color: string, startTime: Time, endTime:Time) => dispatch(addTask({
-        taskText: text,
-        year: Number(year),
-        month: Number(month),
-        day: Number(day),
-        startTime: startTime,
-        endTime: endTime,
-        color: color,
-    }));
+
+    const addTaskToStore = (text: string, color: string, startTime: Time, endTime: Time): void => {
+        dispatch(addTask({
+            taskText: text,
+            year: Number(year),
+            month: Number(month),
+            day: Number(day),
+            startTime: startTime,
+            endTime: endTime,
+            color: color,
+        }));
+
+        setModalStatus(false);
+    };
+
+    const submitAdd = (): void => addTaskToStore(text, color, startTime, endTime);
+
+    const changeInputHandler = (event: StringChangeEvent): void => setText(event.target.value);
 
     return (
         <div className={styles.AddTaskForm}>
@@ -49,7 +58,7 @@ const AddTaskForm:React.FC<IAddTaskFormProps> = ({setModalStatus, date}) => {
             <div className={styles.AddTaskForm__inputArea}>
                 <Input
                     value={text}
-                    onChange={event=>setText(event.target.value)}
+                    onChange={changeInputHandler}
                 />
                 <TimePicker
                     startTime={startTime}
@@ -65,10 +74,7 @@ const AddTaskForm:React.FC<IAddTaskFormProps> = ({setModalStatus, date}) => {
                         ? <Button
                             title="Add task"
                             text="Create"
-                            onClick={()=>{
-                                add(text, color, startTime, endTime)
-                                setModalStatus(false)
-                            }}
+                            onClick={submitAdd}
                         />
                         : <Button
                             text="Input is empty"

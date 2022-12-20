@@ -4,7 +4,7 @@ import * as actions from "../../store/taskManagerSlice";
 
 import EditTaskForm from "../../components/EditTaskForm/EditTaskForm";
 
-import {Task} from "../../types/data";
+import {Task} from "../../types/types";
 
 jest.mock("react-redux");
 
@@ -16,7 +16,7 @@ const someTask: Task = {
     year: 2022,
     month: 5,
     day: 18,
-    startTime: {hour: 23, min: 2},
+    startTime: {hour: 8, min: 12},
     endTime: {hour: 23, min: 5},
     color: "beige"
 };
@@ -63,6 +63,37 @@ describe("EditTaskForm", ()=>{
                 startTime: {hour: 15, min: 15},
                 endTime: {hour: 23, min: 5},
                 color: "#4169E1",
+            }
+        );
+    });
+
+    it("should properly changed time",()=>{
+        const dispatch = jest.fn();
+        mockedUseDispatch.mockReturnValue(dispatch);
+
+        const mockedEditTask = jest.spyOn(actions, "editTask");
+
+        render(
+            <EditTaskForm
+                setEditModalStatus={jest.fn()}
+                selectedTask={someTask}
+            />
+        );
+
+        fireEvent.change(screen.getByTitle("End minute"), {target: {value: 10}});
+        fireEvent.change(screen.getByTitle("End hour"), {target: {value: 8}});
+
+        fireEvent.click(screen.getByTitle("Edit"));
+
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(mockedEditTask).toHaveBeenCalledTimes(1);
+        expect(mockedEditTask).toHaveBeenCalledWith(
+            {
+                id: "2021-11-27T16:33:22.812Z",
+                taskText: "Your task",
+                startTime: {hour: 8, min: 12},
+                endTime: {hour: 8, min: 13},
+                color: "beige",
             }
         );
     });

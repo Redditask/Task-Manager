@@ -1,29 +1,30 @@
-export type Task = {
+export interface Task {
     id?: string;
     taskText: string;
+
     year?: number;
     month?: number;
     day?: number;
     startTime: Time;
     endTime: Time;
     color: string;
-};
+}
 
-export type Time = {
+export interface Time {
     hour: number;
     min: number;
-};
+}
 
-export type Color = {
+export interface Color {
     name: string;
     color: string;
-};
+}
 
-export type CustomDate = {
+export interface CustomDate {
     year: number;
     month: number;
     day: number;
-};
+}
 
 export type StringChangeEvent = {
     target: {
