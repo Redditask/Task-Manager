@@ -6,7 +6,7 @@ import {useAppDispatch} from "../../hooks/hooks";
 // @ts-ignore
 import styles from "./EditTaskForm.module.scss";
 
-import Input from "../UI/Input/Input";
+import Textarea from "../UI/Textarea/Textarea";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import Button from "../UI/Button/Button";
 import TimePicker from "../TimePicker/TimePicker";
@@ -46,7 +46,7 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
         <div className={styles.EditTaskForm}>
             <h2 className={styles.EditTaskForm__title}>Edit your task:</h2>
             <div className={styles.EditTaskForm__inputArea}>
-                <Input
+                <Textarea
                     value={text}
                     onChange={changeInputHandler}
                 />

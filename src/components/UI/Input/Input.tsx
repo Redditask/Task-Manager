@@ -1,18 +1,25 @@
 // @ts-ignore
-import styles from "./Input.module.scss"
+import styles from "./Input.module.scss";
 
 import React from 'react';
 
 import {StringChangeEvent} from "../../../types/types";
 
 interface InputProps {
-    value?: string;
-    onChange?: (event: StringChangeEvent) => void;
+    value: string,
+    onChange: (event: StringChangeEvent) => void;
+    type: string;
 }
 
-const Input:React.FC<InputProps> = ({value, onChange}) => {
+const Input: React.FC<InputProps> = ({value, onChange, type}) => {
     return (
-        <textarea title="Input" className={styles.Input} value={value} onChange={onChange}/>
+        <input
+            title="input"
+            className={styles.Input}
+            value={value}
+            onChange={onChange}
+            type={type}
+        />
     );
 };
 

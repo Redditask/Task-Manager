@@ -29,7 +29,7 @@ const initialState: TaskManagerState = {
     selectedTasks: [],
     selectedDate: "",
     theme: "light",
-    user: 2,
+    user: 0,
 };
 
 const taskManagerSlice = createSlice({

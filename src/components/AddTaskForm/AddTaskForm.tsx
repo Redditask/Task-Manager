@@ -6,7 +6,7 @@ import React, {useState} from 'react';
 import {useAppDispatch} from "../../hooks/hooks";
 import {addTask} from "../../store/taskManagerSlice";
 
-import Input from "../UI/Input/Input";
+import Textarea from "../UI/Textarea/Textarea";
 import Button from "../UI/Button/Button";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import TimePicker from "../TimePicker/TimePicker";
@@ -56,7 +56,7 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
         <div className={styles.AddTaskForm}>
             <h2 className={styles.AddTaskForm__title}>Create a task</h2>
             <div className={styles.AddTaskForm__inputArea}>
-                <Input
+                <Textarea
                     value={text}
                     onChange={changeInputHandler}
                 />
