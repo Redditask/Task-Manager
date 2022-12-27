@@ -1,3 +1,5 @@
+import {FC} from "react";
+
 export interface Task {
     id?: string;
     taskText: string;
@@ -18,6 +20,11 @@ export interface Time {
 export interface Color {
     name: string;
     color: string;
+}
+
+export interface Route {
+    path: string,
+    Component: FC<{}>;
 }
 
 export interface CustomDate {

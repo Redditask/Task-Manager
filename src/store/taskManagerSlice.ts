@@ -21,6 +21,7 @@ export interface TaskManagerState {
     selectedTasks: Task[];
     selectedDate: string;
     theme: Theme;
+    user: number;
 }
 
 const initialState: TaskManagerState = {
@@ -28,6 +29,7 @@ const initialState: TaskManagerState = {
     selectedTasks: [],
     selectedDate: "",
     theme: "light",
+    user: 2,
 };
 
 const taskManagerSlice = createSlice({
@@ -101,6 +103,9 @@ const taskManagerSlice = createSlice({
             });
 
             state.theme = action.payload.theme;
+        },
+        setUser(state, action: PayloadAction<{user: number}>){
+            state.user = action.payload.user;
         },
     }
 });

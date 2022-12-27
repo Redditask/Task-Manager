@@ -8,7 +8,7 @@ describe("redux selectors", ()=> {
         it("should select tasks initialState from state object", () => {
             const tasks: Task[] = [];
 
-            const result = selectTasks({tasks: {tasks, theme: "light", selectedTasks: [], selectedDate: ""}});
+            const result = selectTasks({tasks: {tasks, theme: "light", selectedTasks: [], selectedDate: "", user: 0}});
 
             expect(result).toEqual([]);
         });
@@ -37,7 +37,7 @@ describe("redux selectors", ()=> {
                 }
             ];
 
-            const result = selectTasks({tasks: {tasks, theme: "dark", selectedTasks: [], selectedDate: ""}});
+            const result = selectTasks({tasks: {tasks, theme: "dark", selectedTasks: [], selectedDate: "", user: 0}});
 
             expect(result).toEqual(tasks);
         });
@@ -47,7 +47,7 @@ describe("redux selectors", ()=> {
         it("should select theme from state object", () => {
             const theme = "dark";
 
-            const result = selectTheme({tasks: {tasks: [], theme: theme, selectedTasks: [], selectedDate: ""}});
+            const result = selectTheme({tasks: {tasks: [], theme: theme, selectedTasks: [], selectedDate: "", user: 0}});
 
             expect(result).toEqual("dark");
         });
@@ -116,7 +116,8 @@ describe("redux selectors", ()=> {
                     tasks,
                     theme: "dark",
                     selectedTasks: [tasks[0], tasks[2]],
-                    selectedDate: "27-11-2021"
+                    selectedDate: "27-11-2021",
+                    user: 0
                 }
             });
 
@@ -154,7 +155,8 @@ describe("redux selectors", ()=> {
                     tasks: selectedTasks,
                     theme: "light",
                     selectedTasks,
-                    selectedDate: selectedTasks[0].day + "-" + selectedTasks[0].month + "-" + selectedTasks[0].year
+                    selectedDate: selectedTasks[0].day + "-" + selectedTasks[0].month + "-" + selectedTasks[0].year,
+                    user: 0
                 }
             });
 
@@ -169,7 +171,8 @@ describe("redux selectors", ()=> {
                     tasks: selectedTasks,
                     theme: "light",
                     selectedTasks,
-                    selectedDate: ""
+                    selectedDate: "",
+                    user: 0,
                 }
             });
 
