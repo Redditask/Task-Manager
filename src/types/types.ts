@@ -33,6 +33,13 @@ export interface CustomDate {
     day: number;
 }
 
+export interface User {
+    exp: number;
+    iat: number;
+    id: number;
+    login: string;
+}
+
 export type StringChangeEvent = {
     target: {
         value: string

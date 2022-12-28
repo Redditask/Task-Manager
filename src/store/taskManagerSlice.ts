@@ -105,6 +105,7 @@ const taskManagerSlice = createSlice({
             state.theme = action.payload.theme;
         },
         setUser(state, action: PayloadAction<{user: number}>){
+            //пока временно
             state.user = action.payload.user;
         },
     }
@@ -116,6 +117,7 @@ export const {
     editTask,
     setSelectedCell,
     changeTheme,
+    setUser
 } = taskManagerSlice.actions;
 
 export default taskManagerSlice.reducer;

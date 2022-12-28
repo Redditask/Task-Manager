@@ -15,6 +15,7 @@ interface SignFormProps {
     onChangePassword: (event: StringChangeEvent) => void;
     isSignUp: boolean;
     setIsSignUp: (type: boolean) => void;
+    onClick: ()=>void;
 }
 
 const SignForm: React.FC<SignFormProps> = ({
@@ -23,7 +24,8 @@ const SignForm: React.FC<SignFormProps> = ({
         onChangePassword,
         onChangeLogin,
         isSignUp,
-        setIsSignUp
+        setIsSignUp,
+        onClick
     }) => {
     const changeFormType = (): void => {
         setIsSignUp(!isSignUp);
@@ -48,7 +50,10 @@ const SignForm: React.FC<SignFormProps> = ({
                 />
             </div>
             <div className={styles.SignForm__buttonArea}>
-                <Button text={isSignUp ? "Sign up" : "Sign in"}/>
+                <Button
+                    text={isSignUp ? "Sign up" : "Sign in"}
+                    onClick={onClick}
+                />
             </div>
             <div className={styles.SignForm__infoArea}>
                 <p>{isSignUp ? "You already have account?" : "You dont have account?"}</p>

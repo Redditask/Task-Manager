@@ -11,6 +11,7 @@ import AppRouter from "./components/AppRouter/AppRouter";
 ToDo
  readme поправить
  //
+ юзер в отдельный слой (?)
  обновить тесты
  авторизация (бд + сервер)
  //
