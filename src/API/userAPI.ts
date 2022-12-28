@@ -1,5 +1,7 @@
 import {$authHost, $host} from "./index";
+
 import jwtDecode from "jwt-decode";
+
 import {User} from "../types/types";
 
 export const registration = async (login: string, password: string): Promise<User> => {

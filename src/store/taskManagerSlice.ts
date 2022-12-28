@@ -2,6 +2,8 @@ import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
 
 import {Task, Theme} from "../types/types";
 
+import localStorage from "redux-persist/es/storage";
+
 const taskSorting = (task1: Task, task2: Task): number => task1.startTime.hour - task2.startTime.hour;
 
 const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>): void => {
@@ -104,9 +106,12 @@ const taskManagerSlice = createSlice({
 
             state.theme = action.payload.theme;
         },
+        //пока временно здесь
         setUser(state, action: PayloadAction<{user: number}>){
-            //пока временно
-            state.user = action.payload.user;
+            if(action.payload.user === 0){
+                localStorage.removeItem("token");
+                return {...initialState};
+            }else state.user = action.payload.user;
         },
     }
 });

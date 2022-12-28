@@ -1,14 +1,15 @@
 // @ts-ignore
 import styles from "./SignForm.module.scss";
 
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
-import {StringChangeEvent} from "../../types/types";
 import {NavLink} from "react-router-dom";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE} from "../../utils/consts";
+
+import {StringChangeEvent} from "../../types/types";
 
 interface SignFormProps {
     login: string;

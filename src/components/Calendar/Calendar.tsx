@@ -6,6 +6,10 @@ import React, {memo, useMemo, useState} from 'react';
 import ChangeDateForm from "../ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import CalendarCell from "../CalendarCell/CalendarCell";
+import Button from "../UI/Button/Button";
+
+import {useAppDispatch} from "../../hooks/hooks";
+import {changeTheme, setUser} from "../../store/taskManagerSlice";
 
 import {CustomDate, Task} from "../../types/types";
 
@@ -64,6 +68,13 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
         } else setOnCalendarMonth(onCalendarMonth - 1);
     };
 
+    const dispatch = useAppDispatch();
+
+    const signOut = (): void => {
+        dispatch(setUser({user: 0}));
+        dispatch(changeTheme({theme: "light"}));
+    };
+
     return (
         <div className={styles.Container}>
             <div className={styles.Calendar__header}>
@@ -97,6 +108,12 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
                         )
                     }
                 )}
+            </div>
+            <div className={styles.Calendar__footer}>
+                <Button
+                    text="Sign out"
+                    onClick={signOut}
+                />
             </div>
         </div>
     );
