@@ -20,15 +20,18 @@ const Auth: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const action = async () => {
-        let user: User;
-        if(isSignUp) {
-            user = await registration(login, password);
+        try {
+            let user: User;
+            if (isSignUp) {
+                user = await registration(login, password);
+            } else {
+                user = await logIn(login, password);
+            }
+            dispatch(setUser({user: user.id}));
+            //возможно сделать отдельный slice для юзера
+        }catch(error: any) {
+            alert(error.response.data.message);
         }
-        else {
-            user = await logIn(login, password);
-        }
-        dispatch(setUser({user: user.id}));
-        //возможно сделать отдельный slice для юзера
     };
 
     const changeLoginHandler = (event: StringChangeEvent): void => setLogin(event.target.value);

@@ -1,10 +1,8 @@
 import React from 'react';
 
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
 import {authRoutes, publicRoutes} from "../../routes";
-
-import Main from "../../pages/Main/Main";
-import Auth from "../../pages/Auth/Auth";
+import {MAIN_ROUTE, REGISTRATION_ROUTE} from "../../utils/consts";
 
 import {selectUser} from "../../store/selectors";
 import {useAppSelector} from "../../hooks/hooks";
@@ -19,14 +17,14 @@ const AppRouter: React.FC = () => {
                 {authRoutes.map((route)=>
                         <Route key={route.path} path={route.path} element={<route.Component/>}/>
                 )}
-                <Route path="/*" element={<Main/>}/>
+                <Route path="/*" element={<Navigate to={MAIN_ROUTE} replace />}/>
             </Routes>
             :
             <Routes>
                 {publicRoutes.map((route)=>
                         <Route key={route.path} path={route.path} element={<route.Component/>}/>
                 )}
-                <Route path="/*" element={<Auth/>}/>
+                <Route path="/*" element={<Navigate to={REGISTRATION_ROUTE} replace />}/>
             </Routes>
     );
 };

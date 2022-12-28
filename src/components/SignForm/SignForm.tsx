@@ -7,6 +7,8 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 
 import {StringChangeEvent} from "../../types/types";
+import {NavLink} from "react-router-dom";
+import {LOGIN_ROUTE, REGISTRATION_ROUTE} from "../../utils/consts";
 
 interface SignFormProps {
     login: string;
@@ -27,6 +29,7 @@ const SignForm: React.FC<SignFormProps> = ({
         setIsSignUp,
         onClick
     }) => {
+
     const changeFormType = (): void => {
         setIsSignUp(!isSignUp);
     };
@@ -57,14 +60,15 @@ const SignForm: React.FC<SignFormProps> = ({
             </div>
             <div className={styles.SignForm__infoArea}>
                 <p>{isSignUp ? "You already have account?" : "You dont have account?"}</p>
-                <p
+                <NavLink
                     className={styles.SignForm__changeType}
                     title={isSignUp ? "Sign in now!" : "Register now!"}
                     style={{color: "darkcyan"}}
                     onClick={changeFormType}
+                    to={isSignUp ? LOGIN_ROUTE : REGISTRATION_ROUTE}
                 >
                     {isSignUp ? "Sign in!" : "Sign up!"}
-                </p>
+                </NavLink>
             </div>
         </div>
     )
