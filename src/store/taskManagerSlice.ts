@@ -2,8 +2,6 @@ import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
 
 import {Task, Theme} from "../types/types";
 
-import localStorage from "redux-persist/es/storage";
-
 const taskSorting = (task1: Task, task2: Task): number => task1.startTime.hour - task2.startTime.hour;
 
 const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>): void => {

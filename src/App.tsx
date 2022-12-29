@@ -1,17 +1,11 @@
 // @ts-ignore
 import styles from './App.module.scss';
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import {BrowserRouter} from "react-router-dom";
 
 import AppRouter from "./components/AppRouter/AppRouter";
-import Loader from "./components/UI/Loader/Loader";
-
-import {check} from "./API/userAPI";
-
-import {useAppDispatch} from "./hooks/hooks";
-import {setUserId} from "./store/taskManagerSlice";
 
 /*
 ToDo
@@ -26,20 +20,6 @@ ToDo
 */
 
 const App: React.FC = () => {
-    const [loading, setLoading] = useState<boolean>(true);
-
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        check()
-            .then(data => {
-                dispatch(setUserId({userId: data.id}));
-            })
-            .finally(() => setLoading(false));
-    }, []);
-
-    if (loading) return <Loader/>
-
     return (
         <div className={styles.App}>
             <BrowserRouter>
