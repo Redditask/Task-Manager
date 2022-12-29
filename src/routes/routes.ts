@@ -1,9 +1,9 @@
-import {LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE} from "./utils/consts";
+import {LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 
-import Main from "./pages/Main/Main";
-import Auth from "./pages/Auth/Auth";
+import Main from "../pages/Main/Main";
+import Auth from "../pages/Auth/Auth";
 
-import {Route} from "./types/types";
+import {Route} from "../types/types";
 
 export const authRoutes: Route[] = [
     {

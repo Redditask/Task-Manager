@@ -9,7 +9,7 @@ import taskReducer, {
 import {Task} from "../../types/types";
 
 //states for testing actions
-const initialState: TaskManagerState = {tasks: [], selectedTasks:[], selectedDate: "", theme: "light", user: 0};
+const initialState: TaskManagerState = {tasks: [], selectedTasks:[], selectedDate: "", theme: "light", userId: 0};
 
 const someTasks: Task[] = [
     {
@@ -34,7 +34,7 @@ const someTasks: Task[] = [
     }
 ];
 
-const someState: TaskManagerState = {tasks: someTasks, selectedTasks:[someTasks[0]], selectedDate: "27-11-2021", theme: "dark", user: 0}
+const someState: TaskManagerState = {tasks: someTasks, selectedTasks:[someTasks[0]], selectedDate: "27-11-2021", theme: "dark", userId: 0}
 
 describe("redux slice", ()=> {
     it("should return default state when passed en empty action", () => {

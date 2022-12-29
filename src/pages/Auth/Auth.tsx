@@ -10,7 +10,7 @@ import {StringChangeEvent, User} from "../../types/types";
 import {registration, logIn} from "../../API/userAPI";
 
 import {useAppDispatch} from "../../hooks/hooks";
-import {setUser} from "../../store/taskManagerSlice";
+import {setUserId} from "../../store/taskManagerSlice";
 
 const Auth: React.FC = () => {
     const [login, setLogin] = useState<string>("");
@@ -19,7 +19,7 @@ const Auth: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const action = async () => {
+    const clickAction = async () => {
         try {
             let user: User;
             if (isSignUp) {
@@ -27,8 +27,7 @@ const Auth: React.FC = () => {
             } else {
                 user = await logIn(login, password);
             }
-            dispatch(setUser({user: user.id}));
-            //возможно сделать отдельный slice для юзера
+            dispatch(setUserId({userId: user.id}));
         }catch(error: any) {
             alert(error.response.data.message);
         }
@@ -45,7 +44,7 @@ const Auth: React.FC = () => {
             onChangePassword={changePasswordHandler}
             isSignUp={isSignUp}
             setIsSignUp={setIsSignUp}
-            onClick = {action}
+            onClick = {clickAction}
         />
     );
 };

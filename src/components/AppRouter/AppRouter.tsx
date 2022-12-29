@@ -1,17 +1,17 @@
 import React from 'react';
 
 import {Routes, Route, Navigate} from "react-router-dom";
-import {authRoutes, publicRoutes} from "../../routes";
+import {authRoutes, publicRoutes} from "../../routes/routes";
 import {MAIN_ROUTE, REGISTRATION_ROUTE} from "../../utils/consts";
 
-import {selectUser} from "../../store/selectors";
+import {selectUserId} from "../../store/selectors";
 import {useAppSelector} from "../../hooks/hooks";
 
 const AppRouter: React.FC = () => {
-    const user = useAppSelector(selectUser);
+    const userId = useAppSelector(selectUserId);
 
     return (
-        user !== 0
+        userId !== 0
             ?
             <Routes>
                 {authRoutes.map((route)=>

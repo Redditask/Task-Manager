@@ -23,7 +23,7 @@ export interface TaskManagerState {
     selectedTasks: Task[];
     selectedDate: string;
     theme: Theme;
-    user: number;
+    userId: number;
 }
 
 const initialState: TaskManagerState = {
@@ -31,7 +31,7 @@ const initialState: TaskManagerState = {
     selectedTasks: [],
     selectedDate: "",
     theme: "light",
-    user: 0,
+    userId: 0,
 };
 
 const taskManagerSlice = createSlice({
@@ -106,12 +106,11 @@ const taskManagerSlice = createSlice({
 
             state.theme = action.payload.theme;
         },
-        //пока временно здесь
-        setUser(state, action: PayloadAction<{user: number}>){
-            if(action.payload.user === 0){
+        setUserId(state, action: PayloadAction<{userId: number}>){
+            if(action.payload.userId === 0){
                 localStorage.removeItem("token");
                 return {...initialState};
-            }else state.user = action.payload.user;
+            }else state.userId = action.payload.userId;
         },
     }
 });
@@ -122,7 +121,7 @@ export const {
     editTask,
     setSelectedCell,
     changeTheme,
-    setUser
+    setUserId
 } = taskManagerSlice.actions;
 
 export default taskManagerSlice.reducer;

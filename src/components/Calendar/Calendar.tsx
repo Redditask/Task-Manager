@@ -9,7 +9,7 @@ import CalendarCell from "../CalendarCell/CalendarCell";
 import Button from "../UI/Button/Button";
 
 import {useAppDispatch} from "../../hooks/hooks";
-import {changeTheme, setUser} from "../../store/taskManagerSlice";
+import {changeTheme, setUserId} from "../../store/taskManagerSlice";
 
 import {CustomDate, Task} from "../../types/types";
 
@@ -71,7 +71,7 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
     const dispatch = useAppDispatch();
 
     const signOut = (): void => {
-        dispatch(setUser({user: 0}));
+        dispatch(setUserId({userId: 0}));
         dispatch(changeTheme({theme: "light"}));
     };
 

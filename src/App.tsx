@@ -11,17 +11,16 @@ import Loader from "./components/UI/Loader/Loader";
 import {check} from "./API/userAPI";
 
 import {useAppDispatch} from "./hooks/hooks";
-import {setUser} from "./store/taskManagerSlice";
-
+import {setUserId} from "./store/taskManagerSlice";
 
 /*
 ToDo
  readme поправить
  //
- юзер в отдельный слой (?)
+ добавить thunk в store
  обновить тесты
- всплывающие окна для ошибок (и на стороне сервера сообещния некоторый поправить)
- //придумать еще как пофиксить баг с цветом кнопки после выхода (при включенной темной теме)
+ всплывающие окна для ошибок (и на стороне сервера сообщения некоторые поправить)
+ придумать еще как пофиксить баг с цветом кнопки после выхода (при включенной темной теме) - navlink мб
  //
  адаптивная вёрстка
 */
@@ -34,7 +33,7 @@ const App: React.FC = () => {
     useEffect(() => {
         check()
             .then(data => {
-                dispatch(setUser({user: data.id}));
+                dispatch(setUserId({userId: data.id}));
             })
             .finally(() => setLoading(false));
     }, []);

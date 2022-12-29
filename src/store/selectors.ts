@@ -6,4 +6,4 @@ export const selectTasks = (state: { tasks: TaskManagerState; }): Task[] => stat
 export const selectSelectedTasks = (state: { tasks: TaskManagerState; }): Task[] => state.tasks.selectedTasks;
 export const selectSelectedDate = (state: { tasks: TaskManagerState; }): string => state.tasks.selectedDate;
 export const selectTheme = (state: { tasks: TaskManagerState; }): Theme => state.tasks.theme;
-export const selectUser = (state: {tasks: TaskManagerState; }): number => state.tasks.user;
+export const selectUserId = (state: {tasks: TaskManagerState; }): number => state.tasks.userId;
