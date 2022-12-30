@@ -1,6 +1,8 @@
-import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
+import {ActionReducerMapBuilder, createSlice, current, PayloadAction} from "@reduxjs/toolkit";
 
-import {Task, Theme} from "../types/types";
+import {ServerTask, Task, Theme} from "../types/types";
+
+import {getTasks} from "../API/taskAPI";
 
 const taskSorting = (task1: Task, task2: Task): number => task1.startTime.hour - task2.startTime.hour;
 
@@ -38,7 +40,7 @@ const taskManagerSlice = createSlice({
     reducers: {
         addTask(state, action: PayloadAction<Task>) {
             state.tasks.push({
-                id: new Date().toISOString(),
+                id: action.payload.id,
                 taskText: action.payload.taskText,
                 year: action.payload.year,
                 month: action.payload.month,
@@ -104,12 +106,32 @@ const taskManagerSlice = createSlice({
 
             state.theme = action.payload.theme;
         },
-        setUserId(state, action: PayloadAction<{userId: number}>){
-            if(action.payload.userId === 0){
+        setUserId(state, action: PayloadAction<{ userId: number }>) {
+            if (action.payload.userId === 0) {
                 localStorage.removeItem("token");
                 return {...initialState};
-            }else state.userId = action.payload.userId;
+            } else state.userId = action.payload.userId;
         },
+    }, extraReducers: (builder: ActionReducerMapBuilder<TaskManagerState>) => {
+        builder
+            .addCase(getTasks.fulfilled, (state, action: PayloadAction<ServerTask []>) => {
+                const tasks = action.payload;
+                state.tasks = [];
+                tasks.forEach((task: ServerTask) => {
+                    state.tasks.push({
+                        id: task.id,
+                        taskText: task.taskText,
+                        year: task.year,
+                        month: task.month,
+                        day: task.day,
+                        startTime: task.startTime,
+                        endTime: task.endTime,
+                        color: task.color,
+                    });
+                });
+
+                state.tasks.sort(taskSorting);
+            });
     }
 });
 

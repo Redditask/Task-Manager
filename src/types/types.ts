@@ -3,13 +3,18 @@ import {FC} from "react";
 export interface Task {
     id?: string;
     taskText: string;
-
     year?: number;
     month?: number;
     day?: number;
     startTime: Time;
     endTime: Time;
     color: string;
+}
+
+export interface ServerTask extends Task {
+    createdAt: string;
+    updatedAt: string;
+    userId: number;
 }
 
 export interface Time {

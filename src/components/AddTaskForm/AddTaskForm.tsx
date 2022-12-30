@@ -3,15 +3,16 @@ import styles from "./AddTaskForm.module.scss";
 
 import React, {useState} from 'react';
 
-import {useAppDispatch} from "../../hooks/hooks";
-import {addTask} from "../../store/taskManagerSlice";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {postTask} from "../../API/taskAPI";
 
 import Textarea from "../UI/Textarea/Textarea";
 import Button from "../UI/Button/Button";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {StringChangeEvent, Time} from "../../types/types";
+import {StringChangeEvent, Task, Theme, Time} from "../../types/types";
+import {selectTheme, selectUserId} from "../../store/selectors";
 
 const today = new Date();
 let day: string = String(today.getDate());
@@ -33,9 +34,10 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
     if (date) [day, month, year] = date.split("-");
 
     const dispatch = useAppDispatch();
+    const userId: number = useAppSelector(selectUserId);
 
     const addTaskToStore = (text: string, color: string, startTime: Time, endTime: Time): void => {
-        dispatch(addTask({
+        const task: Task = {
             taskText: text,
             year: Number(year),
             month: Number(month),
@@ -43,7 +45,9 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
             startTime: startTime,
             endTime: endTime,
             color: color,
-        }));
+        };
+
+        dispatch(postTask({task, userId}));
 
         setModalStatus(false);
     };

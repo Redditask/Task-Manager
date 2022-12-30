@@ -13,6 +13,7 @@ import {useAppDispatch} from "../../hooks/hooks";
 import {setUserId} from "../../store/taskManagerSlice";
 
 import {check} from "../../API/userAPI";
+import {getTasks} from "../../API/taskAPI";
 
 const Main: React.FC = () => {
     const [date, setDate] = useState<string>("");
@@ -25,6 +26,7 @@ const Main: React.FC = () => {
         check()
             .then(data => {
                 dispatch(setUserId({userId: data.id}));
+                dispatch(getTasks(data.id));
             })
             .finally(() => setLoading(false));
     }, []);

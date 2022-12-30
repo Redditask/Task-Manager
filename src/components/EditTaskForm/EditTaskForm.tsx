@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {editTask} from "../../store/taskManagerSlice";
+import {putTask} from "../../API/taskAPI";
 import {useAppDispatch} from "../../hooks/hooks";
 
 // @ts-ignore
@@ -28,13 +28,15 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
 
     const submitEdit = (): void => {
         if (selectedTask.id) {
-            dispatch(editTask({
+            const task: Task = {
                 id: selectedTask.id,
                 taskText: text,
                 startTime: startTime,
                 endTime: endTime,
                 color: color
-            }));
+            };
+
+            dispatch(putTask({task}));
         }
 
         setEditModalStatus(false);

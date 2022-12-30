@@ -7,9 +7,9 @@ import Button from "../UI/Button/Button";
 
 import {AiOutlineEdit} from "react-icons/ai";
 import {MdDeleteOutline} from "react-icons/md";
+
 import {useAppDispatch} from "../../hooks/hooks";
-import {removeTask} from "../../store/taskManagerSlice";
-import {PayloadAction} from "@reduxjs/toolkit";
+import {deleteTask} from "../../API/taskAPI";
 
 import {Task} from "../../types/types";
 
@@ -31,10 +31,10 @@ interface AsideTaskProps {
 
 const AsideTask: React.FC<AsideTaskProps> = memo(({task, setTask, setEditModalStatus}) => {
     const dispatch = useAppDispatch();
-    const removeTaskFromStore = (taskId: string | undefined): PayloadAction<{ id: string }> =>
-        dispatch(removeTask({id: taskId || "undefinedId"}));
+    const removeTaskFromStore = (taskId: string | undefined) =>
+        dispatch(deleteTask({id: taskId || "undefinedId"}));
 
-    const submitRemove = (): PayloadAction<{ id: string }> => removeTaskFromStore(task.id);
+    const submitRemove = () => removeTaskFromStore(task.id);
 
     const openEditTaskForm = (): void => {
         setEditModalStatus(true);
