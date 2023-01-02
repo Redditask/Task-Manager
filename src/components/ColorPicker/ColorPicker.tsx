@@ -3,13 +3,14 @@ import styles from "./ColorPicker.module.scss";
 
 import React, {memo} from 'react';
 
-import {Color} from '../../types/types';
+import {Color, TaskColor} from '../../types/types';
 
 import {colors} from "../../utils/utils";
 
 interface ColorPickerProps {
     color: string;
-    setColor: (color: string) => void;
+    // @ts-ignore
+    setColor: (color: HTMLSelectElement.value) => void;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = memo(({color, setColor}) => {

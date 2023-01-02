@@ -12,7 +12,7 @@ import ColorPicker from "../ColorPicker/ColorPicker";
 import Button from "../UI/Button/Button";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {StringChangeEvent, Task, Time} from "../../types/types";
+import {StringChangeEvent, Task, TaskColor, Time} from "../../types/types";
 
 interface EditTaskFormProps {
     setEditModalStatus: (editModalStatus: boolean)=>void;
@@ -21,7 +21,7 @@ interface EditTaskFormProps {
 
 const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selectedTask}) => {
     const [text, setText] = useState<string>(selectedTask.taskText);
-    const [color, setColor] = useState<string>(selectedTask.color);
+    const [color, setColor] = useState<TaskColor>(selectedTask.color);
     const [startTime, setStartTime] = useState<Time>({hour: selectedTask.startTime.hour, min: selectedTask.startTime.min});
     const [endTime, setEndTime] = useState<Time>({hour: selectedTask.endTime.hour, min: selectedTask.endTime.min});
 

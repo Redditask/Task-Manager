@@ -8,7 +8,7 @@ export interface Task {
     day?: number;
     startTime: Time;
     endTime: Time;
-    color: string;
+    color: TaskColor;
 }
 
 export interface ServerTask extends Task {
@@ -52,3 +52,6 @@ export type StringChangeEvent = {
 };
 
 export type Theme = "light" | "dark";
+
+export type TaskColor =
+    "beige" | "#00FF7F" | "#CD5C5CFF" | "#C0C0C0" | "#4169E1";

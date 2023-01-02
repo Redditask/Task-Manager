@@ -11,7 +11,7 @@ import Button from "../UI/Button/Button";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {StringChangeEvent, Task, Theme, Time} from "../../types/types";
+import {StringChangeEvent, Task, TaskColor, Theme, Time} from "../../types/types";
 import {selectTheme, selectUserId} from "../../store/selectors";
 
 const today = new Date();
@@ -26,7 +26,7 @@ interface AddTaskFormProps {
 
 const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
     const [text, setText] = useState<string>("Your task");
-    const [color, setColor] = useState<string>("beige");
+    const [color, setColor] = useState<TaskColor>("beige");
 
     const [startTime, setStartTime] = useState<Time>({hour: 0, min: 0});
     const [endTime, setEndTime] = useState<Time>({hour: 23, min: 59});
@@ -36,7 +36,7 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
     const dispatch = useAppDispatch();
     const userId: number = useAppSelector(selectUserId);
 
-    const addTaskToStore = (text: string, color: string, startTime: Time, endTime: Time): void => {
+    const addTaskToStore = (text: string, color: TaskColor, startTime: Time, endTime: Time): void => {
         const task: Task = {
             taskText: text,
             year: Number(year),

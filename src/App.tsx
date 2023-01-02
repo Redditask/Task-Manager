@@ -11,7 +11,6 @@ import AppRouter from "./components/AppRouter/AppRouter";
 ToDo
  добавить обработку (pending, reject)
  onClick в интерфейсе Button как-то лучше типизировать
- типизировать цвет задачи
  readme поправить
  //
  всплывающие окна для ошибок (и на стороне сервера сообщения некоторые поправить)
