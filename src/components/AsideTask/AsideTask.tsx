@@ -8,8 +8,9 @@ import Button from "../UI/Button/Button";
 import {AiOutlineEdit} from "react-icons/ai";
 import {MdDeleteOutline} from "react-icons/md";
 
-import {useAppDispatch} from "../../hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {deleteTask} from "../../API/taskAPI";
+import {selectUserId} from "../../store/selectors";
 
 import {Task} from "../../types/types";
 
@@ -31,8 +32,10 @@ interface AsideTaskProps {
 
 const AsideTask: React.FC<AsideTaskProps> = memo(({task, setTask, setEditModalStatus}) => {
     const dispatch = useAppDispatch();
+    const userId: number = useAppSelector(selectUserId);
+
     const removeTaskFromStore = (taskId: string | undefined) =>
-        dispatch(deleteTask({id: taskId || "undefinedId"}));
+        dispatch(deleteTask({id: taskId || "undefinedId", userId}));
 
     const submitRemove = () => removeTaskFromStore(task.id);
 

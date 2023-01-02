@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 
 import {putTask} from "../../API/taskAPI";
-import {useAppDispatch} from "../../hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {selectUserId} from "../../store/selectors";
 
 // @ts-ignore
 import styles from "./EditTaskForm.module.scss";
@@ -25,6 +26,7 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
     const [endTime, setEndTime] = useState<Time>({hour: selectedTask.endTime.hour, min: selectedTask.endTime.min});
 
     const dispatch = useAppDispatch();
+    const userId: number = useAppSelector(selectUserId);
 
     const submitEdit = (): void => {
         if (selectedTask.id) {
@@ -36,7 +38,7 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
                 color: color
             };
 
-            dispatch(putTask({task}));
+            dispatch(putTask({task, userId}));
         }
 
         setEditModalStatus(false);

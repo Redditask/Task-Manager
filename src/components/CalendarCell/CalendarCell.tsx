@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {setSelectedCell} from "../../store/taskManagerSlice";
 import {deleteTask, postTask} from "../../API/taskAPI";
 import {PayloadAction} from "@reduxjs/toolkit";
+import {selectUserId} from "../../store/selectors";
 
 import Button from "../UI/Button/Button";
 import CalendarTaskList from "../CalendarTaskList/CalendarTaskList";
@@ -12,7 +13,6 @@ import CalendarTaskList from "../CalendarTaskList/CalendarTaskList";
 import styles from "./CalendarCell.module.scss";
 
 import {CustomDate, Task} from "../../types/types";
-import {selectUserId} from "../../store/selectors";
 
 interface CalendarCellProps {
     className: string;
@@ -40,7 +40,7 @@ const CalendarCell:React.FC<CalendarCellProps> = memo(({className, data, setModa
             && data.day === dropTask.day)) {
 
             if(dropTask.id) {
-                dispatch(deleteTask({id: dropTask.id}));
+                dispatch(deleteTask({id: dropTask.id, userId}));
             }
 
             const task: Task = {

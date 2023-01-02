@@ -33,10 +33,10 @@ export const postTask = createAsyncThunk<void, {task: Task, userId: number}, {re
     }
 );
 
-export const deleteTask = createAsyncThunk<void, {id: string}, {rejectValue: string}>(
+export const deleteTask = createAsyncThunk<void, {id: string, userId: number}, {rejectValue: string}>(
   "tasks/deleteTask",
-  async function ({id}, {rejectWithValue, dispatch}){
-      const response = await $authHost.delete(`api/task/`, {data: {id}});
+  async function ({id, userId}, {rejectWithValue, dispatch}){
+      const response = await $authHost.delete(`api/task/${userId}`, {data: {id}});
 
       if (response.status !== 200) {
           return rejectWithValue("Server error");
@@ -46,10 +46,10 @@ export const deleteTask = createAsyncThunk<void, {id: string}, {rejectValue: str
   }
 );
 
-export const putTask = createAsyncThunk<void, {task: Task}, {rejectValue: string}>(
+export const putTask = createAsyncThunk<void, {task: Task, userId: number}, {rejectValue: string}>(
     "tasks, putTask",
-    async function ({task}, {rejectWithValue, dispatch}){
-        const response = await $authHost.put(`api/task/`, {task});
+    async function ({task, userId}, {rejectWithValue, dispatch}){
+        const response = await $authHost.put(`api/task/${userId}`, {task});
 
         if (response.status !== 200) {
             return rejectWithValue("Server error");

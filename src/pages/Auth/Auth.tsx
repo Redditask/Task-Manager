@@ -24,6 +24,7 @@ const Auth: React.FC = () => {
             let user: User;
             if (isSignUp) {
                 user = await registration(login, password);
+                console.log(user)
             } else {
                 user = await logIn(login, password);
             }
