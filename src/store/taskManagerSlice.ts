@@ -2,9 +2,17 @@ import {ActionReducerMapBuilder, createSlice, current, PayloadAction} from "@red
 
 import {ServerTask, Task, Theme} from "../types/types";
 
-import {getTasks} from "../API/taskAPI";
+import {deleteTask, getTasks, postTask, putTask} from "../API/taskAPI";
 
-const taskSorting = (task1: Task, task2: Task): number => task1.startTime.hour - task2.startTime.hour;
+import {themeVariable} from "../utils/utils";
+
+const taskSorting = (task1: Task, task2: Task): number => {
+    if(task1.startTime.hour !== task2.startTime.hour){
+        return task1.startTime.hour - task2.startTime.hour
+    }else {
+        return task1.startTime.min - task2.startTime.min
+    }
+};
 
 const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>): void => {
     stateVariable.forEach(task => {
@@ -34,44 +42,11 @@ const initialState: TaskManagerState = {
     userId: 0,
 };
 
+//console.log(current(state)) для просмотра состояния tasks
 const taskManagerSlice = createSlice({
     name: "tasks",
     initialState,
     reducers: {
-        addTask(state, action: PayloadAction<Task>) {
-            state.tasks.push({
-                id: action.payload.id,
-                taskText: action.payload.taskText,
-                year: action.payload.year,
-                month: action.payload.month,
-                day: action.payload.day,
-                startTime: action.payload.startTime,
-                endTime: action.payload.endTime,
-                color: action.payload.color
-            });
-            state.tasks.sort(taskSorting);
-
-            state.selectedTasks = [];
-            for (let i = 0; i < state.tasks.length; i++) {
-                if (state.tasks[i].year === action.payload.year
-                    && state.tasks[i].month === action.payload.month
-                    && state.tasks[i].day === action.payload.day) {
-                    state.selectedTasks.push(state.tasks[i]);
-                }
-            }
-
-            state.selectedDate = `${action.payload.day}-${action.payload.month}-${action.payload.year}`;
-            //console.log(current(state)) для просмотра состояния tasks
-        },
-        removeTask(state, action: PayloadAction<{ id: string }>) {
-            state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
-            state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
-        },
-        editTask(state, action: PayloadAction<Task>) {
-            taskEditing(state.tasks, action);
-
-            taskEditing(state.selectedTasks, action);
-        },
         setSelectedCell(state, action: PayloadAction<string>) {
             const [day, month, year]: string[] = action.payload.split("-");
 
@@ -88,14 +63,6 @@ const taskManagerSlice = createSlice({
         },
         changeTheme(state, action: PayloadAction<{ theme: Theme }>) {
             const root: Element | null = document.querySelector(":root");
-
-            const themeVariable: string[] = [
-                "Color", "BgColor",
-                "BorderColor", "ButtonColor",
-                "ShadowColor", "HoverBgColor",
-                "HoverColor", "ActiveMonthColor",
-                "UnActiveMonthColor"
-            ];
 
             themeVariable.forEach(variable => {
                 // @ts-ignore
@@ -131,14 +98,44 @@ const taskManagerSlice = createSlice({
                 });
 
                 state.tasks.sort(taskSorting);
+            })
+            .addCase(postTask.fulfilled, (state, action: PayloadAction<Task>) => {
+                state.tasks.push({
+                    id: action.payload.id,
+                    taskText: action.payload.taskText,
+                    year: action.payload.year,
+                    month: action.payload.month,
+                    day: action.payload.day,
+                    startTime: action.payload.startTime,
+                    endTime: action.payload.endTime,
+                    color: action.payload.color
+                });
+                state.tasks.sort(taskSorting);
+
+                state.selectedTasks = [];
+                for (let i = 0; i < state.tasks.length; i++) {
+                    if (state.tasks[i].year === action.payload.year
+                        && state.tasks[i].month === action.payload.month
+                        && state.tasks[i].day === action.payload.day) {
+                        state.selectedTasks.push(state.tasks[i]);
+                    }
+                }
+
+                state.selectedDate = `${action.payload.day}-${action.payload.month}-${action.payload.year}`;
+            })
+            .addCase(deleteTask.fulfilled, (state, action: PayloadAction<{id: string}>)=>{
+                state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
+                state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
+            })
+            .addCase(putTask.fulfilled, (state, action: PayloadAction<Task>) => {
+                taskEditing(state.tasks, action);
+
+                taskEditing(state.selectedTasks, action);
             });
     }
 });
 
 export const {
-    addTask,
-    removeTask,
-    editTask,
     setSelectedCell,
     changeTheme,
     setUserId

@@ -112,3 +112,11 @@ export const isToday = (date: CustomDate): boolean => {
 export const isActiveMonth = (data: CustomDate, onCalendarMonth: number): boolean => {
     return data.month === onCalendarMonth;
 };
+
+export const themeVariable: string[] = [
+    "Color", "BgColor",
+    "BorderColor", "ButtonColor",
+    "ShadowColor", "HoverBgColor",
+    "HoverColor", "ActiveMonthColor",
+    "UnActiveMonthColor"
+];

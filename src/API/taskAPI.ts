@@ -3,7 +3,6 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {$authHost} from "./index";
 
 import {ServerTask, Task} from "../types/types";
-import {addTask, editTask, removeTask} from "../store/taskManagerSlice";
 
 //все userId передавать в params, чтобы единый стиль был
 export const getTasks = createAsyncThunk<ServerTask [], number, {rejectValue: string}>(
@@ -19,7 +18,7 @@ export const getTasks = createAsyncThunk<ServerTask [], number, {rejectValue: st
     }
 );
 
-export const postTask = createAsyncThunk<void, {task: Task, userId: number}, {rejectValue: string}>(
+export const postTask = createAsyncThunk<Task, {task: Task, userId: number}, {rejectValue: string}>(
     "tasks/postTask",
     async function ({task, userId}, {rejectWithValue, dispatch}) {
         task.id = new Date().toISOString();
@@ -29,11 +28,11 @@ export const postTask = createAsyncThunk<void, {task: Task, userId: number}, {re
             return rejectWithValue("Server error");
         }
 
-        dispatch(addTask(task));
+        return task;
     }
 );
 
-export const deleteTask = createAsyncThunk<void, {id: string, userId: number}, {rejectValue: string}>(
+export const deleteTask = createAsyncThunk<{id: string}, {id: string, userId: number}, {rejectValue: string}>(
   "tasks/deleteTask",
   async function ({id, userId}, {rejectWithValue, dispatch}){
       const response = await $authHost.delete(`api/task/${userId}`, {data: {id}});
@@ -42,11 +41,11 @@ export const deleteTask = createAsyncThunk<void, {id: string, userId: number}, {
           return rejectWithValue("Server error");
       }
 
-      dispatch(removeTask({id}));
+      return {id};
   }
 );
 
-export const putTask = createAsyncThunk<void, {task: Task, userId: number}, {rejectValue: string}>(
+export const putTask = createAsyncThunk<Task, {task: Task, userId: number}, {rejectValue: string}>(
     "tasks, putTask",
     async function ({task, userId}, {rejectWithValue, dispatch}){
         const response = await $authHost.put(`api/task/${userId}`, {task});
@@ -55,6 +54,6 @@ export const putTask = createAsyncThunk<void, {task: Task, userId: number}, {rej
             return rejectWithValue("Server error");
         }
 
-        dispatch(editTask(task));
+        return task
     }
 );

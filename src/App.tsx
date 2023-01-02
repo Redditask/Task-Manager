@@ -9,8 +9,6 @@ import AppRouter from "./components/AppRouter/AppRouter";
 
 /*
 ToDo
- все таки делать еще проверку на userId при crud операциях
- возможно как-то перенести reducers в extrareducers
  добавить обработку (pending, reject)
  onClick в интерфейсе Button как-то лучше типизировать
  типизировать цвет задачи
