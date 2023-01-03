@@ -57,7 +57,7 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
     const changeInputHandler = (event: StringChangeEvent): void => setText(event.target.value);
 
     return (
-        <div className={styles.AddTaskForm}>
+        <form className={styles.AddTaskForm}>
             <h2 className={styles.AddTaskForm__title}>Create a task</h2>
             <div className={styles.AddTaskForm__inputArea}>
                 <Textarea
@@ -85,7 +85,7 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
                         />
                 }
             </div>
-        </div>
+        </form>
     );
 };
 

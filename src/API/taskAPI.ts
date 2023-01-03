@@ -4,7 +4,6 @@ import {$authHost} from "./index";
 
 import {ServerTask, Task} from "../types/types";
 
-//все userId передавать в params, чтобы единый стиль был
 export const getTasks = createAsyncThunk<ServerTask [], number, {rejectValue: string}>(
   "tasks/getTasks",
     async function (userId, {rejectWithValue}){

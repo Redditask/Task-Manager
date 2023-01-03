@@ -1,10 +1,14 @@
-import {ActionReducerMapBuilder, createSlice, current, PayloadAction} from "@reduxjs/toolkit";
+import {ActionReducerMapBuilder, AnyAction, createSlice, current, PayloadAction} from "@reduxjs/toolkit";
 
 import {ServerTask, Task, Theme} from "../types/types";
 
 import {deleteTask, getTasks, postTask, putTask} from "../API/taskAPI";
 
 import {themeVariable} from "../utils/utils";
+
+const isError = (action: AnyAction): boolean => {
+    return action.type.endsWith("rejected");
+};
 
 const taskSorting = (task1: Task, task2: Task): number => {
     if(task1.startTime.hour !== task2.startTime.hour){
@@ -32,6 +36,8 @@ export interface TaskManagerState {
     selectedDate: string;
     theme: Theme;
     userId: number;
+    error: string | null;
+    isLoading: boolean;
 }
 
 const initialState: TaskManagerState = {
@@ -40,6 +46,8 @@ const initialState: TaskManagerState = {
     selectedDate: "",
     theme: "light",
     userId: 0,
+    error: null,
+    isLoading: false,
 };
 
 //console.log(current(state)) для просмотра состояния tasks
@@ -81,7 +89,12 @@ const taskManagerSlice = createSlice({
         },
     }, extraReducers: (builder: ActionReducerMapBuilder<TaskManagerState>) => {
         builder
+            .addCase(getTasks.pending, (state) => {
+                state.isLoading = true
+            })
             .addCase(getTasks.fulfilled, (state, action: PayloadAction<ServerTask []>) => {
+                state.isLoading = false;
+
                 const tasks = action.payload;
                 state.tasks = [];
                 tasks.forEach((task: ServerTask) => {
@@ -131,6 +144,10 @@ const taskManagerSlice = createSlice({
                 taskEditing(state.tasks, action);
 
                 taskEditing(state.selectedTasks, action);
+            })
+            .addMatcher(isError, (state, action: PayloadAction<string>)=>{
+                state.error = action.payload;
+                state.isLoading = false;
             });
     }
 });

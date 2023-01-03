@@ -12,7 +12,12 @@ interface TextareaProps {
 
 const Textarea: React.FC<TextareaProps> = ({value, onChange}) => {
     return (
-        <textarea title="Textarea" className={styles.Textarea} value={value} onChange={onChange}/>
+        <textarea
+            title="Textarea"
+            className={styles.Textarea}
+            value={value}
+            onChange={onChange}
+        />
     );
 };
 

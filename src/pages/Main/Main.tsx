@@ -9,8 +9,9 @@ import Modal from "../../components/UI/Modal/Modal";
 import AddTaskForm from "../../components/AddTaskForm/AddTaskForm";
 import Loader from "../../components/UI/Loader/Loader";
 
-import {useAppDispatch} from "../../hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {setUserId} from "../../store/taskManagerSlice";
+import {selectError, selectLoadingStatus} from "../../store/selectors";
 
 import {check} from "../../API/userAPI";
 import {getTasks} from "../../API/taskAPI";
@@ -18,8 +19,9 @@ import {getTasks} from "../../API/taskAPI";
 const Main: React.FC = () => {
     const [date, setDate] = useState<string>("");
     const [modalStatus, setModalStatus] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(true);
 
+    const isLoading: boolean = useAppSelector(selectLoadingStatus);
+    const error: string | null = useAppSelector(selectError);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -27,11 +29,11 @@ const Main: React.FC = () => {
             .then(data => {
                 dispatch(setUserId({userId: data.id}));
                 dispatch(getTasks(data.id));
-            })
-            .finally(() => setLoading(false));
+            });
     }, []);
 
-    if (loading) return <Loader/>
+    if (isLoading) return <Loader/>;
+    if (error) prompt(error);
 
     return (
         <div className={styles.Main}>

@@ -47,7 +47,7 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
     const changeInputHandler = (event: StringChangeEvent): void => setText(event.target.value);
 
     return (
-        <div className={styles.EditTaskForm}>
+        <form className={styles.EditTaskForm}>
             <h2 className={styles.EditTaskForm__title}>Edit your task:</h2>
             <div className={styles.EditTaskForm__inputArea}>
                 <Textarea
@@ -78,7 +78,7 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
                         />
                 }
             </div>
-        </div>
+        </form>
     );
 };
 

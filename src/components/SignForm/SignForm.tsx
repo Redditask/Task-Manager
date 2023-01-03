@@ -36,7 +36,7 @@ const SignForm: React.FC<SignFormProps> = ({
     };
 
     return (
-        <div className={styles.SignForm}>
+        <form className={styles.SignForm}>
             <div className={styles.SignForm__inputArea}>
                 <p>Login</p>
                 <Input
@@ -71,7 +71,7 @@ const SignForm: React.FC<SignFormProps> = ({
                     {isSignUp ? "Sign in!" : "Sign up!"}
                 </NavLink>
             </div>
-        </div>
+        </form>
     )
 };
 
