@@ -1,4 +1,4 @@
-import {ActionReducerMapBuilder, AnyAction, createSlice, current, PayloadAction} from "@reduxjs/toolkit";
+import {ActionReducerMapBuilder, AnyAction, createSlice, current, isAnyOf, PayloadAction} from "@reduxjs/toolkit";
 
 import {ServerTask, Task, Theme} from "../types/types";
 
@@ -90,7 +90,8 @@ const taskManagerSlice = createSlice({
     }, extraReducers: (builder: ActionReducerMapBuilder<TaskManagerState>) => {
         builder
             .addCase(getTasks.pending, (state) => {
-                state.isLoading = true
+                state.isLoading = true;
+                state.error = null;
             })
             .addCase(getTasks.fulfilled, (state, action: PayloadAction<ServerTask []>) => {
                 state.isLoading = false;
@@ -146,9 +147,9 @@ const taskManagerSlice = createSlice({
                 taskEditing(state.selectedTasks, action);
             })
             .addMatcher(isError, (state, action: PayloadAction<string>)=>{
-                state.error = action.payload;
                 state.isLoading = false;
-            });
+                state.error = action.payload;
+            })
     }
 });
 
