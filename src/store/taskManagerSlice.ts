@@ -1,4 +1,4 @@
-import {ActionReducerMapBuilder, AnyAction, createSlice, current, isAnyOf, PayloadAction} from "@reduxjs/toolkit";
+import {ActionReducerMapBuilder, AnyAction, createSlice, current, PayloadAction} from "@reduxjs/toolkit";
 
 import {ServerTask, Task, Theme} from "../types/types";
 

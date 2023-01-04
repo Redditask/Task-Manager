@@ -16,7 +16,6 @@ const ThemeSelector: React.FC = () => {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(changeTheme({theme: theme}))
-        //auto "return"
     }, []);
 
     const selectLightTheme = () => dispatch(changeTheme({theme: "light"}));
