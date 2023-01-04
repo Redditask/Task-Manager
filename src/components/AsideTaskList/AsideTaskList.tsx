@@ -1,11 +1,10 @@
+import styles from "./AsideTaskList.module.scss";
+import "../../Transition.scss";
+
 import React, {memo} from 'react';
 import AsideTask from "../AsideTask/AsideTask";
 
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-
-// @ts-ignore
-import styles from "./AsideTaskList.module.scss";
-import "../../Transition.scss";
 
 import {selectSelectedTasks} from "../../store/selectors";
 import {useAppSelector} from "../../hooks/hooks";

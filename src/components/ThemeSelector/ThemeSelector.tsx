@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./ThemeSelector.module.scss";
 
 import React, {useEffect} from 'react';

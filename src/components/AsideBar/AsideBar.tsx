@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./AsideBar.module.scss";
 
 import React, {memo, useState} from 'react';

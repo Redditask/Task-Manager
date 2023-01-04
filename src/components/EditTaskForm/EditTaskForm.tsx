@@ -1,11 +1,10 @@
+import styles from "./EditTaskForm.module.scss";
+
 import React, {useState} from 'react';
 
 import {putTask} from "../../API/taskAPI";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {selectUserId} from "../../store/selectors";
-
-// @ts-ignore
-import styles from "./EditTaskForm.module.scss";
 
 import Textarea from "../UI/Textarea/Textarea";
 import ColorPicker from "../ColorPicker/ColorPicker";

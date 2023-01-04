@@ -1,7 +1,6 @@
-import React, {memo} from 'react';
-
-// @ts-ignore
 import styles from "./AsideTask.module.scss";
+
+import React, {memo} from 'react';
 
 import Button from "../UI/Button/Button";
 

@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./AddTaskForm.module.scss";
 
 import React, {useState} from 'react';
@@ -11,8 +10,8 @@ import Button from "../UI/Button/Button";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {StringChangeEvent, Task, TaskColor, Theme, Time} from "../../types/types";
-import {selectTheme, selectUserId} from "../../store/selectors";
+import {StringChangeEvent, Task, TaskColor, Time} from "../../types/types";
+import {selectUserId} from "../../store/selectors";
 
 const today = new Date();
 let day: string = String(today.getDate());

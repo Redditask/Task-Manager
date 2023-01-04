@@ -1,3 +1,5 @@
+import styles from "./CalendarCell.module.scss";
+
 import React, {memo} from 'react';
 
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
@@ -8,9 +10,6 @@ import {selectUserId} from "../../store/selectors";
 
 import Button from "../UI/Button/Button";
 import CalendarTaskList from "../CalendarTaskList/CalendarTaskList";
-
-// @ts-ignore
-import styles from "./CalendarCell.module.scss";
 
 import {CustomDate, Task} from "../../types/types";
 

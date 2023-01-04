@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./Calendar.module.scss";
 
 import React, {memo, useMemo, useState} from 'react';

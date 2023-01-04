@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./Button.module.scss";
 
 import React from 'react';
