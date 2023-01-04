@@ -6,7 +6,7 @@ export const initialState: TaskManagerState = {
     selectedTasks: [],
     selectedDate: "",
     theme: "light",
-    userId: 1,
+    userId: 0,
     error: null,
     isLoading: false
 };
@@ -54,4 +54,4 @@ export const someState: TaskManagerState = {
     isLoading: false
 };
 
-export const anotherState: TaskManagerState = {...someState, error: "Server error", isLoading: true};
+export const anotherState: TaskManagerState = {...someState, selectedTasks: [], selectedDate:"16-5-2022", error: "Server error", isLoading: true};

@@ -7,7 +7,7 @@ import {deleteTask, getTasks, postTask, putTask} from "../API/taskAPI";
 import {themeVariable} from "../utils/utils";
 
 const isError = (action: AnyAction): boolean => {
-    return action.type.endsWith("rejected");
+    return String(action.type).endsWith("rejected");
 };
 
 const taskSorting = (task1: Task, task2: Task): number => {
@@ -156,7 +156,7 @@ const taskManagerSlice = createSlice({
 export const {
     setSelectedCell,
     changeTheme,
-    setUserId
+    setUserId,
 } = taskManagerSlice.actions;
 
 export default taskManagerSlice.reducer;

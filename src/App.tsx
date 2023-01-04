@@ -16,8 +16,11 @@ ToDo
  AppRouter
  TimePicker
  в store:
- userId и selectedDate добавить null
- переименовать selectedDate и selectedTasks
+ userId и selectedDate добавить null тип
+ переименовать selectedDate, selectedTasks, setSelectedCell
+ в setSelectedCell payload сделать через {...: string}
+ changeTheme -> setTheme
+ ^после этого обновить тесты и поправить изменения в компонентах^
  utils:
  перенести константы из utils в consts
  //
