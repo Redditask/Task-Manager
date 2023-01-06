@@ -2,7 +2,7 @@ import taskReducer, {changeTheme, setSelectedCell, setUserId} from "../../store/
 
 import {anotherState, initialState, someState} from "../consts";
 
-describe("redux slice", ()=>{
+describe("redux slice (reducers)", ()=>{
 
     it("should return initial state, when passed an empty action", ()=>{
         const result = taskReducer(undefined, {type: ""});

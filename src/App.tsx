@@ -19,6 +19,7 @@ ToDo
  userId и selectedDate добавить null тип
  переименовать selectedDate, selectedTasks, setSelectedCell
  в setSelectedCell payload сделать через {...: string}
+ (аналогично в getTasks)
  changeTheme -> setTheme
  ^после этого обновить тесты и поправить изменения в компонентах^
  utils:
