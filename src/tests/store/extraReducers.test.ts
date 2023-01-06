@@ -20,6 +20,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("should change loading status with 'getTasks.pending' action", () => {
             const action = {type: getTasks.pending.type};
+
             const state = taskReducer(initialState, action);
 
             expect(state.isLoading).toEqual(true);
@@ -29,6 +30,7 @@ describe("redux slice (extraReducers)", ()=> {
         it("should get tasks with 'getTasks.fulfilled' action", ()=>{
             //serverTask === someTasks + database info
             const action = {type: getTasks.fulfilled.type, payload: serverTasks};
+
             const state = taskReducer({...initialState, userId: 2}, action);
 
             expect(state.isLoading).toEqual(false);
@@ -39,6 +41,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("should set error with 'getTasks.rejected' action", () => {
             const action = {type: getTasks.rejected.type, payload: "Server error"};
+
             const state = taskReducer(someState, action);
 
             expect(state.isLoading).toEqual(false);
@@ -50,6 +53,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("shouldn't change loading status with 'postTask.pending' action", () => {
             const action = {type: postTask.pending.type};
+
             const state = taskReducer(initialState, action);
 
             expect(state.isLoading).toEqual(false);
@@ -57,11 +61,12 @@ describe("redux slice (extraReducers)", ()=> {
         });
 
         it("should add task with 'postTask.fulfilled' action", ()=>{
-            const action = {type: postTask.fulfilled.type, payload: someTask};
-            const state = taskReducer(someState, action);
-
             const newTaskList: Task[] = [...someState.tasks, someTask];
             newTaskList.sort(taskSorting);
+
+            const action = {type: postTask.fulfilled.type, payload: someTask};
+
+            const state = taskReducer(someState, action);
 
             expect(state.isLoading).toEqual(false);
             expect(state.error).toEqual(null);
@@ -73,6 +78,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("should set error with 'postTask.rejected' action", () => {
             const action = {type: postTask.rejected.type, payload: "Server error"};
+
             const state = taskReducer(someState, action);
 
             expect(state.isLoading).toEqual(false);
@@ -84,6 +90,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("shouldn't change loading status with 'deleteTask.pending' action", () => {
             const action = {type: deleteTask.pending.type};
+
             const state = taskReducer(initialState, action);
 
             expect(state.isLoading).toEqual(false);
@@ -92,6 +99,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("should delete task with 'deleteTask.fulfilled' action", ()=>{
             const action = {type: deleteTask.fulfilled.type, payload: {id: "2021-11-27T16:33:22.812Z"}};
+
             const state = taskReducer(someState, action);
 
             expect(state.isLoading).toEqual(false);
@@ -103,6 +111,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("should set error with 'deleteTask.rejected' action", () => {
             const action = {type: deleteTask.rejected.type, payload: "Server error"};
+
             const state = taskReducer(someState, action);
 
             expect(state.isLoading).toEqual(false);
@@ -114,6 +123,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("shouldn't change loading status with 'putTask.pending' action", () => {
             const action = {type: putTask.pending.type};
+
             const state = taskReducer(initialState, action);
 
             expect(state.isLoading).toEqual(false);
@@ -132,8 +142,10 @@ describe("redux slice (extraReducers)", ()=> {
                 color: "#00FF7F"
             };
             const editedTaskList: Task [] = [someState.tasks[0], editedTask, someState.tasks[2]];
+            editedTaskList.sort(taskSorting);
 
             const action = {type: putTask.fulfilled.type, payload: editedTask};
+
             const state = taskReducer(someState, action);
 
             expect(state.isLoading).toEqual(false);
@@ -145,6 +157,7 @@ describe("redux slice (extraReducers)", ()=> {
 
         it("should set error with 'putTask.rejected' action", () => {
             const action = {type: putTask.rejected.type, payload: "Server error"};
+
             const state = taskReducer(someState, action);
 
             expect(state.isLoading).toEqual(false);
