@@ -1,5 +1,4 @@
 import taskReducer from "../../store/taskManagerSlice";
-
 import {deleteTask, getTasks, postTask, putTask} from "../../API/taskAPI";
 
 import {initialState, serverTasks, someState, someTask, someTasks} from "../consts";
@@ -16,36 +15,42 @@ const taskSorting = (task1: Task, task2: Task): number => {
 
 describe("redux slice (extraReducers)", ()=> {
 
+    it("should return initial state, when passed an empty action", () => {
+        const result = taskReducer(undefined, {type: ""});
+
+        expect(result).toEqual(initialState);
+    });
+
     describe("getTasks", () => {
 
         it("should change loading status with 'getTasks.pending' action", () => {
             const action = {type: getTasks.pending.type};
 
-            const state = taskReducer(initialState, action);
+            const result = taskReducer(initialState, action);
 
-            expect(state.isLoading).toEqual(true);
-            expect(state.error).toEqual(null);
+            expect(result.isLoading).toEqual(true);
+            expect(result.error).toEqual(null);
         });
 
-        it("should get tasks with 'getTasks.fulfilled' action", ()=>{
+        it("should get tasks with 'getTasks.fulfilled' action", () => {
             //serverTask === someTasks + database info
             const action = {type: getTasks.fulfilled.type, payload: serverTasks};
 
-            const state = taskReducer({...initialState, userId: 2}, action);
+            const result = taskReducer({...initialState, userId: 2}, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual(null);
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual(null);
 
-            expect(state.tasks).toEqual(someTasks);
+            expect(result.tasks).toEqual(someTasks);
         });
 
         it("should set error with 'getTasks.rejected' action", () => {
             const action = {type: getTasks.rejected.type, payload: "Server error"};
 
-            const state = taskReducer(someState, action);
+            const result = taskReducer(someState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual("Server error");
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual("Server error");
         });
     });
 
@@ -54,35 +59,35 @@ describe("redux slice (extraReducers)", ()=> {
         it("shouldn't change loading status with 'postTask.pending' action", () => {
             const action = {type: postTask.pending.type};
 
-            const state = taskReducer(initialState, action);
+            const result = taskReducer(initialState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual(null);
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual(null);
         });
 
-        it("should add task with 'postTask.fulfilled' action", ()=>{
+        it("should add task with 'postTask.fulfilled' action", () => {
             const newTaskList: Task[] = [...someState.tasks, someTask];
             newTaskList.sort(taskSorting);
 
             const action = {type: postTask.fulfilled.type, payload: someTask};
 
-            const state = taskReducer(someState, action);
+            const result = taskReducer(someState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual(null);
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual(null);
 
-            expect(state.tasks).toEqual(newTaskList);
-            expect(state.selectedDate).toEqual("27-11-2022");
-            expect(state.selectedTasks).toEqual([someTask]);
+            expect(result.tasks).toEqual(newTaskList);
+            expect(result.selectedDate).toEqual("27-11-2022");
+            expect(result.selectedTasks).toEqual([someTask]);
         });
 
         it("should set error with 'postTask.rejected' action", () => {
             const action = {type: postTask.rejected.type, payload: "Server error"};
 
-            const state = taskReducer(someState, action);
+            const result = taskReducer(someState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual("Server error");
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual("Server error");
         });
     });
 
@@ -91,31 +96,35 @@ describe("redux slice (extraReducers)", ()=> {
         it("shouldn't change loading status with 'deleteTask.pending' action", () => {
             const action = {type: deleteTask.pending.type};
 
-            const state = taskReducer(initialState, action);
+            const result = taskReducer(initialState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual(null);
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual(null);
         });
 
-        it("should delete task with 'deleteTask.fulfilled' action", ()=>{
-            const action = {type: deleteTask.fulfilled.type, payload: {id: "2021-11-27T16:33:22.812Z"}};
+        it("should delete task with 'deleteTask.fulfilled' action", () => {
+            const action = {type: deleteTask.fulfilled.type, payload: {id: "2022-5-17T16:33:22.813Z"}};
 
-            const state = taskReducer(someState, action);
+            const result = taskReducer(someState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual(null);
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual(null);
 
-            expect(state.tasks).toHaveLength(2);
-            expect(state.tasks).toEqual(someState.tasks.filter((task)=>task.id!=="2021-11-27T16:33:22.812Z"));
+            expect(result.tasks).toHaveLength(2);
+            expect(result.tasks).toEqual(someState.tasks.filter(
+                (task) => task.id !== "2022-5-17T16:33:22.813Z"));
+            expect(result.selectedTasks).toHaveLength(1);
+            expect(result.selectedTasks).toEqual(someState.tasks.filter(
+                (task) => (task.day === 17 && task.id !== "2022-5-17T16:33:22.813Z")));
         });
 
         it("should set error with 'deleteTask.rejected' action", () => {
             const action = {type: deleteTask.rejected.type, payload: "Server error"};
 
-            const state = taskReducer(someState, action);
+            const result = taskReducer(someState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual("Server error");
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual("Server error");
         });
     });
 
@@ -124,13 +133,13 @@ describe("redux slice (extraReducers)", ()=> {
         it("shouldn't change loading status with 'putTask.pending' action", () => {
             const action = {type: putTask.pending.type};
 
-            const state = taskReducer(initialState, action);
+            const result = taskReducer(initialState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual(null);
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual(null);
         });
 
-        it("should edit task with 'putTask.fulfilled' action", ()=>{
+        it("should edit task with 'putTask.fulfilled' action", () => {
             const editedTask: Task = {
                 id: "2022-5-17T16:33:22.813Z",
                 taskText: "Edited task",
@@ -146,22 +155,22 @@ describe("redux slice (extraReducers)", ()=> {
 
             const action = {type: putTask.fulfilled.type, payload: editedTask};
 
-            const state = taskReducer(someState, action);
+            const result = taskReducer(someState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual(null);
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual(null);
 
-            expect(state.tasks).toEqual(editedTaskList);
-            expect(state.selectedTasks).toEqual(editedTaskList.filter((task)=>task.day===17));
+            expect(result.tasks).toEqual(editedTaskList);
+            expect(result.selectedTasks).toEqual(editedTaskList.filter((task) => task.day === 17));
         });
 
         it("should set error with 'putTask.rejected' action", () => {
             const action = {type: putTask.rejected.type, payload: "Server error"};
 
-            const state = taskReducer(someState, action);
+            const result = taskReducer(someState, action);
 
-            expect(state.isLoading).toEqual(false);
-            expect(state.error).toEqual("Server error");
+            expect(result.isLoading).toEqual(false);
+            expect(result.error).toEqual("Server error");
         });
     });
 });

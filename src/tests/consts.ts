@@ -1,16 +1,7 @@
 import {TaskManagerState} from "../store/taskManagerSlice";
 import {ServerTask, Task} from "../types/types";
 
-export const initialState: TaskManagerState = {
-    tasks: [],
-    selectedTasks: [],
-    selectedDate: "",
-    theme: "light",
-    userId: 0,
-    error: null,
-    isLoading: false
-};
-
+//tasks
 export const someTasks: Task [] = [
     {
         id: "2021-11-27T16:33:22.812Z",
@@ -86,16 +77,6 @@ export const serverTasks: ServerTask [] = [
     }
 ];
 
-export const someState: TaskManagerState = {
-    tasks: someTasks,
-    selectedTasks: [someTasks[1], someTasks[2]],
-    selectedDate: "17-5-2022",
-    theme: "light",
-    userId: 1,
-    error: null,
-    isLoading: false
-};
-
 export const someTask: Task = {
     id: "2021-11-28T16:33:22.820Z",
     taskText: "Your some task",
@@ -105,6 +86,27 @@ export const someTask: Task = {
     startTime: {hour: 0, min: 0},
     endTime: {hour: 23, min: 59},
     color: "beige"
-}
+};
+
+//states
+export const initialState: TaskManagerState = {
+    tasks: [],
+    selectedTasks: [],
+    selectedDate: "",
+    theme: "light",
+    userId: 0,
+    error: null,
+    isLoading: false
+};
+
+export const someState: TaskManagerState = {
+    tasks: someTasks,
+    selectedTasks: [someTasks[1], someTasks[2]],
+    selectedDate: "17-5-2022",
+    theme: "light",
+    userId: 1,
+    error: null,
+    isLoading: false
+};
 
 export const anotherState: TaskManagerState = {...someState, selectedTasks: [], selectedDate:"16-5-2022", error: "Server error", isLoading: true};

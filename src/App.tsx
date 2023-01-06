@@ -8,7 +8,7 @@ import AppRouter from "./components/AppRouter/AppRouter";
 
 /*
 ToDo
- обновить тесты для асинхронного store и компонентов (+ добавить их для страниц)
+ обновить тесты для компонентов
  readme поправить
  //
  РЕФАКТОРИНГ:
