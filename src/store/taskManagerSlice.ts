@@ -113,6 +113,9 @@ const taskManagerSlice = createSlice({
 
                 state.tasks.sort(taskSorting);
             })
+            .addCase(postTask.pending, (state) => {
+                state.error = null;
+            })
             .addCase(postTask.fulfilled, (state, action: PayloadAction<Task>) => {
                 state.tasks.push({
                     id: action.payload.id,
@@ -137,9 +140,15 @@ const taskManagerSlice = createSlice({
 
                 state.selectedDate = `${action.payload.day}-${action.payload.month}-${action.payload.year}`;
             })
+            .addCase(deleteTask.pending, (state) => {
+                state.error = null;
+            })
             .addCase(deleteTask.fulfilled, (state, action: PayloadAction<{id: string}>)=>{
                 state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
                 state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
+            })
+            .addCase(putTask.pending, (state) => {
+                state.error = null;
             })
             .addCase(putTask.fulfilled, (state, action: PayloadAction<Task>) => {
                 taskEditing(state.tasks, action);

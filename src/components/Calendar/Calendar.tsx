@@ -118,6 +118,7 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
             <div className={styles.Calendar__footer}>
                 <Button
                     text="Sign out"
+                    title="Out"
                     onClick={signOut}
                 />
             </div>

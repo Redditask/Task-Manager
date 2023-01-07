@@ -41,7 +41,7 @@ describe("redux slice (extraReducers)", ()=> {
             expect(result.isLoading).toEqual(false);
             expect(result.error).toEqual(null);
 
-            expect(result.tasks).toEqual(someTasks);
+            expect(result.tasks).toEqual(someTasks.sort(taskSorting));
         });
 
         it("should set error with 'getTasks.rejected' action", () => {

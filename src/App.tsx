@@ -8,7 +8,6 @@ import AppRouter from "./components/AppRouter/AppRouter";
 
 /*
 ToDo
- обновить тесты для компонентов
  readme поправить
  //
  РЕФАКТОРИНГ:
@@ -18,10 +17,11 @@ ToDo
  в store:
  userId и selectedDate добавить null тип
  переименовать selectedDate, selectedTasks, setSelectedCell
- в setSelectedCell payload сделать через {...: string}
- (аналогично в getTasks)
+ в setSelectedCell payload сделать через {...: string} (в getTasks в taskAPI)
  changeTheme -> setTheme
  ^после этого обновить тесты и поправить изменения в компонентах^
+ state.tasks.push (и selectedTasks) вынести в функцию
+ переименовать thukn-и
  utils:
  перенести константы из utils в consts
  //
