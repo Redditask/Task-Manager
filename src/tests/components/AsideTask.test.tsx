@@ -1,59 +1,52 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 import * as ReduxHooks from "react-redux";
-import * as actions from "../../store/taskManagerSlice";
+import * as api from "../../API/taskAPI";
 
 import AsideTask from "../../components/AsideTask/AsideTask";
 
-import {Task} from "../../types/types";
+import {someTask} from "../consts";
 
 jest.mock("react-redux");
 
 const mockedUseDispatch = jest.spyOn(ReduxHooks, "useDispatch");
-
-const someTask: Task = {
-    id: "2021-11-27T16:33:22.812Z",
-    taskText: "Your task",
-    year: 2022,
-    month: 5,
-    day: 18,
-    startTime: {hour: 13, min: 8},
-    endTime: {hour: 14, min: 25},
-    color: "beige"
-};
+const mockedUseSelector = jest.spyOn(ReduxHooks, "useSelector");
 
 describe("AsideTask", ()=>{
+
     it("should create AsideTask", ()=>{
-        mockedUseDispatch.mockReturnValue(jest.fn());
+        mockedUseSelector.mockReturnValueOnce(0);
+        mockedUseDispatch.mockReturnValueOnce(jest.fn());
 
         const component = render(
             <AsideTask
                 task={someTask}
-                setTask={jest.fn()}
-                setEditModalStatus={jest.fn()}
+                setTask={jest.fn}
+                setEditModalStatus={jest.fn}
             />
         );
 
         expect(component).toMatchSnapshot();
     });
 
-    it("should dispatch actions",()=>{
+    it("should dispatch thunk actions",()=>{
+        mockedUseSelector.mockReturnValueOnce(2);
         const dispatch = jest.fn();
-        mockedUseDispatch.mockReturnValue(dispatch);
+        mockedUseDispatch.mockReturnValueOnce(dispatch);
 
-        const mockedRemoveTask = jest.spyOn(actions, "removeTask");
+        const mockedDeleteTask = jest.spyOn(api, "deleteTask");
 
         render(
             <AsideTask
                 task={someTask}
-                setTask={jest.fn()}
-                setEditModalStatus={jest.fn()}
+                setTask={jest.fn}
+                setEditModalStatus={jest.fn}
             />
         );
 
         fireEvent.click(screen.getByTitle("Remove"));
 
         expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(mockedRemoveTask).toHaveBeenCalledTimes(1);
-        expect(mockedRemoveTask).toHaveBeenCalledWith({id: "2021-11-27T16:33:22.812Z"});
+        expect(mockedDeleteTask).toHaveBeenCalledTimes(1);
+        expect(mockedDeleteTask).toHaveBeenCalledWith({id: someTask.id, userId: 2});
     });
 });

@@ -10,9 +10,10 @@ const mockedUseDispatch = jest.spyOn(ReduxHooks, "useDispatch");
 const mockedUseSelector = jest.spyOn(ReduxHooks, "useSelector");
 
 describe("ThemeSelector", ()=>{
+
     it("should create ThemeSelector", ()=>{
-        mockedUseDispatch.mockReturnValue(jest.fn());
-        mockedUseSelector.mockReturnValue([]);
+        mockedUseDispatch.mockReturnValueOnce(jest.fn());
+        mockedUseSelector.mockReturnValueOnce("light");
 
         const component = render(
             <ThemeSelector/>

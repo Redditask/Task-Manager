@@ -1,0 +1,37 @@
+@import "../../../variable";
+
+.Textarea{
+  font-family: inherit;
+  height: 5rem;
+  width: 15rem;
+
+  border: silver solid;
+  border-radius: 1rem;
+
+  text-align: start;
+
+  resize: none;
+  overflow: auto;
+
+  background-color: var(--defaultBgColor);
+  color: var(--defaultColor);
+
+  margin: 1rem 0;
+  padding: 0.5rem;
+
+  &:focus {
+    transform: scale(1.1);
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &::-webkit-scrollbar{
+    border: none;
+
+    &-thumb{
+      border: none;
+    }
+  }
+}

@@ -1,14 +1,15 @@
+import styles from "./CalendarCell.module.scss";
+
 import React, {memo} from 'react';
 
-import {useAppDispatch} from "../../hooks/hooks";
-import {addTask, removeTask, setSelectedCell} from "../../store/taskManagerSlice";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {setSelectedCell} from "../../store/taskManagerSlice";
+import {deleteTask, postTask} from "../../API/taskAPI";
 import {PayloadAction} from "@reduxjs/toolkit";
+import {selectUserId} from "../../store/selectors";
 
 import Button from "../UI/Button/Button";
 import CalendarTaskList from "../CalendarTaskList/CalendarTaskList";
-
-// @ts-ignore
-import styles from "./CalendarCell.module.scss";
 
 import {CustomDate, Task} from "../../types/types";
 
@@ -23,6 +24,7 @@ interface CalendarCellProps {
 
 const CalendarCell:React.FC<CalendarCellProps> = memo(({className, data, setModalStatus, setDate, dropTask, setDropTask}) => {
     const dispatch = useAppDispatch();
+    const userId: number = useAppSelector(selectUserId);
 
     //drag and drop functionality
     const dragOverHandler = (event: React.DragEvent<HTMLDivElement>): void => {
@@ -37,10 +39,10 @@ const CalendarCell:React.FC<CalendarCellProps> = memo(({className, data, setModa
             && data.day === dropTask.day)) {
 
             if(dropTask.id) {
-                dispatch(removeTask({id: dropTask.id}));
+                dispatch(deleteTask({id: dropTask.id, userId}));
             }
 
-            dispatch(addTask({
+            const task: Task = {
                 taskText: dropTask.taskText,
                 year: data.year,
                 month: data.month,
@@ -48,7 +50,9 @@ const CalendarCell:React.FC<CalendarCellProps> = memo(({className, data, setModa
                 startTime: dropTask.startTime,
                 endTime: dropTask.endTime,
                 color: dropTask.color,
-            }));
+            };
+
+            dispatch(postTask({task, userId}));
         }
     };
 

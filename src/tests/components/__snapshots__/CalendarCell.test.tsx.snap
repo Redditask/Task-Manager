@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class=""
+        class="styles.Calendar__activeMonth"
         title="Cell"
       >
         <div
@@ -28,7 +28,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class=""
+      class="styles.Calendar__activeMonth"
       title="Cell"
     >
       <div

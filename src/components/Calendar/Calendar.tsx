@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./Calendar.module.scss";
 
 import React, {memo, useMemo, useState} from 'react';
@@ -6,6 +5,12 @@ import React, {memo, useMemo, useState} from 'react';
 import ChangeDateForm from "../ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import CalendarCell from "../CalendarCell/CalendarCell";
+import Button from "../UI/Button/Button";
+import Loader from "../UI/Loader/Loader";
+
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {changeTheme, setUserId} from "../../store/taskManagerSlice";
+import {selectError, selectLoadingStatus} from "../../store/selectors";
 
 import {CustomDate, Task} from "../../types/types";
 
@@ -64,6 +69,17 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
         } else setOnCalendarMonth(onCalendarMonth - 1);
     };
 
+    const isLoading: boolean = useAppSelector(selectLoadingStatus);
+    const error: string | null = useAppSelector(selectError);
+    const dispatch = useAppDispatch();
+
+    const signOut = (): void => {
+        dispatch(setUserId({userId: 0}));
+        dispatch(changeTheme({theme: "light"}));
+    };
+
+    if (error) prompt(error);
+
     return (
         <div className={styles.Container}>
             <div className={styles.Calendar__header}>
@@ -73,6 +89,7 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
                     nextMonth={nextMonth}
                     prevMonth={prevMonth}
                 />
+                {isLoading && <Loader/>}
                 <ThemeSelector/>
             </div>
             <div className={styles.Calendar}>
@@ -97,6 +114,13 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
                         )
                     }
                 )}
+            </div>
+            <div className={styles.Calendar__footer}>
+                <Button
+                    text="Sign out"
+                    title="Out"
+                    onClick={signOut}
+                />
             </div>
         </div>
     );

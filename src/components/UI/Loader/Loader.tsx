@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./Loader.module.scss";
 
 import React from 'react';

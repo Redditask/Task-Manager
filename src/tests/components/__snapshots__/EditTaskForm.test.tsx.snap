@@ -5,7 +5,7 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
+      <form
         class="EditTaskForm"
       >
         <h2
@@ -17,10 +17,10 @@ Object {
           class="EditTaskForm__inputArea"
         >
           <textarea
-            class="Input"
-            title="Input"
+            class="Textarea"
+            title="Textarea"
           >
-            Your task
+            Your some task
           </textarea>
           <div
             class="Container"
@@ -305,52 +305,28 @@ Object {
                 class="TimeSelect"
                 title="End hour"
               >
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   0
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   1
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   2
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   3
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   4
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   5
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   6
                 </option>
-                <option
-                  disabled=""
-                  style="background-color: silver;"
-                >
+                <option>
                   7
                 </option>
                 <option>
@@ -647,11 +623,11 @@ Object {
             Edit
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </body>,
   "container": <div>
-    <div
+    <form
       class="EditTaskForm"
     >
       <h2
@@ -663,10 +639,10 @@ Object {
         class="EditTaskForm__inputArea"
       >
         <textarea
-          class="Input"
-          title="Input"
+          class="Textarea"
+          title="Textarea"
         >
-          Your task
+          Your some task
         </textarea>
         <div
           class="Container"
@@ -951,52 +927,28 @@ Object {
               class="TimeSelect"
               title="End hour"
             >
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 0
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 1
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 2
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 3
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 4
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 5
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 6
               </option>
-              <option
-                disabled=""
-                style="background-color: silver;"
-              >
+              <option>
                 7
               </option>
               <option>
@@ -1293,7 +1245,7 @@ Object {
           Edit
         </div>
       </div>
-    </div>
+    </form>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

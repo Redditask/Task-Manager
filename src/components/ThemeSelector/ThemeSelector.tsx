@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./ThemeSelector.module.scss";
 
 import React, {useEffect} from 'react';
@@ -16,7 +15,6 @@ const ThemeSelector: React.FC = () => {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(changeTheme({theme: theme}))
-        //auto "return"
     }, []);
 
     const selectLightTheme = () => dispatch(changeTheme({theme: "light"}));

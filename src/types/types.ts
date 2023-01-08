@@ -1,13 +1,20 @@
+import {FC} from "react";
+
 export interface Task {
     id?: string;
     taskText: string;
-
     year?: number;
     month?: number;
     day?: number;
     startTime: Time;
     endTime: Time;
-    color: string;
+    color: TaskColor;
+}
+
+export interface ServerTask extends Task {
+    createdAt: string;
+    updatedAt: string;
+    userId: number;
 }
 
 export interface Time {
@@ -20,10 +27,22 @@ export interface Color {
     color: string;
 }
 
+export interface Route {
+    path: string,
+    Component: FC<{}>;
+}
+
 export interface CustomDate {
     year: number;
     month: number;
     day: number;
+}
+
+export interface User {
+    exp: number;
+    iat: number;
+    id: number;
+    login: string;
 }
 
 export type StringChangeEvent = {
@@ -33,3 +52,6 @@ export type StringChangeEvent = {
 };
 
 export type Theme = "light" | "dark";
+
+export type TaskColor =
+    "beige" | "#00FF7F" | "#CD5C5CFF" | "#C0C0C0" | "#4169E1";

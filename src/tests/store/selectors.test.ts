@@ -1,179 +1,112 @@
-import {selectTasks, selectTheme, selectSelectedDate, selectSelectedTasks} from "../../store/selectors";
+import {
+    selectError, selectLoadingStatus,
+    selectSelectedDate,
+    selectSelectedTasks,
+    selectTasks,
+    selectTheme,
+    selectUserId
+} from "../../store/selectors";
 
-import {Task} from "../../types/types";
+import {anotherState, initialState, someState} from "../consts";
 
 describe("redux selectors", ()=> {
 
-    describe("tasks selector", () => {
-        it("should select tasks initialState from state object", () => {
-            const tasks: Task[] = [];
+    describe("task selector", () => {
 
-            const result = selectTasks({tasks: {tasks, theme: "light", selectedTasks: [], selectedDate: ""}});
+        it("should select empty tasks array from initial state", () => {
+            const result = selectTasks({tasks: initialState});
 
-            expect(result).toEqual([]);
+            expect(result).toEqual(initialState.tasks);
         });
 
-        it("should select tasks from state object", () => {
-            const tasks: Task[] = [
-                {
-                    id: "2021-11-27T16:33:22.812Z",
-                    taskText: "Your task",
-                    year: 2021,
-                    month: 11,
-                    day: 27,
-                    startTime: {hour: 0, min: 0},
-                    endTime: {hour: 23, min: 59},
-                    color: "beige"
-                },
-                {
-                    id: "2022-5-17T16:33:22.813Z",
-                    taskText: "Your task",
-                    year: 2022,
-                    month: 5,
-                    day: 17,
-                    startTime: {hour: 15, min: 15},
-                    endTime: {hour: 16, min: 24},
-                    color: "#00FF7F"
-                }
-            ];
+        it("should select tasks array from state", () => {
+            const result = selectTasks({tasks: someState});
 
-            const result = selectTasks({tasks: {tasks, theme: "dark", selectedTasks: [], selectedDate: ""}});
-
-            expect(result).toEqual(tasks);
+            expect(result).toEqual(someState.tasks);
         });
     });
 
-    describe("theme selector", () => {
-        it("should select theme from state object", () => {
-            const theme = "dark";
+    describe("selected task selector", () => {
 
-            const result = selectTheme({tasks: {tasks: [], theme: theme, selectedTasks: [], selectedDate: ""}});
+        it("should select empty selected tasks array from initial state", () => {
+            const result = selectSelectedTasks({tasks: initialState});
 
-            expect(result).toEqual("dark");
+            expect(result).toEqual(initialState.selectedTasks);
         });
-    });
 
-    describe("selected tasks selector", () => {
-        it("should select tasks with the same date from state object", () => {
-            const tasks: Task[] = [
-                {
-                    id: "2021-11-27T16:33:22.813Z",
-                    taskText: "Your task",
-                    year: 2021,
-                    month: 11,
-                    day: 27,
-                    startTime: {hour: 0, min: 0},
-                    endTime: {hour: 23, min: 59},
-                    color: "beige"
-                },
-                {
-                    id: "2022-5-17T16:33:22.814Z",
-                    taskText: "Your task",
-                    year: 2022,
-                    month: 5,
-                    day: 17,
-                    startTime: {hour: 15, min: 15},
-                    endTime: {hour: 16, min: 24},
-                    color: "#00FF7F"
-                },
-                {
-                    id: "2021-11-27T16:33:22.812Z",
-                    taskText: "Your task 2",
-                    year: 2021,
-                    month: 11,
-                    day: 27,
-                    startTime: {hour: 18, min: 15},
-                    endTime: {hour: 18, min: 16},
-                    color: "beige"
-                }
-            ];
+        it("should select selected tasks array from state", () => {
+            const result = selectSelectedTasks({tasks: someState});
 
-            const selectedTasks: Task[] = [
-                {
-                    id: "2021-11-27T16:33:22.813Z",
-                    taskText: "Your task",
-                    year: 2021,
-                    month: 11,
-                    day: 27,
-                    startTime: {hour: 0, min: 0},
-                    endTime: {hour: 23, min: 59},
-                    color: "beige"
-                },
-                {
-                    id: "2021-11-27T16:33:22.812Z",
-                    taskText: "Your task 2",
-                    year: 2021,
-                    month: 11,
-                    day: 27,
-                    startTime: {hour: 18, min: 15},
-                    endTime: {hour: 18, min: 16},
-                    color: "beige"
-                }
-            ];
-
-            const result = selectSelectedTasks({
-                tasks: {
-                    tasks,
-                    theme: "dark",
-                    selectedTasks: [tasks[0], tasks[2]],
-                    selectedDate: "27-11-2021"
-                }
-            });
-
-            expect(result).toEqual(selectedTasks);
+            expect(result).toEqual(someState.selectedTasks);
         });
     });
 
     describe("selected date selector", () => {
-        it("should select date of selectedTasks from state object", () => {
-            const selectedTasks: Task[] = [
-                {
-                    id: "2021-11-27T16:33:22.812Z",
-                    taskText: "Your task",
-                    year: 2021,
-                    month: 11,
-                    day: 27,
-                    startTime: {hour: 0, min: 0},
-                    endTime: {hour: 23, min: 59},
-                    color: "beige"
-                },
-                {
-                    id: "2021-11-27T16:33:22.813Z",
-                    taskText: "Your task 2",
-                    year: 2021,
-                    month: 11,
-                    day: 27,
-                    startTime: {hour: 18, min: 15},
-                    endTime: {hour: 18, min: 16},
-                    color: "beige"
-                }
-            ];
 
-            const result = selectSelectedDate({
-                tasks: {
-                    tasks: selectedTasks,
-                    theme: "light",
-                    selectedTasks,
-                    selectedDate: selectedTasks[0].day + "-" + selectedTasks[0].month + "-" + selectedTasks[0].year
-                }
-            });
+        it("should select empty date from initial state", () => {
+            const result = selectSelectedDate({tasks: initialState});
 
-            expect(result).toEqual("27-11-2021");
+            expect(result).toEqual(initialState.selectedDate);
         });
 
-        it("should select empty date from state object", () => {
-            const selectedTasks: Task[] = [];
+        it("should select selected date from state", () => {
+            const result = selectSelectedDate({tasks: someState});
 
-            const result = selectSelectedDate({
-                tasks: {
-                    tasks: selectedTasks,
-                    theme: "light",
-                    selectedTasks,
-                    selectedDate: ""
-                }
-            });
+            expect(result).toEqual(someState.selectedDate);
+        });
+    });
 
-            expect(result).toEqual("");
+    describe("theme selector", () => {
+
+        it("should select theme from state", () => {
+            const result = selectTheme({tasks: someState});
+
+            expect(result).toEqual(someState.theme);
+        });
+    });
+
+    describe("userId selector", () => {
+
+        it("should select zero userId from initial state", () => {
+            const result = selectUserId({tasks: initialState});
+
+            expect(result).toEqual(initialState.userId);
+        });
+
+        it("should select userId from state", () => {
+            const result = selectUserId({tasks: someState});
+
+            expect(result).toEqual(someState.userId);
+        });
+    });
+
+    describe("error selector", () => {
+
+        it("should select null error from initial state", () => {
+            const result = selectError({tasks: initialState});
+
+            expect(result).toEqual(initialState.error);
+        });
+
+        it("should select error from state", () => {
+            const result = selectError({tasks: anotherState});
+
+            expect(result).toEqual(anotherState.error);
+        });
+    });
+
+    describe("isLoading selector", () => {
+
+        it("should select false loading status from initial state", () => {
+            const result = selectLoadingStatus({tasks: initialState});
+
+            expect(result).toEqual(initialState.isLoading);
+        });
+
+        it("should select true loading status from state", () => {
+            const result = selectLoadingStatus({tasks: anotherState});
+
+            expect(result).toEqual(anotherState.isLoading);
         });
     });
 });
