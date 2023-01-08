@@ -1,31 +1,20 @@
 import React from 'react';
 
-import {Routes, Route, Navigate} from "react-router-dom";
 import {authRoutes, publicRoutes} from "../../routes/routes";
 import {MAIN_ROUTE, REGISTRATION_ROUTE} from "../../utils/consts";
 
 import {selectUserId} from "../../store/selectors";
 import {useAppSelector} from "../../hooks/hooks";
 
+import CustomRoutes from "../CustomRoutes/CustomRoutes";
+
 const AppRouter: React.FC = () => {
-    const userId = useAppSelector(selectUserId);
+    const userId: number | null = useAppSelector(selectUserId);
 
     return (
-        userId !== 0
-            ?
-            <Routes>
-                {authRoutes.map((route)=>
-                        <Route key={route.path} path={route.path} element={<route.Component/>}/>
-                )}
-                <Route path="/*" element={<Navigate to={MAIN_ROUTE} replace />}/>
-            </Routes>
-            :
-            <Routes>
-                {publicRoutes.map((route)=>
-                        <Route key={route.path} path={route.path} element={<route.Component/>}/>
-                )}
-                <Route path="/*" element={<Navigate to={REGISTRATION_ROUTE} replace />}/>
-            </Routes>
+        userId
+            ? <CustomRoutes routes={authRoutes} redirectRout={MAIN_ROUTE}/>
+            : <CustomRoutes routes={publicRoutes} redirectRout={REGISTRATION_ROUTE}/>
     );
 };
 

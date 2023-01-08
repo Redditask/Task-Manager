@@ -1,4 +1,3 @@
-// @ts-ignore
 import styles from "./Main.module.scss";
 
 import React, {useEffect, useState} from 'react';
@@ -20,11 +19,11 @@ const Main: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
+    useEffect((): void => {
         check()
-            .then(data => {
-                dispatch(setUserId({userId: data.id}));
-                dispatch(getTasks(data.id));
+            .then((user) => {
+                dispatch(setUserId({userId: user.id}));
+                dispatch(getTasks({userId: user.id}));
             });
     }, []);
 

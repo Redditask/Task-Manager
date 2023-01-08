@@ -30,7 +30,7 @@ describe("AddTaskForm", ()=>{
         const dispatch = jest.fn();
         mockedUseDispatch.mockReturnValueOnce(dispatch);
 
-        const mockedPostTask = jest.spyOn(api, "postTask");
+        const mockedPostTask = jest.spyOn(api, "createTask");
 
         render(
             <AddTaskForm
@@ -65,7 +65,7 @@ describe("AddTaskForm", ()=>{
         const dispatch = jest.fn();
         mockedUseDispatch.mockReturnValue(dispatch);
 
-        const mockedPostTask = jest.spyOn(api, "postTask");
+        const mockedPostTask = jest.spyOn(api, "createTask");
 
         render(
             <AddTaskForm

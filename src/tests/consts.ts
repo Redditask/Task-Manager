@@ -92,9 +92,9 @@ export const someTask: Task = {
 export const initialState: TaskManagerState = {
     tasks: [],
     selectedTasks: [],
-    selectedDate: "",
+    selectedDate: null,
     theme: "light",
-    userId: 0,
+    userId: null,
     error: null,
     isLoading: false
 };

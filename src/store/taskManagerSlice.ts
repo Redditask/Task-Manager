@@ -2,9 +2,32 @@ import {ActionReducerMapBuilder, AnyAction, createSlice, current, PayloadAction}
 
 import {ServerTask, Task, Theme} from "../types/types";
 
-import {deleteTask, getTasks, postTask, putTask} from "../API/taskAPI";
+import {deleteTask, getTasks, createTask, updateTask} from "../API/taskAPI";
 
-import {themeVariable} from "../utils/utils";
+import {themeVariable} from "../utils/consts";
+
+const taskPushing = (state: TaskManagerState, task: Task): void => {
+    state.tasks.push({
+        id: task.id,
+        taskText: task.taskText,
+        year: task.year,
+        month: task.month,
+        day: task.day,
+        startTime: task.startTime,
+        endTime: task.endTime,
+        color: task.color,
+    });
+};
+
+const selectedTaskPushing = (state: TaskManagerState, taskDay: string, taskMonth: string, taskYear: string): void => {
+    for (let i = 0; i < state.tasks.length; i++) {
+        if (state.tasks[i].year === Number(taskYear)
+            && state.tasks[i].month === Number(taskMonth)
+            && state.tasks[i].day === Number(taskDay)) {
+            state.selectedTasks.push(state.tasks[i]);
+        }
+    }
+};
 
 const isError = (action: AnyAction): boolean => {
     return String(action.type).endsWith("rejected");
@@ -12,9 +35,9 @@ const isError = (action: AnyAction): boolean => {
 
 const taskSorting = (task1: Task, task2: Task): number => {
     if(task1.startTime.hour !== task2.startTime.hour){
-        return task1.startTime.hour - task2.startTime.hour
+        return task1.startTime.hour - task2.startTime.hour;
     }else {
-        return task1.startTime.min - task2.startTime.min
+        return task1.startTime.min - task2.startTime.min;
     }
 };
 
@@ -33,9 +56,9 @@ const taskEditing = (stateVariable: Task[], action: PayloadAction<Task>): void =
 export interface TaskManagerState {
     tasks: Task[];
     selectedTasks: Task[];
-    selectedDate: string;
+    selectedDate: string | null;
     theme: Theme;
-    userId: number;
+    userId: number | null;
     error: string | null;
     isLoading: boolean;
 }
@@ -43,9 +66,9 @@ export interface TaskManagerState {
 const initialState: TaskManagerState = {
     tasks: [],
     selectedTasks: [],
-    selectedDate: "",
+    selectedDate: null,
     theme: "light",
-    userId: 0,
+    userId: null,
     error: null,
     isLoading: false,
 };
@@ -55,21 +78,15 @@ const taskManagerSlice = createSlice({
     name: "tasks",
     initialState,
     reducers: {
-        setSelectedCell(state, action: PayloadAction<string>) {
-            const [day, month, year]: string[] = action.payload.split("-");
+        setSelectedCell(state, action: PayloadAction<{ date: string }>) {
+            const [day, month, year]: string[] = action.payload.date.split("-");
 
             state.selectedTasks = [];
-            for (let i = 0; i < state.tasks.length; i++) {
-                if (state.tasks[i].year === Number(year)
-                    && state.tasks[i].month === Number(month)
-                    && state.tasks[i].day === Number(day)) {
-                    state.selectedTasks.push(state.tasks[i]);
-                }
-            }
+            selectedTaskPushing(state, day, month, year);
 
             state.selectedDate = `${day}-${month}-${year}`;
         },
-        changeTheme(state, action: PayloadAction<{ theme: Theme }>) {
+        setTheme(state, action: PayloadAction<{ theme: Theme }>) {
             const root: Element | null = document.querySelector(":root");
 
             themeVariable.forEach(variable => {
@@ -81,13 +98,14 @@ const taskManagerSlice = createSlice({
 
             state.theme = action.payload.theme;
         },
-        setUserId(state, action: PayloadAction<{ userId: number }>) {
-            if (action.payload.userId === 0) {
+        setUserId(state, action: PayloadAction<{ userId: number | null }>) {
+            if (action.payload.userId === null) {
                 localStorage.removeItem("token");
                 return {...initialState};
             } else state.userId = action.payload.userId;
         },
-    }, extraReducers: (builder: ActionReducerMapBuilder<TaskManagerState>) => {
+    },
+    extraReducers: (builder: ActionReducerMapBuilder<TaskManagerState>) => {
         builder
             .addCase(getTasks.pending, (state) => {
                 state.isLoading = true;
@@ -99,63 +117,51 @@ const taskManagerSlice = createSlice({
                 const tasks = action.payload;
                 state.tasks = [];
                 tasks.forEach((task: ServerTask) => {
-                    state.tasks.push({
-                        id: task.id,
-                        taskText: task.taskText,
-                        year: task.year,
-                        month: task.month,
-                        day: task.day,
-                        startTime: task.startTime,
-                        endTime: task.endTime,
-                        color: task.color,
-                    });
+                    taskPushing(state, task);
                 });
-
                 state.tasks.sort(taskSorting);
+
+                if (state.selectedDate) {
+                    const [day, month, year]: string[] = state.selectedDate.split("-");
+
+                    state.selectedTasks = [];
+                    selectedTaskPushing(state, day, month, year);
+                }
             })
-            .addCase(postTask.pending, (state) => {
+            .addCase(createTask.pending, (state) => {
                 state.error = null;
             })
-            .addCase(postTask.fulfilled, (state, action: PayloadAction<Task>) => {
-                state.tasks.push({
-                    id: action.payload.id,
-                    taskText: action.payload.taskText,
-                    year: action.payload.year,
-                    month: action.payload.month,
-                    day: action.payload.day,
-                    startTime: action.payload.startTime,
-                    endTime: action.payload.endTime,
-                    color: action.payload.color
-                });
+            .addCase(createTask.fulfilled, (state, action: PayloadAction<Task>) => {
+                taskPushing(state, action.payload);
                 state.tasks.sort(taskSorting);
 
                 state.selectedTasks = [];
-                for (let i = 0; i < state.tasks.length; i++) {
-                    if (state.tasks[i].year === action.payload.year
-                        && state.tasks[i].month === action.payload.month
-                        && state.tasks[i].day === action.payload.day) {
-                        state.selectedTasks.push(state.tasks[i]);
-                    }
-                }
+                selectedTaskPushing(
+                    state,
+                    String(action.payload.day),
+                    String(action.payload.month),
+                    String(action.payload.year)
+                );
 
-                state.selectedDate = `${action.payload.day}-${action.payload.month}-${action.payload.year}`;
+                state.selectedDate =
+                    `${action.payload.day}-${action.payload.month}-${action.payload.year}`;
             })
             .addCase(deleteTask.pending, (state) => {
                 state.error = null;
             })
-            .addCase(deleteTask.fulfilled, (state, action: PayloadAction<{id: string}>)=>{
+            .addCase(deleteTask.fulfilled, (state, action: PayloadAction<{ id: string }>) => {
                 state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
                 state.selectedTasks = state.selectedTasks.filter(task => task.id !== action.payload.id);
             })
-            .addCase(putTask.pending, (state) => {
+            .addCase(updateTask.pending, (state) => {
                 state.error = null;
             })
-            .addCase(putTask.fulfilled, (state, action: PayloadAction<Task>) => {
+            .addCase(updateTask.fulfilled, (state, action: PayloadAction<Task>) => {
                 taskEditing(state.tasks, action);
 
                 taskEditing(state.selectedTasks, action);
             })
-            .addMatcher(isError, (state, action: PayloadAction<string>)=>{
+            .addMatcher(isError, (state, action: PayloadAction<string>) => {
                 state.isLoading = false;
                 state.error = action.payload;
             })
@@ -164,7 +170,7 @@ const taskManagerSlice = createSlice({
 
 export const {
     setSelectedCell,
-    changeTheme,
+    setTheme,
     setUserId,
 } = taskManagerSlice.actions;
 

@@ -4,7 +4,7 @@ import React, {memo} from 'react';
 
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {setSelectedCell} from "../../store/taskManagerSlice";
-import {deleteTask, postTask} from "../../API/taskAPI";
+import {deleteTask, createTask} from "../../API/taskAPI";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {selectUserId} from "../../store/selectors";
 
@@ -15,16 +15,16 @@ import {CustomDate, Task} from "../../types/types";
 
 interface CalendarCellProps {
     className: string;
-    data: CustomDate;
+    date: CustomDate;
     setModalStatus: (modalStatus: boolean) => void;
     setDate: (date: string) => void;
     dropTask: Task;
     setDropTask: (dropTask: Task)=>void;
 }
 
-const CalendarCell:React.FC<CalendarCellProps> = memo(({className, data, setModalStatus, setDate, dropTask, setDropTask}) => {
+const CalendarCell:React.FC<CalendarCellProps> = memo(({className, date, setModalStatus, setDate, dropTask, setDropTask}) => {
     const dispatch = useAppDispatch();
-    const userId: number = useAppSelector(selectUserId);
+    const userId: number | null = useAppSelector(selectUserId);
 
     //drag and drop functionality
     const dragOverHandler = (event: React.DragEvent<HTMLDivElement>): void => {
@@ -34,35 +34,35 @@ const CalendarCell:React.FC<CalendarCellProps> = memo(({className, data, setModa
     const dropHandler = (event: React.DragEvent<HTMLDivElement>): void => {
         event.preventDefault();
 
-        if (!(data.year === dropTask.year
-            && data.month === dropTask.month
-            && data.day === dropTask.day)) {
+        if (!(date.year === dropTask.year
+            && date.month === dropTask.month
+            && date.day === dropTask.day)) {
 
-            if(dropTask.id) {
+            if(dropTask.id && userId) {
                 dispatch(deleteTask({id: dropTask.id, userId}));
             }
 
             const task: Task = {
                 taskText: dropTask.taskText,
-                year: data.year,
-                month: data.month,
-                day: data.day,
+                year: date.year,
+                month: date.month,
+                day: date.day,
                 startTime: dropTask.startTime,
                 endTime: dropTask.endTime,
                 color: dropTask.color,
             };
 
-            dispatch(postTask({task, userId}));
+            if (userId) dispatch(createTask({task, userId}));
         }
     };
 
     const openAddTaskForm = (): void => {
         setModalStatus(true);
-        setDate(`${data.day}-${data.month}-${data.year}`);
+        setDate(`${date.day}-${date.month}-${date.year}`);
     };
 
-    const setThisCellSelected = (): PayloadAction<string> =>
-        dispatch(setSelectedCell(`${data.day}-${data.month}-${data.year}`));
+    const setThisCellSelected = (): PayloadAction<{ date: string }> =>
+        dispatch(setSelectedCell({date:`${date.day}-${date.month}-${date.year}`}));
 
     return (
         <div
@@ -73,14 +73,14 @@ const CalendarCell:React.FC<CalendarCellProps> = memo(({className, data, setModa
             onDrop={dropHandler}
         >
             <div className={styles.CalendarCell__title}>
-                {data.day}
+                {date.day}
                 <Button
                     text="+"
                     title="Add task"
                     onClick={openAddTaskForm}
                 />
             </div>
-            <CalendarTaskList data={data} setDropTask={setDropTask}/>
+            <CalendarTaskList date={date} setDropTask={setDropTask}/>
         </div>
     );
 });

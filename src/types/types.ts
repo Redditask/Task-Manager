@@ -27,7 +27,7 @@ export interface Color {
     color: string;
 }
 
-export interface Route {
+export interface CustomRoute {
     path: string,
     Component: FC<{}>;
 }

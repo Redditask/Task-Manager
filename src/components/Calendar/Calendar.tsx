@@ -9,7 +9,7 @@ import Button from "../UI/Button/Button";
 import Loader from "../UI/Loader/Loader";
 
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {changeTheme, setUserId} from "../../store/taskManagerSlice";
+import {setTheme, setUserId} from "../../store/taskManagerSlice";
 import {selectError, selectLoadingStatus} from "../../store/selectors";
 
 import {CustomDate, Task} from "../../types/types";
@@ -20,9 +20,9 @@ import {
     getPrevMonthDays,
     isActiveMonth,
     isToday,
-    monthsList,
-    weekDayList,
 } from "../../utils/utils";
+
+import {weekDayList, monthsList} from "../../utils/consts";
 
 interface CalendarProps {
     setModalStatus: (modalStatus: boolean)=>void;
@@ -74,8 +74,8 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
     const dispatch = useAppDispatch();
 
     const signOut = (): void => {
-        dispatch(setUserId({userId: 0}));
-        dispatch(changeTheme({theme: "light"}));
+        dispatch(setUserId({userId: null}));
+        dispatch(setTheme({theme: "light"}));
     };
 
     if (error) prompt(error);
@@ -96,16 +96,16 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
                 {weekDayList.map((weekDay: string) =>
                     <div className={styles.Calendar__weekDay} key={weekDay}>{weekDay}</div>
                 )}
-                {calendarData.map(data => {
+                {calendarData.map(date => {
                         let className = styles.Calendar__cell;
-                        if (isActiveMonth(data, onCalendarMonth)) className = styles.Calendar__activeMonth;
-                        if (isToday(data)) className = styles.Calendar__currentDay;
+                        if (isActiveMonth(date, onCalendarMonth)) className = styles.Calendar__activeMonth;
+                        if (isToday(date)) className = styles.Calendar__currentDay;
 
                         return (
                             <CalendarCell
-                                key={`${data.day}${data.month}${data.year}`}
+                                key={`${date.day}${date.month}${date.year}`}
                                 className={className}
-                                data={data}
+                                date={date}
                                 setDate={setDate}
                                 setModalStatus={setModalStatus}
                                 dropTask={dropTask}

@@ -13,15 +13,7 @@ import {selectUserId} from "../../store/selectors";
 
 import {Task} from "../../types/types";
 
-const formattedTime = (task: Task) => {
-    let startZero: string = "";
-    let endZero: string = "";
-
-    if(task.startTime.min<=9) startZero = "0";
-    if(task.endTime.min<=9) endZero = "0";
-
-    return `${task.startTime.hour}:${startZero}${task.startTime.min}-${task.endTime.hour}:${endZero}${task.endTime.min}`;
-};
+import {formattedTime} from "../../utils/utils";
 
 interface AsideTaskProps {
     task: Task;
@@ -31,12 +23,13 @@ interface AsideTaskProps {
 
 const AsideTask: React.FC<AsideTaskProps> = memo(({task, setTask, setEditModalStatus}) => {
     const dispatch = useAppDispatch();
-    const userId: number = useAppSelector(selectUserId);
+    const userId: number | null = useAppSelector(selectUserId);
 
-    const removeTaskFromStore = (taskId: string | undefined) =>
-        dispatch(deleteTask({id: taskId || "undefinedId", userId}));
+    const removeTaskFromStore = (taskId: string | undefined): void => {
+        if (userId) dispatch(deleteTask({id: taskId || "undefinedId", userId}))
+    };
 
-    const submitRemove = () => removeTaskFromStore(task.id);
+    const submitRemove = (): void => removeTaskFromStore(task.id);
 
     const openEditTaskForm = (): void => {
         setEditModalStatus(true);

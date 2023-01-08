@@ -4,7 +4,7 @@ import React, {memo} from 'react';
 
 import {Time} from "../../types/types";
 
-import {hours, mins} from "../../utils/utils";
+import {hours, mins} from "../../utils/consts";
 
 interface TimePickerProps {
     startTime: Time;
@@ -14,7 +14,7 @@ interface TimePickerProps {
 }
 
 const TimePicker: React.FC<TimePickerProps> = memo(({startTime, setStartTime, endTime, setEndTime}) => {
-    const startHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const startHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         const newHour: number = Number(event.target.value);
         if (endTime.hour <= newHour) {
             setEndTime({...endTime, hour: newHour});
@@ -29,7 +29,7 @@ const TimePicker: React.FC<TimePickerProps> = memo(({startTime, setStartTime, en
         setStartTime({...startTime, hour: newHour});
     };
 
-    const startMinChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const startMinChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         const newMin: number = Number(event.target.value);
         if (startTime.hour === endTime.hour) {
             if (endTime.min <= newMin) {
@@ -42,7 +42,7 @@ const TimePicker: React.FC<TimePickerProps> = memo(({startTime, setStartTime, en
         setStartTime({...startTime, min: newMin});
     };
 
-    const endHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const endHourChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         const newHour: number = Number(event.target.value);
         if (newHour === startTime.hour) {
             if (startTime.min >= endTime.min) {
@@ -53,8 +53,9 @@ const TimePicker: React.FC<TimePickerProps> = memo(({startTime, setStartTime, en
         } else setEndTime({...endTime, hour: newHour});
     };
 
-    const endMinChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    const endMinChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         setEndTime({...endTime, min: Number(event.target.value)});
+    };
 
     return (
         <div className={styles.Container}>

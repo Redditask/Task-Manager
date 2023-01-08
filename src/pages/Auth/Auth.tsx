@@ -1,6 +1,3 @@
-// @ts-ignore
-import styles from "./Auth.module.scss";
-
 import React, {useState} from 'react';
 
 import SignForm from "../../components/SignForm/SignForm";

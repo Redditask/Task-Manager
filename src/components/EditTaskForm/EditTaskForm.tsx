@@ -2,7 +2,7 @@ import styles from "./EditTaskForm.module.scss";
 
 import React, {useState} from 'react';
 
-import {putTask} from "../../API/taskAPI";
+import {updateTask} from "../../API/taskAPI";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {selectUserId} from "../../store/selectors";
 
@@ -25,10 +25,10 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
     const [endTime, setEndTime] = useState<Time>({hour: selectedTask.endTime.hour, min: selectedTask.endTime.min});
 
     const dispatch = useAppDispatch();
-    const userId: number = useAppSelector(selectUserId);
+    const userId: number | null = useAppSelector(selectUserId);
 
     const submitEdit = (): void => {
-        if (selectedTask.id) {
+        if (selectedTask.id && userId) {
             const task: Task = {
                 id: selectedTask.id,
                 taskText: text,
@@ -37,7 +37,7 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
                 color: color
             };
 
-            dispatch(putTask({task, userId}));
+            dispatch(updateTask({task, userId}));
         }
 
         setEditModalStatus(false);

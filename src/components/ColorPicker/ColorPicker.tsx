@@ -4,7 +4,7 @@ import React, {memo} from 'react';
 
 import {Color} from '../../types/types';
 
-import {colors} from "../../utils/utils";
+import {colors} from "../../utils/consts";
 
 interface ColorPickerProps {
     color: string;

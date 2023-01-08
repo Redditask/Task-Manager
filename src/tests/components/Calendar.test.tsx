@@ -37,7 +37,7 @@ describe("Calendar", ()=>{
         // empty implementation window.alert for jest
         window.prompt = () => "Error";
 
-        const mockedChangeTheme = jest.spyOn(actions, "changeTheme");
+        const mockedSetTheme = jest.spyOn(actions, "setTheme");
         const mockedSetUserId = jest.spyOn(actions, "setUserId");
 
         render(
@@ -49,9 +49,9 @@ describe("Calendar", ()=>{
 
         fireEvent.click(screen.getByTitle("Out"));
         expect(mockedSetUserId).toHaveBeenCalledTimes(1);
-        expect(mockedSetUserId).toHaveBeenCalledWith({userId: 0});
-        expect(mockedChangeTheme).toHaveBeenCalledTimes(2); // 1 extra from child component
-        expect(mockedChangeTheme).toHaveBeenCalledWith({theme: "light"});
+        expect(mockedSetUserId).toHaveBeenCalledWith({userId: null});
+        expect(mockedSetTheme).toHaveBeenCalledTimes(2); // 1 extra from child component
+        expect(mockedSetTheme).toHaveBeenCalledWith({theme: "light"});
         expect(dispatch).toHaveBeenCalledTimes(3); // 1 extra from child component
     });
 });

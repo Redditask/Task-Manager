@@ -4,9 +4,9 @@ import {$authHost} from "./index";
 
 import {ServerTask, Task} from "../types/types";
 
-export const getTasks = createAsyncThunk<ServerTask [], number, {rejectValue: string}>(
+export const getTasks = createAsyncThunk<ServerTask [], {userId: number}, {rejectValue: string}>(
   "tasks/getTasks",
-    async function (userId, {rejectWithValue}){
+    async function ({userId}, {rejectWithValue}){
         const response = await $authHost.get(`api/task/${userId}`);
 
         if (response.status !== 200){
@@ -17,11 +17,11 @@ export const getTasks = createAsyncThunk<ServerTask [], number, {rejectValue: st
     }
 );
 
-export const postTask = createAsyncThunk<Task, {task: Task, userId: number}, {rejectValue: string}>(
+export const createTask = createAsyncThunk<Task, {task: Task, userId: number}, {rejectValue: string}>(
     "tasks/postTask",
     async function ({task, userId}, {rejectWithValue}) {
         task.id = new Date().toISOString();
-        const response = await $authHost.post(`api/task/`, {task, userId});
+        const response = await $authHost.post(`api/task/${userId}`, {task});
 
         if (response.status !== 200) {
             return rejectWithValue("Server error");
@@ -44,7 +44,7 @@ export const deleteTask = createAsyncThunk<{id: string}, {id: string, userId: nu
   }
 );
 
-export const putTask = createAsyncThunk<Task, {task: Task, userId: number}, {rejectValue: string}>(
+export const updateTask = createAsyncThunk<Task, {task: Task, userId: number}, {rejectValue: string}>(
     "tasks, putTask",
     async function ({task, userId}, {rejectWithValue}){
         const response = await $authHost.put(`api/task/${userId}`, {task});

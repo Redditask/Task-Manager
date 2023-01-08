@@ -3,7 +3,7 @@ import styles from "./AddTaskForm.module.scss";
 import React, {useState} from 'react';
 
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {postTask} from "../../API/taskAPI";
+import {createTask} from "../../API/taskAPI";
 
 import Textarea from "../UI/Textarea/Textarea";
 import Button from "../UI/Button/Button";
@@ -13,17 +13,17 @@ import TimePicker from "../TimePicker/TimePicker";
 import {StringChangeEvent, Task, TaskColor, Time} from "../../types/types";
 import {selectUserId} from "../../store/selectors";
 
-const today = new Date();
-let day: string = String(today.getDate());
-let month: string = String(today.getMonth());
-let year: string = String(today.getFullYear());
-
 interface AddTaskFormProps {
     setModalStatus: (modalStatus: boolean) => void;
     date: string;
 }
 
 const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
+    const today = new Date();
+    let day: string = String(today.getDate());
+    let month: string = String(today.getMonth());
+    let year: string = String(today.getFullYear());
+
     const [text, setText] = useState<string>("Your task");
     const [color, setColor] = useState<TaskColor>("beige");
 
@@ -33,7 +33,7 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
     if (date) [day, month, year] = date.split("-");
 
     const dispatch = useAppDispatch();
-    const userId: number = useAppSelector(selectUserId);
+    const userId: number | null = useAppSelector(selectUserId);
 
     const addTaskToStore = (text: string, color: TaskColor, startTime: Time, endTime: Time): void => {
         const task: Task = {
@@ -46,7 +46,7 @@ const AddTaskForm:React.FC<AddTaskFormProps> = ({setModalStatus, date}) => {
             color: color,
         };
 
-        dispatch(postTask({task, userId}));
+        if (userId) dispatch(createTask({task, userId}));
 
         setModalStatus(false);
     };

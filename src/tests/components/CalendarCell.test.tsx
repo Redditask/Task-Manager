@@ -22,7 +22,7 @@ describe("CalendarCell", ()=>{
 
         const component = render(
             <CalendarCell
-                data={{day: 17, month: 5, year: 2022}}
+                date={{day: 17, month: 5, year: 2022}}
                 className="styles.Calendar__activeMonth"
                 setDate={jest.fn}
                 setModalStatus={jest.fn}
@@ -43,11 +43,11 @@ describe("CalendarCell", ()=>{
 
         const mockedSetSelectedCell = jest.spyOn(actions, "setSelectedCell");
         const mockedDeleteTask = jest.spyOn(api, "deleteTask");
-        const mockedPostTask = jest.spyOn(api, "postTask");
+        const mockedPostTask = jest.spyOn(api, "createTask");
 
         render(
             <CalendarCell
-                data={{day: 17, month: 5, year: 2022}}
+                date={{day: 17, month: 5, year: 2022}}
                 className="styles.Calendar__activeMonth"
                 setDate={jest.fn}
                 setModalStatus={jest.fn}
@@ -59,7 +59,7 @@ describe("CalendarCell", ()=>{
         fireEvent.click(screen.getByTitle("Cell"));
 
         expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(mockedSetSelectedCell).toHaveBeenCalledWith("17-5-2022");
+        expect(mockedSetSelectedCell).toHaveBeenCalledWith({date: "17-5-2022"});
 
         fireEvent.drop(screen.getByTitle("Cell"));
 

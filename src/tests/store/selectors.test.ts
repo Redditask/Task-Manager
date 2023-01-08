@@ -43,7 +43,7 @@ describe("redux selectors", ()=> {
 
     describe("selected date selector", () => {
 
-        it("should select empty date from initial state", () => {
+        it("should select null date from initial state", () => {
             const result = selectSelectedDate({tasks: initialState});
 
             expect(result).toEqual(initialState.selectedDate);
@@ -67,7 +67,7 @@ describe("redux selectors", ()=> {
 
     describe("userId selector", () => {
 
-        it("should select zero userId from initial state", () => {
+        it("should select null userId from initial state", () => {
             const result = selectUserId({tasks: initialState});
 
             expect(result).toEqual(initialState.userId);

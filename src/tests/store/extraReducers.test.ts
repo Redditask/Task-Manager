@@ -1,5 +1,5 @@
 import taskReducer from "../../store/taskManagerSlice";
-import {deleteTask, getTasks, postTask, putTask} from "../../API/taskAPI";
+import {deleteTask, getTasks, createTask, updateTask} from "../../API/taskAPI";
 
 import {initialState, serverTasks, someState, someTask, someTasks} from "../consts";
 
@@ -57,7 +57,7 @@ describe("redux slice (extraReducers)", ()=> {
     describe("postTask", () => {
 
         it("shouldn't change loading status with 'postTask.pending' action", () => {
-            const action = {type: postTask.pending.type};
+            const action = {type: createTask.pending.type};
 
             const result = taskReducer(initialState, action);
 
@@ -69,7 +69,7 @@ describe("redux slice (extraReducers)", ()=> {
             const newTaskList: Task[] = [...someState.tasks, someTask];
             newTaskList.sort(taskSorting);
 
-            const action = {type: postTask.fulfilled.type, payload: someTask};
+            const action = {type: createTask.fulfilled.type, payload: someTask};
 
             const result = taskReducer(someState, action);
 
@@ -82,7 +82,7 @@ describe("redux slice (extraReducers)", ()=> {
         });
 
         it("should set error with 'postTask.rejected' action", () => {
-            const action = {type: postTask.rejected.type, payload: "Server error"};
+            const action = {type: createTask.rejected.type, payload: "Server error"};
 
             const result = taskReducer(someState, action);
 
@@ -131,7 +131,7 @@ describe("redux slice (extraReducers)", ()=> {
     describe("putTask", () => {
 
         it("shouldn't change loading status with 'putTask.pending' action", () => {
-            const action = {type: putTask.pending.type};
+            const action = {type: updateTask.pending.type};
 
             const result = taskReducer(initialState, action);
 
@@ -153,7 +153,7 @@ describe("redux slice (extraReducers)", ()=> {
             const editedTaskList: Task [] = [someState.tasks[0], editedTask, someState.tasks[2]];
             editedTaskList.sort(taskSorting);
 
-            const action = {type: putTask.fulfilled.type, payload: editedTask};
+            const action = {type: updateTask.fulfilled.type, payload: editedTask};
 
             const result = taskReducer(someState, action);
 
@@ -165,7 +165,7 @@ describe("redux slice (extraReducers)", ()=> {
         });
 
         it("should set error with 'putTask.rejected' action", () => {
-            const action = {type: putTask.rejected.type, payload: "Server error"};
+            const action = {type: updateTask.rejected.type, payload: "Server error"};
 
             const result = taskReducer(someState, action);
 

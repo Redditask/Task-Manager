@@ -8,22 +8,17 @@ import AppRouter from "./components/AppRouter/AppRouter";
 
 /*
 ToDo
- РЕФАКТОРИНГ:
- разбить на под-компоненты:
- AppRouter
- TimePicker
- в store:
- userId и selectedDate добавить null тип
- переименовать selectedDate, selectedTasks, setSelectedCell
- в setSelectedCell payload сделать через {...: string} (в getTasks в taskAPI)
- changeTheme -> setTheme
- ^после этого обновить тесты и поправить изменения в компонентах^
- state.tasks.push (и selectedTasks) вынести в функцию
- переименовать thukn-и
- utils:
- перенести константы из utils в consts
+    добавить кнопку обновления в AsideBar (?)
  //
- адаптивная вёрстка
+ ТЕСТЫ:
+    добавить замоканный стор для тестирования компонентов (?)
+ //
+ АВТОРИЗАЦИЯ/РЕГИСТРАЦИЯ:
+    в Auth setUserId исправить, чтобы undefined в alert не вылазил
+    подправить авторизацию (скрыть токен)
+ //
+ ДИЗАЙН:
+    адаптивная вёрстка
 */
 
 const App: React.FC = () => {

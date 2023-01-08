@@ -16,7 +16,7 @@ describe("CalendarTaskList", ()=>{
 
         const component = render(
             <CalendarTaskList
-                data={{day: 0, month: 0, year: 0}}
+                date={{day: 0, month: 0, year: 0}}
                 setDropTask={jest.fn}
             />
         );
@@ -29,7 +29,7 @@ describe("CalendarTaskList", ()=>{
 
         const component = render(
             <CalendarTaskList
-                data={{day: 17, month: 5, year: 2022}}
+                date={{day: 17, month: 5, year: 2022}}
                 setDropTask={jest.fn}
             />
         );
