@@ -8,8 +8,6 @@ import AppRouter from "./components/AppRouter/AppRouter";
 
 /*
 ToDo
- readme поправить
- //
  РЕФАКТОРИНГ:
  разбить на под-компоненты:
  AppRouter
