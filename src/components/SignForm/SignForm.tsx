@@ -1,6 +1,6 @@
 import styles from "./SignForm.module.scss";
 
-import React from 'react';
+import React from "react";
 
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";

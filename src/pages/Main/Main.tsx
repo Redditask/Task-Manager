@@ -1,6 +1,6 @@
 import styles from "./Main.module.scss";
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from "react";
 
 import AsideBar from "../../components/AsideBar/AsideBar";
 import Calendar from "../../components/Calendar/Calendar";

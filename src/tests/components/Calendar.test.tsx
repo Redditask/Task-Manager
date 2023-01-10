@@ -35,7 +35,7 @@ describe("Calendar", ()=>{
         mockedUseDispatch.mockReturnValue(dispatch);
 
         // empty implementation window.alert for jest
-        window.prompt = () => "Error";
+        window.alert = () => "Server error";
 
         const mockedSetTheme = jest.spyOn(actions, "setTheme");
         const mockedSetUserId = jest.spyOn(actions, "setUserId");

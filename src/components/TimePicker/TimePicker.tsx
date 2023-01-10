@@ -1,6 +1,6 @@
 import styles from "./TimePicker.module.scss";
 
-import React, {memo} from 'react';
+import React, {memo} from "react";
 
 import {Time} from "../../types/types";
 

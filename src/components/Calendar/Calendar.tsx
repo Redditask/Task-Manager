@@ -1,6 +1,6 @@
 import styles from "./Calendar.module.scss";
 
-import React, {memo, useMemo, useState} from 'react';
+import React, {memo, useMemo, useState} from "react";
 
 import ChangeDateForm from "../ChangeDateForm/ChangeDateForm";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
@@ -78,7 +78,7 @@ const Calendar: React.FC<CalendarProps> = memo(({setModalStatus, setDate}) => {
         dispatch(setTheme({theme: "light"}));
     };
 
-    if (error) prompt(error);
+    if (error) alert(error);
 
     return (
         <div className={styles.Container}>

@@ -1,6 +1,7 @@
 import styles from "./ThemeSelector.module.scss";
 
-import React, {useEffect} from 'react';
+import React, {useEffect} from "react";
+
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {setTheme} from "../../store/taskManagerSlice";

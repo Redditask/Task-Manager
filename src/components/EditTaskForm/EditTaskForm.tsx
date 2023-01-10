@@ -1,6 +1,6 @@
 import styles from "./EditTaskForm.module.scss";
 
-import React, {useState} from 'react';
+import React, {useState} from "react";
 
 import {updateTask} from "../../API/taskAPI";
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";

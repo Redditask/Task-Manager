@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {authRoutes, publicRoutes} from "../../routes/routes";
 import {MAIN_ROUTE, REGISTRATION_ROUTE} from "../../utils/consts";

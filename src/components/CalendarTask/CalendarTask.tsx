@@ -1,6 +1,6 @@
 import styles from "./CalendarTask.module.scss";
 
-import React, {memo} from 'react';
+import React, {memo} from "react";
 
 import {Task} from "../../types/types";
 

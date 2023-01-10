@@ -1,8 +1,8 @@
 import styles from "./ColorPicker.module.scss";
 
-import React, {memo} from 'react';
+import React, {memo} from "react";
 
-import {Color} from '../../types/types';
+import {Color} from "../../types/types";
 
 import {colors} from "../../utils/consts";
 

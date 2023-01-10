@@ -1,6 +1,6 @@
 import styles from "./AddTaskForm.module.scss";
 
-import React, {useState} from 'react';
+import React, {useState} from "react";
 
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {createTask} from "../../API/taskAPI";

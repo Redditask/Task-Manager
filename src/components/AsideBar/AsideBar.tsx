@@ -1,6 +1,6 @@
 import styles from "./AsideBar.module.scss";
 
-import React, {memo, useState} from 'react';
+import React, {memo, useState} from "react";
 
 import {useAppSelector} from "../../hooks/hooks";
 import {selectSelectedDate} from "../../store/selectors";

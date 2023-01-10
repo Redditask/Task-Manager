@@ -1,6 +1,6 @@
 import styles from "./CalendarTaskList.module.scss";
 
-import React from 'react';
+import React from "react";
 
 import {useAppSelector} from "../../hooks/hooks";
 import {selectTasks} from "../../store/selectors";

@@ -1,6 +1,6 @@
 import styles from "./CalendarCell.module.scss";
 
-import React, {memo} from 'react';
+import React, {memo} from "react";
 
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {setSelectedCell} from "../../store/taskManagerSlice";

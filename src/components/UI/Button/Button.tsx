@@ -1,6 +1,6 @@
 import styles from "./Button.module.scss";
 
-import React from 'react';
+import React from "react";
 
 interface ButtonProps {
     text: React.ReactNode;

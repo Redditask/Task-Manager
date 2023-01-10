@@ -374,7 +374,7 @@ Object {
             />
           </div>
           <div
-            class="Calendar__currentDay"
+            class="Calendar__activeMonth"
             title="Cell"
           >
             <div
@@ -412,7 +412,7 @@ Object {
             />
           </div>
           <div
-            class="Calendar__activeMonth"
+            class="Calendar__currentDay"
             title="Cell"
           >
             <div
@@ -1308,7 +1308,7 @@ Object {
           />
         </div>
         <div
-          class="Calendar__currentDay"
+          class="Calendar__activeMonth"
           title="Cell"
         >
           <div
@@ -1346,7 +1346,7 @@ Object {
           />
         </div>
         <div
-          class="Calendar__activeMonth"
+          class="Calendar__currentDay"
           title="Cell"
         >
           <div

@@ -1,6 +1,6 @@
 import styles from "./Input.module.scss";
 
-import React from 'react';
+import React from "react";
 
 import {StringChangeEvent} from "../../../types/types";
 
