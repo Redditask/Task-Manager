@@ -1,32 +1,25 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 import * as ReduxHooks from "react-redux";
-import * as actions from "../../store/taskManagerSlice";
+import * as api from "../../API/taskAPI";
 
 import EditTaskForm from "../../components/EditTaskForm/EditTaskForm";
 
-import {Task} from "../../types/types";
+import {someTask} from "../consts";
 
 jest.mock("react-redux");
 
 const mockedUseDispatch = jest.spyOn(ReduxHooks, "useDispatch");
+const mockedUseSelector = jest.spyOn(ReduxHooks, "useSelector");
 
-const someTask: Task = {
-    id: "2021-11-27T16:33:22.812Z",
-    taskText: "Your task",
-    year: 2022,
-    month: 5,
-    day: 18,
-    startTime: {hour: 8, min: 12},
-    endTime: {hour: 23, min: 5},
-    color: "beige"
-};
 describe("EditTaskForm", ()=>{
+
     it("should create EditTaskForm", ()=>{
+        mockedUseSelector.mockReturnValue(0);
         mockedUseDispatch.mockReturnValue(jest.fn());
 
         const component = render(
             <EditTaskForm
-                setEditModalStatus={jest.fn()}
+                setEditModalStatus={jest.fn}
                 selectedTask={someTask}
             />
         );
@@ -34,20 +27,21 @@ describe("EditTaskForm", ()=>{
         expect(component).toMatchSnapshot();
     });
 
-    it("should dispatch actions",()=>{
+    it("should dispatch thunk actions",()=>{
+        mockedUseSelector.mockReturnValue(2);
         const dispatch = jest.fn();
         mockedUseDispatch.mockReturnValue(dispatch);
 
-        const mockedEditTask = jest.spyOn(actions, "editTask");
+        const mockedPutTask = jest.spyOn(api, "updateTask");
 
         render(
             <EditTaskForm
-                setEditModalStatus={jest.fn()}
+                setEditModalStatus={jest.fn}
                 selectedTask={someTask}
             />
         );
 
-        fireEvent.change(screen.getByTitle("Input"), {target: {value: "New task text!!!"}});
+        fireEvent.change(screen.getByTitle("Textarea"), {target: {value: "New task text!!!"}});
         fireEvent.change(screen.getByTitle("Start hour"), {target: {value: 15}});
         fireEvent.change(screen.getByTitle("Start minute"), {target: {value: 15}});
         fireEvent.change(screen.getByTitle("Task color"), {target: {value: "#4169E1"}});
@@ -55,45 +49,54 @@ describe("EditTaskForm", ()=>{
         fireEvent.click(screen.getByTitle("Edit"));
 
         expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(mockedEditTask).toHaveBeenCalledTimes(1);
-        expect(mockedEditTask).toHaveBeenCalledWith(
+        expect(mockedPutTask).toHaveBeenCalledTimes(1);
+        expect(mockedPutTask).toHaveBeenCalledWith(
             {
-                id: "2021-11-27T16:33:22.812Z",
-                taskText: "New task text!!!",
-                startTime: {hour: 15, min: 15},
-                endTime: {hour: 23, min: 5},
-                color: "#4169E1",
+                task: {
+                    id: "2021-11-28T16:33:22.820Z",
+                    taskText: "New task text!!!",
+                    startTime: {hour: 15, min: 15},
+                    endTime: {hour: 23, min: 59},
+                    color: "#4169E1"
+                },
+                userId: 2
             }
         );
     });
 
     it("should properly changed time",()=>{
+        mockedUseSelector.mockReturnValue(2);
         const dispatch = jest.fn();
         mockedUseDispatch.mockReturnValue(dispatch);
 
-        const mockedEditTask = jest.spyOn(actions, "editTask");
+        const mockedPutTask = jest.spyOn(api, "updateTask");
 
         render(
             <EditTaskForm
-                setEditModalStatus={jest.fn()}
+                setEditModalStatus={jest.fn}
                 selectedTask={someTask}
             />
         );
 
+        fireEvent.change(screen.getByTitle("Start hour"), {target: {value: 8}});
+        fireEvent.change(screen.getByTitle("Start minute"), {target: {value: 12}});
         fireEvent.change(screen.getByTitle("End minute"), {target: {value: 10}});
         fireEvent.change(screen.getByTitle("End hour"), {target: {value: 8}});
 
         fireEvent.click(screen.getByTitle("Edit"));
 
         expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(mockedEditTask).toHaveBeenCalledTimes(1);
-        expect(mockedEditTask).toHaveBeenCalledWith(
+        expect(mockedPutTask).toHaveBeenCalledTimes(1);
+        expect(mockedPutTask).toHaveBeenCalledWith(
             {
-                id: "2021-11-27T16:33:22.812Z",
-                taskText: "Your task",
-                startTime: {hour: 8, min: 12},
-                endTime: {hour: 8, min: 13},
-                color: "beige",
+                task: {
+                    id: "2021-11-28T16:33:22.820Z",
+                    taskText: "Your some task",
+                    startTime: {hour: 8, min: 12},
+                    endTime: {hour: 8, min: 13},
+                    color: "beige",
+                },
+                userId: 2
             }
         );
     });

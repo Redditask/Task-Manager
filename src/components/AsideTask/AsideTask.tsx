@@ -1,27 +1,19 @@
-import React, {memo} from 'react';
-
-// @ts-ignore
 import styles from "./AsideTask.module.scss";
+
+import React, {memo} from "react";
 
 import Button from "../UI/Button/Button";
 
 import {AiOutlineEdit} from "react-icons/ai";
 import {MdDeleteOutline} from "react-icons/md";
-import {useAppDispatch} from "../../hooks/hooks";
-import {removeTask} from "../../store/taskManagerSlice";
-import {PayloadAction} from "@reduxjs/toolkit";
+
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {deleteTask} from "../../API/taskAPI";
+import {selectUserId} from "../../store/selectors";
 
 import {Task} from "../../types/types";
 
-const formattedTime = (task: Task) => {
-    let startZero: string = "";
-    let endZero: string = "";
-
-    if(task.startTime.min<=9) startZero = "0";
-    if(task.endTime.min<=9) endZero = "0";
-
-    return `${task.startTime.hour}:${startZero}${task.startTime.min}-${task.endTime.hour}:${endZero}${task.endTime.min}`;
-};
+import {formattedTime} from "../../utils/utils";
 
 interface AsideTaskProps {
     task: Task;
@@ -31,10 +23,13 @@ interface AsideTaskProps {
 
 const AsideTask: React.FC<AsideTaskProps> = memo(({task, setTask, setEditModalStatus}) => {
     const dispatch = useAppDispatch();
-    const removeTaskFromStore = (taskId: string | undefined): PayloadAction<{ id: string }> =>
-        dispatch(removeTask({id: taskId || "undefinedId"}));
+    const userId: number | null = useAppSelector(selectUserId);
 
-    const submitRemove = (): PayloadAction<{ id: string }> => removeTaskFromStore(task.id);
+    const removeTaskFromStore = (taskId: string | undefined): void => {
+        if (userId) dispatch(deleteTask({id: taskId || "undefinedId", userId}))
+    };
+
+    const submitRemove = (): void => removeTaskFromStore(task.id);
 
     const openEditTaskForm = (): void => {
         setEditModalStatus(true);

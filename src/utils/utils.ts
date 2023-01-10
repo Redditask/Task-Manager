@@ -1,42 +1,6 @@
-import {Color, CustomDate} from "../types/types";
+import {visibleDays, weekDays} from "./consts";
 
-export const hours: number[] = [];
-for(let i = 0; i<24; i++){
-    hours[i] = i;
-}
-
-export const mins: number[] = [];
-for(let i = 0; i<60; i++){
-    mins[i] = i;
-}
-
-export const colors: Color[] = [
-    {name: "beige", color: "beige"},
-    {name: "green", color: "#00FF7F"},
-    {name: "red", color: "#CD5C5CFF"},
-    {name: "silver", color: "#C0C0C0"},
-    {name: "blue", color: "#4169E1"},
-];
-
-export const monthsList: string[] = [
-    "Jan", "Feb", "Mar", "Apr",
-    "May", "Jun", "Jul", "Aug",
-    "Sep", "Oct", "Nov", "Dec",
-];
-
-export const weekDayList: string[] = [
-    "Mon", "Tue", "Wed",
-    "Thu", "Fri", "Sat",
-    "Sun",
-];
-
-export const weekDays = {
-    0: 6, 1: 0, 2: 1,
-    3: 2, 4: 3, 5: 4,
-    6: 5,
-};
-
-export const visibleDays: number = 7 * 6;
+import {CustomDate, Task} from "../types/types";
 
 export const getDaysAmount = (year: number, month: number): number => {
     const nextMonth: Date = new Date(year, month+1, 1);
@@ -48,7 +12,6 @@ export const getDaysAmount = (year: number, month: number): number => {
 export const getWeekDay = (date: Date): number => {
     const day: number = date.getDay();
 
-    // @ts-ignore
     return weekDays[day];
 };
 
@@ -109,6 +72,26 @@ export const isToday = (date: CustomDate): boolean => {
         && date.day === today.getDate();
 };
 
-export const isActiveMonth = (data: CustomDate, onCalendarMonth: number): boolean => {
-    return data.month === onCalendarMonth;
+export const isActiveMonth = (date: CustomDate, onCalendarMonth: number): boolean => {
+    return date.month === onCalendarMonth;
+};
+
+export const dateFormatting = (date: string | null): string => {
+    if (date){
+        const [day, month, year]: string[] = date.split("-");
+
+        return `${day}-${Number(month) + 1}-${year}`;
+    }
+
+    return "Select date";
+};
+
+export const formattedTime = (task: Task): string => {
+    let startZero: string = "";
+    let endZero: string = "";
+
+    if(task.startTime.min<=9) startZero = "0";
+    if(task.endTime.min<=9) endZero = "0";
+
+    return `${task.startTime.hour}:${startZero}${task.startTime.min}-${task.endTime.hour}:${endZero}${task.endTime.min}`;
 };

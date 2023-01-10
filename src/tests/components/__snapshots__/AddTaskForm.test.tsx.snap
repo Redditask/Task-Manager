@@ -5,7 +5,7 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
+      <form
         class="AddTaskForm"
       >
         <h2
@@ -17,8 +17,8 @@ Object {
           class="AddTaskForm__inputArea"
         >
           <textarea
-            class="Input"
-            title="Input"
+            class="Textarea"
+            title="Textarea"
           >
             Your task
           </textarea>
@@ -623,11 +623,11 @@ Object {
             Create
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </body>,
   "container": <div>
-    <div
+    <form
       class="AddTaskForm"
     >
       <h2
@@ -639,8 +639,8 @@ Object {
         class="AddTaskForm__inputArea"
       >
         <textarea
-          class="Input"
-          title="Input"
+          class="Textarea"
+          title="Textarea"
         >
           Your task
         </textarea>
@@ -1245,7 +1245,7 @@ Object {
           Create
         </div>
       </div>
-    </div>
+    </form>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

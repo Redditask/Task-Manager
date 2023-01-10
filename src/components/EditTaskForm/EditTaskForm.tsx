@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
-
-import {editTask} from "../../store/taskManagerSlice";
-import {useAppDispatch} from "../../hooks/hooks";
-
-// @ts-ignore
 import styles from "./EditTaskForm.module.scss";
 
-import Input from "../UI/Input/Input";
+import React, {useState} from "react";
+
+import {updateTask} from "../../API/taskAPI";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {selectUserId} from "../../store/selectors";
+
+import Textarea from "../UI/Textarea/Textarea";
 import ColorPicker from "../ColorPicker/ColorPicker";
 import Button from "../UI/Button/Button";
 import TimePicker from "../TimePicker/TimePicker";
 
-import {StringChangeEvent, Task, Time} from "../../types/types";
+import {StringChangeEvent, Task, TaskColor, Time} from "../../types/types";
 
 interface EditTaskFormProps {
     setEditModalStatus: (editModalStatus: boolean)=>void;
@@ -20,21 +20,24 @@ interface EditTaskFormProps {
 
 const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selectedTask}) => {
     const [text, setText] = useState<string>(selectedTask.taskText);
-    const [color, setColor] = useState<string>(selectedTask.color);
+    const [color, setColor] = useState<TaskColor>(selectedTask.color);
     const [startTime, setStartTime] = useState<Time>({hour: selectedTask.startTime.hour, min: selectedTask.startTime.min});
     const [endTime, setEndTime] = useState<Time>({hour: selectedTask.endTime.hour, min: selectedTask.endTime.min});
 
     const dispatch = useAppDispatch();
+    const userId: number | null = useAppSelector(selectUserId);
 
     const submitEdit = (): void => {
-        if (selectedTask.id) {
-            dispatch(editTask({
+        if (selectedTask.id && userId) {
+            const task: Task = {
                 id: selectedTask.id,
                 taskText: text,
                 startTime: startTime,
                 endTime: endTime,
                 color: color
-            }));
+            };
+
+            dispatch(updateTask({task, userId}));
         }
 
         setEditModalStatus(false);
@@ -43,10 +46,10 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
     const changeInputHandler = (event: StringChangeEvent): void => setText(event.target.value);
 
     return (
-        <div className={styles.EditTaskForm}>
+        <form className={styles.EditTaskForm}>
             <h2 className={styles.EditTaskForm__title}>Edit your task:</h2>
             <div className={styles.EditTaskForm__inputArea}>
-                <Input
+                <Textarea
                     value={text}
                     onChange={changeInputHandler}
                 />
@@ -74,7 +77,7 @@ const EditTaskForm: React.FC<EditTaskFormProps> = ({setEditModalStatus, selected
                         />
                 }
             </div>
-        </div>
+        </form>
     );
 };
 

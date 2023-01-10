@@ -80,16 +80,16 @@ Object {
         <div
           class="CalendarTask"
           draggable="true"
-          style="background-color: beige;"
+          style="background-color: rgb(0, 255, 127);"
         >
-          Your task
+          Your task 2
         </div>
         <div
           class="CalendarTask"
           draggable="true"
-          style="background-color: rgb(0, 255, 127);"
+          style="background-color: beige;"
         >
-          Your task
+          Your task 3
         </div>
       </div>
     </div>
@@ -101,16 +101,16 @@ Object {
       <div
         class="CalendarTask"
         draggable="true"
-        style="background-color: beige;"
+        style="background-color: rgb(0, 255, 127);"
       >
-        Your task
+        Your task 2
       </div>
       <div
         class="CalendarTask"
         draggable="true"
-        style="background-color: rgb(0, 255, 127);"
+        style="background-color: beige;"
       >
-        Your task
+        Your task 3
       </div>
     </div>
   </div>,

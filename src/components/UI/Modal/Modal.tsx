@@ -1,7 +1,6 @@
-// @ts-ignore
 import styles from "./Modal.module.scss";
 
-import React from 'react';
+import React from "react";
 
 interface ModalProps {
     children: React.ReactNode;

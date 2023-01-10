@@ -159,7 +159,7 @@ Object {
 }
 `;
 
-exports[`AsideBar should create AsideBar with tasks 1`] = `
+exports[`AsideBar should create AsideBar with task list 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -178,7 +178,7 @@ Object {
           <h3
             class="AsideBar__date"
           >
-            18-6-2022
+            17-6-2022
           </h3>
         </div>
         <hr />
@@ -194,15 +194,15 @@ Object {
               >
                 <div
                   class="Content__color"
-                  style="background: beige;"
+                  style="background: rgb(0, 255, 127);"
                 />
                 <div>
-                  Your task
+                  Your task 2
                   <div
                     class="Time"
                     title="Task time"
                   >
-                    3:14-23:05
+                    15:15-16:24
                   </div>
                 </div>
               </li>
@@ -259,15 +259,15 @@ Object {
               >
                 <div
                   class="Content__color"
-                  style="background: rgb(0, 255, 127);"
+                  style="background: beige;"
                 />
                 <div>
-                  Your task
+                  Your task 3
                   <div
                     class="Time"
                     title="Task time"
                   >
-                    13:08-14:25
+                    16:20-16:24
                   </div>
                 </div>
               </li>
@@ -354,7 +354,7 @@ Object {
         <h3
           class="AsideBar__date"
         >
-          18-6-2022
+          17-6-2022
         </h3>
       </div>
       <hr />
@@ -370,15 +370,15 @@ Object {
             >
               <div
                 class="Content__color"
-                style="background: beige;"
+                style="background: rgb(0, 255, 127);"
               />
               <div>
-                Your task
+                Your task 2
                 <div
                   class="Time"
                   title="Task time"
                 >
-                  3:14-23:05
+                  15:15-16:24
                 </div>
               </div>
             </li>
@@ -435,15 +435,15 @@ Object {
             >
               <div
                 class="Content__color"
-                style="background: rgb(0, 255, 127);"
+                style="background: beige;"
               />
               <div>
-                Your task
+                Your task 3
                 <div
                   class="Time"
                   title="Task time"
                 >
-                  13:08-14:25
+                  16:20-16:24
                 </div>
               </div>
             </li>

@@ -10,9 +10,10 @@ const mockedUseDispatch = jest.spyOn(ReduxHooks, "useDispatch");
 const mockedUseSelector = jest.spyOn(ReduxHooks, "useSelector");
 
 describe("ThemeSelector", ()=>{
+
     it("should create ThemeSelector", ()=>{
-        mockedUseDispatch.mockReturnValue(jest.fn());
-        mockedUseSelector.mockReturnValue([]);
+        mockedUseDispatch.mockReturnValueOnce(jest.fn());
+        mockedUseSelector.mockReturnValueOnce("light");
 
         const component = render(
             <ThemeSelector/>
@@ -26,18 +27,18 @@ describe("ThemeSelector", ()=>{
         mockedUseDispatch.mockReturnValue(dispatch);
         mockedUseSelector.mockReturnValue("light")
 
-        const mockedChangeTheme = jest.spyOn(actions, "changeTheme");
+        const mockedSetTheme = jest.spyOn(actions, "setTheme");
 
         render(
             <ThemeSelector/>
         );
 
         expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(mockedChangeTheme).toHaveBeenCalledWith({theme: "light"});
+        expect(mockedSetTheme).toHaveBeenCalledWith({theme: "light"});
 
         fireEvent.click(screen.getByTitle("Dark theme"));
         expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(mockedChangeTheme).toHaveBeenCalledWith({theme: "dark"});
+        expect(mockedSetTheme).toHaveBeenCalledWith({theme: "dark"});
     });
 
     it("should dispatch actions to change dark theme", ()=>{
@@ -45,17 +46,17 @@ describe("ThemeSelector", ()=>{
         mockedUseDispatch.mockReturnValue(dispatch);
         mockedUseSelector.mockReturnValue("dark")
 
-        const mockedChangeTheme = jest.spyOn(actions, "changeTheme");
+        const mockedSetTheme = jest.spyOn(actions, "setTheme");
 
         render(
             <ThemeSelector/>
         );
 
         expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(mockedChangeTheme).toHaveBeenCalledWith({theme: "dark"});
+        expect(mockedSetTheme).toHaveBeenCalledWith({theme: "dark"});
 
         fireEvent.click(screen.getByTitle("Light theme"));
         expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(mockedChangeTheme).toHaveBeenCalledWith({theme: "light"});
+        expect(mockedSetTheme).toHaveBeenCalledWith({theme: "light"});
     });
 });

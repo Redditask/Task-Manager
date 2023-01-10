@@ -1,0 +1,13 @@
+@import "src/variable";
+
+.Main {
+  min-height: 63rem;
+
+  display: flex;
+  justify-content: start;
+  align-items: start;
+
+  margin-top: -3rem;
+
+  background-color: var(--defaultBgColor);
+}

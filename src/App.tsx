@@ -1,37 +1,23 @@
-// @ts-ignore
-import styles from './App.module.scss';
+import styles from "./App.module.scss";
 
-import React, {useState} from "react";
+import React from "react";
 
-import AsideBar from "./components/AsideBar/AsideBar";
-import Calendar from "./components/Calendar/Calendar";
-import Modal from "./components/UI/Modal/Modal";
-import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
+import {BrowserRouter} from "react-router-dom";
+
+import AppRouter from "./components/AppRouter/AppRouter";
 
 /*
 ToDo
- readme поправить
- //
- авторизация (бд + сервер)
- //
- адаптивная вёрстка
+ ДИЗАЙН:
+    адаптивная вёрстка
 */
 
 const App: React.FC = () => {
-    const [date, setDate] = useState<string>("");
-    const [modalStatus, setModalStatus] = useState<boolean>(false);
-
     return (
         <div className={styles.App}>
-            <AsideBar setModalStatus={setModalStatus} setDate={setDate}/>
-            <Calendar setModalStatus={setModalStatus} setDate={setDate}/>
-            <Modal visible={modalStatus} setVisible={setModalStatus}>
-                {
-                    modalStatus
-                        ? <AddTaskForm setModalStatus={setModalStatus} date={date}/>
-                        : null
-                }
-            </Modal>
+            <BrowserRouter>
+                <AppRouter/>
+            </BrowserRouter>
         </div>
     );
 }

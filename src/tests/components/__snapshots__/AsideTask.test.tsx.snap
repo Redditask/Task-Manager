@@ -16,12 +16,12 @@ Object {
             style="background: beige;"
           />
           <div>
-            Your task
+            Your some task
             <div
               class="Time"
               title="Task time"
             >
-              13:08-14:25
+              0:00-23:59
             </div>
           </div>
         </li>
@@ -84,12 +84,12 @@ Object {
           style="background: beige;"
         />
         <div>
-          Your task
+          Your some task
           <div
             class="Time"
             title="Task time"
           >
-            13:08-14:25
+            0:00-23:59
           </div>
         </div>
       </li>

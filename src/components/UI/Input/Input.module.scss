@@ -1,9 +1,7 @@
-@import "../../../variable";
-
 .Input{
   font-family: inherit;
-  height: 5rem;
-  width: 15rem;
+  height: 3rem;
+  width: 12rem;
 
   border: silver solid;
   border-radius: 1rem;
@@ -12,9 +10,6 @@
 
   resize: none;
   overflow: auto;
-
-  background-color: var(--defaultBgColor);
-  color: var(--defaultColor);
 
   margin: 1rem 0;
   padding: 0.5rem;
@@ -25,13 +20,5 @@
 
   &:hover {
     transform: scale(1.1);
-  }
-
-  &::-webkit-scrollbar{
-    border: none;
-
-    &-thumb{
-      border: none;
-    }
   }
 }

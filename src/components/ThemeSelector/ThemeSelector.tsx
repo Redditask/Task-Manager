@@ -1,9 +1,10 @@
-// @ts-ignore
 import styles from "./ThemeSelector.module.scss";
 
-import React, {useEffect} from 'react';
+import React, {useEffect} from "react";
+
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {changeTheme} from "../../store/taskManagerSlice";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {setTheme} from "../../store/taskManagerSlice";
 import {selectTheme} from "../../store/selectors";
 
 import {MdDarkMode} from "react-icons/md";
@@ -14,13 +15,12 @@ const ThemeSelector: React.FC = () => {
     const theme: Theme = useAppSelector(selectTheme);
 
     const dispatch = useAppDispatch();
-    useEffect(() => {
-        dispatch(changeTheme({theme: theme}))
-        //auto "return"
+    useEffect((): void => {
+        dispatch(setTheme({theme: theme}))
     }, []);
 
-    const selectLightTheme = () => dispatch(changeTheme({theme: "light"}));
-    const selectDarkTheme = () => dispatch(changeTheme({theme: "dark"}));
+    const selectLightTheme = (): PayloadAction<{theme: Theme}> => dispatch(setTheme({theme: "light"}));
+    const selectDarkTheme = (): PayloadAction<{theme: Theme}> => dispatch(setTheme({theme: "dark"}));
 
     return (
         <>
